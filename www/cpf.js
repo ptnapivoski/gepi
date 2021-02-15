@@ -1,0 +1,1 @@
+$(function(){cpf = function(b){var a=0;if("00000000000"==b||11!=b.length)return!1;for(i=1;9>=i;i++)a+=parseInt(b.substring(i-1,i))*(11-i);a=10*a%11;if(10==a||11==a)a=0;if(a!=parseInt(b.substring(9,10)))return!1;a=0;for(i=1;10>=i;i++)a+=parseInt(b.substring(i-1,i))*(12-i);a=10*a%11;if(10==a||11==a)a=0;return a!=parseInt(b.substring(10,11))?!1:!0}});

@@ -1,0 +1,190 @@
+/* Tudo */
+* {
+	box-sizing: border-box;            /* Correta manipulação de tamanho */
+	margin: 0;                         /* Margem nula */
+	padding: 0;                        /* Preenchimento nulo */
+	font-family: 'Tahoma', sans-serif; /* Fonte Tahoma ou outra sem pé */
+	font-size: 11px;                   /* No tamanho de 11 pixeis */
+}
+
+/* Corpo */
+body {
+	overflow-y: scroll; /* Força barra lateral */
+}
+
+/* Campos e menus recolhidos */
+input, select {
+	border: 1px solid #000000; /* Borda de 1 pixel preta */
+	border-radius: 4px;        /* Cantos arredondados de 4 pixeis */
+	padding: 4px;              /* Preenchimento de 4 pixeis */
+	transition: 0.5s;          /* Transição de estilo em meio segundo */
+}
+
+/* Campos e menus recolhidos quando o mouse passa por cima ou quanto selecionado foco */
+input:hover, select:hover, input:focus, select:focus {
+	background-color: #d0d0d0; /* Cor de fundo cinza claro */
+}
+
+/* Botões */
+input[type=submit], input[type=button] {
+	background-color: #404040; /* Cor de fundo cinza escuro */
+	color: #ffffff;            /* Texto branco */
+	padding: 4px 8px;          /* Preenchimento superior e inferior de 4 pixeis e laterais de 8 pixeis */
+}
+
+/* Botões quando o mouse passa por cima ou quando em foco */
+input[type=submit]:hover, input[type=submit]:focus, input[type=button]:hover, input[type=button]:focus {
+	background-color: #e0e0e0; /* Cor de fundo cinza claro */
+	color: #000000;            /* Texto preto */
+}
+
+/* Menus recolhidos */
+select {
+	padding: 3px; /* Preenchimento de 3 pixeis */
+}
+
+/* Opções em menus recolhidos */
+option {
+	padding: 0; /* Preenchimento nulo */
+}
+
+/* Links */
+a {
+	color: #0040ff;        /* Em azul */
+	text-decoration: none; /* Sem estilização */
+	transition: 0.5s;      /* Transição de estilo em meio segundo */
+}
+
+/* Links quando mouse passa por cima ou quando em foco */
+a:hover, a:focus {
+	color: #c08000; /* Na cor laranja */
+}
+
+/* Secções e menus de navegação */
+section, nav {
+	margin: 20px auto;         /* Margens superior e inferior de 20 pixeis e laterais automáticas */
+	padding: 20px;             /* Preenchimento de 20 pixeis */
+	width: 960px;              /* Largura de 960 pixeis */
+	border: 1px solid #000000; /* Borda de 1 pixel preta */
+	border-radius: 8px;        /* Cantos arredondados de 8 pixeis */
+}
+
+/* Menu de navegação */
+nav {
+	padding: 10px; /* Preenchimento de 10 pixeis */
+}
+
+/* Títulos de cada secção */
+section#about h1, section.cad h1 {
+	margin: 0 0 20px 0; /* Margem inferior de 20 pixeis e nula nas outras */
+}
+
+/* Parágrafos na página inicial */
+section#about p {
+	text-align: justify; /* Justificados */
+	margin: 20px 0 0 0;  /* Margem superior de 20 pixeis e nula nas outras */
+}
+
+/* Caixa de login */
+section#login-form {
+	width: 200px; /* Largura de 20 pixeis */
+}
+
+/* Parágrafos de campos na caixa de login */
+p.login-field {
+	margin-bottom: 20px;
+}
+
+/* Formulários de adição ou elementos no fim */
+form.new, form.but, p.but, table.but, div.but {
+	margin-top: 20px; /* Margem superior de 20 pixeis */
+}
+
+/* Elementos q devem ter um mínimo de espaçamento */
+p.lab, p.select-field, form.row {
+	margin-bottom: 4px; /* Margem de 4 pixeis */
+}
+
+/* Avisos */
+p.success, p.error {
+	font-weight: bold; /* Em negrito */
+}
+
+/* Erro */
+p.error {
+	color: red; /* Vermelho */
+}
+
+/* Sucesso */
+p.success {
+	color: green; /* Verde */
+}
+
+/* Campos no formulário de login */
+input#login-id, input#login-password {
+	width: 160px;
+}
+
+/* Lista em menus de navegação */
+nav ul {
+	margin: 0;          /* Sem margem */
+	text-align: center; /* Alinhamento centralizado */
+}
+
+/* Item de lista em menus de navegação */
+nav ul li {
+	display: inline;                 /* Como caractere */
+	margin: 0;                       /* Sem margem */
+	padding: 0 8px;                  /* Preenchimento superior e inferior nulos e 8 pixeis nas laterais */
+	border-right: 1px solid #000000; /* Borda na direita em 1 pixel na cor preta */
+}
+
+/* Primeiro item de lista de menu de navegação */
+nav ul li:first-child {
+	padding: 0 8px 0 0; /* Preenchimento de 8 pixeis apenas à direita */
+}
+
+/* Último item de lista de menu de navegação */
+nav ul li:last-child {
+	padding: 0 0 0 8px; /* Preenchimento de 8 pixeis apenas à esquerda */
+	border: 0;          /* Sem borda */
+}
+
+/* Célula de tabela */
+td {
+	padding: 2px; /* Preenchimento de 2 pixeis */
+}
+
+/* Caixas de texto de nome */
+input[type=text][name=nome], input[type=text][name=titulo], input.name {
+	width: 250px; /* Largura de 250 pixeis */
+}
+
+/* Caixa de texto de endereço */
+input.address {
+	width: 350px; /* Largura de 350 pixeis */
+}
+
+/* Caixa de texto de endereço maior */
+input.address2 {
+	width: 600px; /* Largura de 600 pixeis */
+}
+
+/* Caixa de texto pequena */
+input[type=text][name=cid], input[type=text][name=sigla], input[type=number], input.cid, input.short {
+	width: 80px; /* Largura de 80 pixeis */
+}
+
+/* Anexar arquivo */
+input[type=file] {
+	padding: 2px 6px 3px 3px; /* Preenchimento */
+}
+
+/* Caixa de texto estendida */
+textarea {
+	margin: 0;                 /* Margem nula */
+	padding: 10px;             /* Preenchimento de 10 pixeis */
+	border: 1px solid #000000; /* Borda de 1 pixel na cor preta */
+	border-radius: 4px;        /* Arredondamento de borda em 4 pixeis */
+	font-family: monospace;    /* Fonte mono-espaçada */
+}
