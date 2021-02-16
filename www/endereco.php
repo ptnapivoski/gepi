@@ -191,7 +191,7 @@ if($_SESSION['user']){
 			'</section>', $EOL,
 			// E começa a das entidades vinculadas ao endereço
 			'<section class="cad">', $EOL,
-				'<h1>Entidades</h1>', $EOL
+				'<h1>Entidades, <a target="_blank" href="nova.entidade.php?endereco=', $id, '">Nova entidade</a></h1>', $EOL
 		;
 
 		// Tenta selecionar as entidades daquele endereço

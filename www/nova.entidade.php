@@ -80,6 +80,21 @@ if($_SESSION['user']){
 			'</section>', $EOL
 		;
 
+		// Caso tenha vindo da página de endereço
+		if(isset($_GET['endereco'])){
+			// Valida
+			$_GET['endereco'] = (int) $_GET['endereco'];
+			// Muda o endereço
+			echo
+			  '<script>',
+					'$(function(){',
+						'$(\'#endereco\').val(', $_GET['endereco'], ');',
+						'$(\'#endereco\').change();',
+					'});',
+			  '</script>'
+			;
+		}
+
 		// Desconecta do servidor de Base de Dados
 		mysqli_close($db_link);
 	// Caso não tenha conseguido conectar ao servidor de Base de Dados
