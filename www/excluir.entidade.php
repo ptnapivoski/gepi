@@ -42,6 +42,6 @@ if($_SESSION['user']){
 	} else require_once('db.link.err.php');
 
 	// Volta para a página das entidades
-	header('Location:entidades.php');
+	header('Location:pesquisar.entidades.php');
 // Se não logado
 } else require_once('login.err.php');
