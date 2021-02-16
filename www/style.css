@@ -172,7 +172,7 @@ input.address2 {
 
 /* Caixa de texto pequena */
 input[type=text][name=cid], input[type=text][name=sigla], input[type=number], input.cid, input.short {
-	width: 70px; /* Largura de 80 pixeis */
+	width: 70px; /* Largura de 70 pixeis */
 }
 
 /* Anexar arquivo */
