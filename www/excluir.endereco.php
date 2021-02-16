@@ -42,6 +42,6 @@ if($_SESSION['user']){
 	} else require_once('db.link.err.php');
 
 	// Volta para a página dos endereços
-	header('Location:enderecos.php');
+	header('Location:pesquisar.enderecos.php');
 // Se não logado
 } else require_once('login.err.php');
