@@ -660,19 +660,20 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
 						// Tenta selecionar o histórico escolar da pessoa em questão
-						if($db_query_2 = mysqli_query($db_link, "SELECT ent.id, ent.nome, pfe.ano, se.id, se.nome, te.nome, pfe.frequencia FROM pessoa_fisica_e_escola pfe LEFT JOIN entidade ent ON ent.id = pfe.escola LEFT JOIN serie_escolar se ON se.id = pfe.serie_escolar LEFT JOIN turno_escolar te ON te.id = pfe.turno_escolar WHERE pfe.pessoa_fisica = $id ORDER BY pfe.ano DESC;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ent.id, ent.nome, pfe.ano, se.id, se.nome, te.nome, pfe.frequencia, pfe.repetencia FROM pessoa_fisica_e_escola pfe LEFT JOIN entidade ent ON ent.id = pfe.escola LEFT JOIN serie_escolar se ON se.id = pfe.serie_escolar LEFT JOIN turno_escolar te ON te.id = pfe.turno_escolar WHERE pfe.pessoa_fisica = $id ORDER BY pfe.ano DESC;")){
 							// Se selecionou pelo menos um histórico escolar
 							if(mysqli_num_rows($db_query_2)){
 								// Para cada selecionado
 								while($db_result_2 = mysqli_fetch_row($db_query_2)){
 									// Trata as entradas
-									$escola   = (int) $db_result_2[0];
-									$escola_n = htmlspecialchars($db_result_2[1]);
-									$ano      = (int) $db_result_2[2];
-									$serie    = (int) $db_result_2[3];
-									$serie_n  = htmlspecialchars($db_result_2[4]);
-									$turno_n  = htmlspecialchars($db_result_2[5]);
-									$freq     = (double) $db_result_2[6];
+									$escola     = (int) $db_result_2[0];
+									$escola_n   = htmlspecialchars($db_result_2[1]);
+									$ano        = (int) $db_result_2[2];
+									$serie      = (int) $db_result_2[3];
+									$serie_n    = htmlspecialchars($db_result_2[4]);
+									$turno_n    = htmlspecialchars($db_result_2[5]);
+									$freq       = (double) $db_result_2[6];
+									$repetencia = (int) $db_result_2[7];
 
 									// Imprime em campos num formulário para exclusão
 									echo
@@ -685,6 +686,7 @@ if($_SESSION['user']){
 												'<input readonly="readonly" type="number" name="ano" value="', $ano, '"/> ',
 												'<input readonly="readonly" type="text" value="', $serie_n, '" class="name"/> ',
 												'<input readonly="readonly" type="text" value="', $turno_n, '"/> ',
+												'<label>Repetência: <input readonly="readonly" type="number" value="', $repetencia, '"/></label> ',
 												'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir o histórico escolar?\');"/>',
 											'</p>', $EOL,
 										'</form>', $EOL
@@ -765,6 +767,7 @@ if($_SESSION['user']){
 
 								echo
 											'</select>', $EOL,
+											'<input type="number" name="repetencia" id="repetencia" value="" min="0" placeholder="Repetência" /> ', $EOL,
 											'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar o histórico escolar?\');"/>', $EOL,
 										'</form>', $EOL,
 									'</p>', $EOL

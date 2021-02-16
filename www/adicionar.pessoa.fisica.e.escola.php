@@ -19,17 +19,18 @@ if($_SESSION['user']){
 		// Caso possua permissão
 		if(perm($db_link, 'permissao_e_entidade', 76, $id)){
 			// Valida dados vindos do formulário
-			$escola = (int) $_POST['escola'];
-			$ano    = (int) $_POST['ano'];
-			$serie  = (int) $_POST['serie'];
-			$turno  = (int) $_POST['turno'];
+			$escola     = (int) $_POST['escola'];
+			$ano        = (int) $_POST['ano'];
+			$serie      = (int) $_POST['serie'];
+			$turno      = (int) $_POST['turno'];
+			$repetencia = (int) $_POST['repetencia'];
 
 			// Verifica se é escola
 			if($db_query = mysqli_query($db_link, "SELECT NULL FROM entidade WHERE id = $escola AND tipo_de_entidade IN (5,6,7,8,9);")){
 				// Se é escola
 				if(mysqli_num_rows($db_query)){
 					// Tenta inserir
-					if($db_query_2 = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_escola (pessoa_fisica, ano, escola, serie_escolar, turno_escolar) VALUES ($id, $ano, $escola, $serie, $turno);")){
+					if($db_query_2 = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_escola (pessoa_fisica, ano, escola, serie_escolar, turno_escolar, repetencia) VALUES ($id, $ano, $escola, $serie, $turno, $repetencia);")){
 						// Se consulta inseriu uma linha
 						if(mysqli_affected_rows($db_link) === 1)
 							// Informa que houve a inserção
