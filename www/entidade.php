@@ -1898,7 +1898,7 @@ if($_SESSION['user']){
 											'<p class="but"><b>Título:</b> ', $db_result_2[4], '</p>', $EOL,
 											// Link para mostrar a descrição
 											'<p class="but">',
-												'<a href="javascript:$(\'#hist-', $i, '\').toggle(250);$(\'#hist-', $i, '-a\').toggle();$(\'#hist-', $i, '-b\').toggle();void 0"><b>Descrição <span id="hist-', $i, '-a">▼</span><span id="hist-', $i, '-b">▲</span></b></a>',
+												'<a href="javascript:desc(', $i, ')"><b>Descrição <span id="hist-', $i, '-a">▼</span><span id="hist-', $i, '-b">▲</span></b></a>',
 											'</p>', $EOL,
 											// Esconde descrição inicialmente
 											'<script>',

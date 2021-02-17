@@ -8,6 +8,13 @@ $(function(){
 	show_vin  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').show();$('#tab-his').hide();}
 	show_his  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').show();}
 
+	// Mostrar e ocultar descrição em histórico
+	desc = function(id){
+		$('#hist-'+id).toggle(250);
+		$('#hist-'+id+'-a').toggle();
+		$('#hist-'+id+'-b').toggle();
+	}
+
 	// Validação do CPF
 	validacpf = function(){
 		if(!cpf($('#cpf').val())) alert('CPF inválido');
