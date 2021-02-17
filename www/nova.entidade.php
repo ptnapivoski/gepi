@@ -86,12 +86,12 @@ if($_SESSION['user']){
 			$_GET['endereco'] = (int) $_GET['endereco'];
 			// Muda o endereço
 			echo
-			  '<script>',
+				'<script>',
 					'$(function(){',
 						'$(\'#endereco\').val(', $_GET['endereco'], ');',
 						'$(\'#endereco\').change();',
 					'});',
-			  '</script>'
+				'</script>'
 			;
 		}
 
