@@ -606,6 +606,7 @@ CREATE TABLE IF NOT EXISTS historico (
 	 entidade  BIGINT UNSIGNED
 	,sobre     BIGINT UNSIGNED
 	,quando    DATETIME
+	,titulo    VARCHAR(255) NOT NULL
 	,descricao TEXT NOT NULL
 	,arquivo   VARCHAR(255)
 	,PRIMARY KEY (entidade,sobre,quando)

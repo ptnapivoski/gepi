@@ -22,9 +22,11 @@ if($_SESSION['user']){
 		if(perm($db_link, 'permissao_e_entidade', 84, $id)){
 			// Escapa descrição
 			$descricao = mysqli_real_escape_string($db_link, $_POST['descricao']);
+			// E título
+			$titulo = mysqli_real_escape_string($db_link, $_POST['titulo']);
 
 			// Valida conteúdo da descrição
-			if($descricao !== ''){
+			if($descricao !== '' && $titulo !== ''){
 				// Caso tenha conseguido subir o arquivo com sucesso ou não tenha subido arquivo
 				if($_FILES['arquivo']['error'] === UPLOAD_ERR_OK || $_FILES['arquivo']['error'] === UPLOAD_ERR_NO_FILE){
 					// Nome para o arquivo no DB caso não tenha sido enviado algum
@@ -58,7 +60,7 @@ if($_SESSION['user']){
 					// Prossegue tentando inserir no DB
 					if($ok){
 						// Tenta inserir
-						if($db_query = mysqli_query($db_link, "INSERT INTO historico VALUES ($_SESSION[user], $id, NOW(), '$descricao', $arquivo_db);")){
+						if($db_query = mysqli_query($db_link, "INSERT INTO historico VALUES ($_SESSION[user], $id, NOW(), '$titulo', '$descricao', $arquivo_db);")){
 							// Se consulta inseriu uma linha
 							if(mysqli_affected_rows($db_link) === 1)
 								// Informa que houve a inserção
@@ -83,7 +85,7 @@ if($_SESSION['user']){
 				// Avisa que houve erro ao enviar o arquivo
 				} else $_SESSION['msg'] = '<p class="error">Erro ao enviar arquivo anexo do histórico.</p>';
 			// Caso descrição vazia
-			} else $_SESSION['msg'] = '<p class="error">Descrição em branco.</p>';
+			} else $_SESSION['msg'] = '<p class="error">Incorreto preenchimento do formulário.</p>';
 		// Caso não possua permissão
 		} else $_SESSION['msg'] = '<p class="error">Você não tem permissão para executar esta ação.</p>';
 

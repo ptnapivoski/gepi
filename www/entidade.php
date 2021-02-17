@@ -1863,7 +1863,8 @@ if($_SESSION['user']){
 								'<h1>Histórico</h1>', $EOL,
 								'<form action="adicionar.historico.php" method="post" enctype="multipart/form-data" class="new">', $EOL,
 									'<input type="hidden" name="sobre" value="', $id, '" />', $EOL,
-									'<p class="lab"><label for="descricao">Descrição</label></p>', $EOL,
+									'<p class="lab"><label>Título: <input type="text" name="titulo" style="width:885px"/></label></p>', $EOL,
+									'<p class="lab"><label for="descricao">Descrição: </label></p>', $EOL,
 									'<p><textarea id="descricao" name="descricao" style="width:918px;height:150px"></textarea></p>', $EOL,
 									'<input type="hidden" name="MAX_FILE_SIZE" value="', $FMS, '" />', $EOL,
 									'<p class="lab but"><label>Anexo: <input id="arquivo" name="arquivo" type="file"/></label> Máximo: ', number_format($FMS,0,',','.'), ' bytes</p>', $EOL,
@@ -1875,35 +1876,49 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 83, $id)){
 						// Tenta selecionar históricos
-						if($db_query_2 = mysqli_query($db_link, "SELECT ent1.id, ent1.nome, DATE_FORMAT(his.quando, '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(his.quando, '%d/%m/%Y %H:%i:%s'), his.descricao, his.arquivo FROM historico his LEFT JOIN entidade ent1 ON ent1.id = his.entidade LEFT JOIN entidade ent2 ON ent2.id = his.sobre WHERE ent2.id = $id ORDER BY his.quando DESC;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ent1.id, ent1.nome, DATE_FORMAT(his.quando, '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(his.quando, '%d/%m/%Y %H:%i:%s'), his.titulo, his.descricao, his.arquivo FROM historico his LEFT JOIN entidade ent1 ON ent1.id = his.entidade LEFT JOIN entidade ent2 ON ent2.id = his.sobre WHERE ent2.id = $id ORDER BY his.quando DESC;")){
 							// Ao selecionar pelo menos um histórico
 							if(mysqli_num_rows($db_query_2)){
 								// Para cada possível histórico existente cadastrado
-								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+								for($i = 1;$db_result_2 = mysqli_fetch_row($db_query_2);$i++){
 									// Trata entrada
 									$db_result_2[0] = (int) $db_result_2[0];
 									$db_result_2[1] = htmlspecialchars($db_result_2[1]);
 									$db_result_2[2] = htmlspecialchars($db_result_2[2]);
 									$db_result_2[3] = htmlspecialchars($db_result_2[3]);
 									$db_result_2[4] = htmlspecialchars($db_result_2[4]);
-									if($db_result_2[5] !== NULL) $db_result_2[] = htmlspecialchars($db_result_2[5]);
+									$db_result_2[5] = htmlspecialchars($db_result_2[5]);
+									if($db_result_2[6] !== NULL) $db_result_2[6] = htmlspecialchars($db_result_2[6]);
 
 									// Imprime os dados pertinentes
 									echo
 										'<section>', $EOL,
 											'<p><b>Por:</b> ', $db_result_2[1], '</p>', $EOL,
 											'<p class="but"><b>Quando:</b> ', $db_result_2[3], '</p>', $EOL,
-											'<p class="but" style="text-align:justify">'
+											'<p class="but"><b>Título:</b> ', $db_result_2[4], '</p>', $EOL,
+											// Link para mostrar o conteúdo
+											'<p class="but">',
+												'<a href="javascript:$(\'#hist-', $i, '\').toggle(250);$(\'#hist-', $i, '-a\').toggle();$(\'#hist-', $i, '-b\').toggle();void 0"><b>Conteúdo <span id="hist-', $i, '-a">▼</span><span id="hist-', $i, '-b">▲</span></b></a>',
+											'</p>', $EOL,
+											// Esconde conteúdo inicialmente
+											'<script>',
+												'$(function(){',
+													'$("#hist-', $i, '").hide();',
+													'$("#hist-', $i, '-b").hide();',
+												'});',
+											'</script>', $EOL,
+											'<div id="hist-', $i, '">',
+												'<p class="but" style="text-align:justify">'
 									;
 
 									// Parágrafos a exibir
-									$pars = str_replace("\r\n",'</p><p class="but" style="text-align:justify">',$db_result_2[4]);
+									$pars = str_replace("\r\n",'</p><p class="but" style="text-align:justify">',$db_result_2[5]);
 
-									echo $pars, '</p>', $EOL;
+									echo $pars, '</p></div>', $EOL;
 
 									// Se tem anexo, exibe link
-									if($db_result_2[5])
-										echo '<p class="but"><b><a href="', $FDIR, '/', $db_result_2[5], '">Anexo</a></b></p>', $EOL;
+									if($db_result_2[6])
+										echo '<p class="but"><b><a href="', $FDIR, '/', $db_result_2[6], '">Anexo</a></b></p>', $EOL;
 									else
 										echo '<p class="but"><b>Sem anexo</b></p>', $EOL;
 
