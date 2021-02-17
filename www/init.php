@@ -15,7 +15,9 @@ $SITE_CONTENT_TYPE = 'Content-Type: text/html; charset=utf-8';
 $SITE_FILE_HEADER  = '<!doctype html>';
 
 // Endereço do host MySQL
-$SITE_DB_HOST     = '127.0.0.1:3306';
+$SITE_DB_HOST     = '127.0.0.1';
+// Porta do host MySQL
+$SITE_DB_PORT     = 3306;
 // Usuário no MySQL
 $SITE_DB_USER     = 'root';
 // Senha do MySQL
