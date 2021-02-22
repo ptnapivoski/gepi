@@ -43,13 +43,9 @@ if($_SESSION['user']){
 			if($escolaridade < 1) $escolaridade = 'NULL';
 			$naturalidade = (int) $_POST['naturalidade'];
 			if($naturalidade < 1) $naturalidade = 'NULL';
-			$tem_acesso_a_internet = (int) $_POST['tem_acesso_a_internet'];
-			if($tem_acesso_a_internet === 1) $tem_acesso_a_internet = 'TRUE'; else $tem_acesso_a_internet = 'FALSE';
-			$usa_cadeira_de_rodas = (int) $_POST['usa_cadeira_de_rodas'];
-			if($usa_cadeira_de_rodas === 1) $usa_cadeira_de_rodas = 'TRUE'; else $usa_cadeira_de_rodas = 'FALSE';
 
 			// Tenta alterar
-			if($db_query = mysqli_query($db_link, "UPDATE pessoa_fisica SET nascimento = $nascimento, cpf = $cpf, rg = $rg, sus = $sus, nis = $nis, certidao_de_nascimento = $certidao_de_nascimento, genero = $genero, raca = $raca, estado_civil = $estado_civil, renda = $renda, escolaridade = $escolaridade, naturalidade = $naturalidade, tem_acesso_a_internet = $tem_acesso_a_internet, usa_cadeira_de_rodas = $usa_cadeira_de_rodas WHERE id = $id;")){
+			if($db_query = mysqli_query($db_link, "UPDATE pessoa_fisica SET nascimento = $nascimento, cpf = $cpf, rg = $rg, sus = $sus, nis = $nis, certidao_de_nascimento = $certidao_de_nascimento, genero = $genero, raca = $raca, estado_civil = $estado_civil, renda = $renda, escolaridade = $escolaridade, naturalidade = $naturalidade WHERE id = $id;")){
 				// Se consulta alterou uma linha
 				if(mysqli_affected_rows($db_link) === 1)
 					// Informa que houve a alteração
