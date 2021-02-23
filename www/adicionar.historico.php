@@ -41,8 +41,14 @@ if($_SESSION['user']){
 						$hash = sha1_file($_FILES['arquivo']['tmp_name']);
 						// Extensão do arquivo enviada
 						$ext = pathinfo($_FILES['arquivo']['name'],PATHINFO_EXTENSION);
-						// Nome do arquivo
-						$arquivo = "$hash.$ext";
+						// Caso válida a extensão
+						if($ext !== '')
+							// Nome do arquivo
+							$arquivo = "$hash.$ext";
+						//Sem extensão
+						else
+							// Nome do arquivo
+							$arquivo = "$hash";
 						$arquivo_addr = "$FDIR/$arquivo";
 						// Tenta mover o arquivo
 						if(move_uploaded_file($_FILES['arquivo']['tmp_name'],$arquivo_addr)){
