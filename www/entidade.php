@@ -522,7 +522,7 @@ if($_SESSION['user']){
 
 					echo
 						'<div id="tab-sau">', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Diagnósticos</h1>', $EOL
 					;
 
@@ -655,7 +655,7 @@ if($_SESSION['user']){
 							'</section>', $EOL,
 						'</div>', $EOL,
 						'<div id="tab-ed">', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Histórico escolar</h1>', $EOL
 					;
 
@@ -791,7 +791,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Barreiras no ensino</h1>', $EOL
 					;
 
@@ -879,7 +879,7 @@ if($_SESSION['user']){
 							'</section>', $EOL,
 						'</div>', $EOL,
 						'<div id="tab-assi">', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Benefícios</h1>', $EOL
 					;
 
@@ -968,7 +968,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Conhecimento de Serviço de Assistência Social</h1>', $EOL
 					;
 
@@ -1054,7 +1054,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Uso de Serviço de Assistência Social</h1>', $EOL
 					;
 
@@ -1140,7 +1140,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Uso de Serviço de Defesa dos Direitos da Pessoa com Deficiência</h1>', $EOL
 					;
 
@@ -1228,7 +1228,7 @@ if($_SESSION['user']){
 							'</section>', $EOL,
 						'</div>', $EOL,
 						'<div id="tab-tra">', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Histórico de trabalho</h1>', $EOL
 					;
 
@@ -1326,7 +1326,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Qualificação</h1>', $EOL
 					;
 
@@ -1412,7 +1412,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Interesse em qualificação</h1>', $EOL
 					;
 
@@ -1498,7 +1498,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Interesse em trabalho</h1>', $EOL
 					;
 
@@ -1584,7 +1584,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Barreiras no trabalho</h1>', $EOL
 					;
 
@@ -1672,7 +1672,7 @@ if($_SESSION['user']){
 							'</section>', $EOL,
 						'</div>', $EOL,
 						'<div id="tab-vin">', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Vínculos pessoais (sujeito)</h1>', $EOL
 					;
 
@@ -1764,7 +1764,7 @@ if($_SESSION['user']){
 
 					echo
 							'</section>', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Vínculos pessoais (objeto)</h1>', $EOL
 					;
 
@@ -1861,7 +1861,7 @@ if($_SESSION['user']){
 							'</section>', $EOL,
 						'</div>', $EOL,
 						'<div id="tab-his">', $EOL,
-							'<section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Histórico</h1>', $EOL,
 								'<form action="adicionar.historico.php" method="post" enctype="multipart/form-data" class="new">', $EOL,
 									'<input type="hidden" name="sobre" value="', $id, '" />', $EOL,

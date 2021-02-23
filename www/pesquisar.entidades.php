@@ -21,7 +21,7 @@ if($_SESSION['user']){
 	if($db_link){
 		echo
 			// Começa primeira seção
-			'<section>', $EOL,
+			'<section class="cad">', $EOL,
 				// Título da seção e link para nova entidade
 				'<h1>Entidades, <a target="_blank" href="nova.entidade.php">Nova</a></h1>', $EOL,
 				// Começa formulário de pesquisa
@@ -77,7 +77,7 @@ if($_SESSION['user']){
 		if(isset($_POST['id']) && isset($_POST['tipo_de_entidade']) && isset($_POST['nome'])){
 			// Começa a seção exibindo os resultados
 			echo
-				'<section>', $EOL,
+				'<section class="cad">', $EOL,
 					'<h1>Resultado</h1>', $EOL
 			;
 
