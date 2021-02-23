@@ -23,6 +23,8 @@ if($_SESSION['user']){
 	else if($tab === 4) echo 'show_tra();';
 	else if($tab === 5) echo 'show_vin();';
 	else if($tab === 6) echo 'show_his();';
+	else if($tab === 7) echo 'show_hab();';
+	else if($tab === 8) echo 'show_mob();';
 	else echo 'show_ge();';
 	echo '});</script>';
 
