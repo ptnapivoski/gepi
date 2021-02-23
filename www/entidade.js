@@ -1,14 +1,15 @@
 $(function(){
-	// Controle das sessões
-	show_ge   = function(){$('#tab-ge').show();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
-	show_sau  = function(){$('#tab-ge').hide();$('#tab-sau').show();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
-	show_ed   = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').show();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
-	show_assi = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').show();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
-	show_tra  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').show();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
-	show_vin  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').show();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
-	show_his  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').show();$('#tab-hab').hide();$('#tab-mob').hide();}
-	show_hab  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').show();$('#tab-mob').hide();}
-	show_mob  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').show();}
+	// Controle das secções
+	hide_all = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_ge   = function(){hide_all();$('#tab-ge').show();}
+	show_sau  = function(){hide_all();$('#tab-sau').show();}
+	show_ed   = function(){hide_all();$('#tab-ed').show();}
+	show_assi = function(){hide_all();$('#tab-assi').show();}
+	show_tra  = function(){hide_all();$('#tab-tra').show();}
+	show_vin  = function(){hide_all();$('#tab-vin').show();}
+	show_his  = function(){hide_all();$('#tab-his').show();}
+	show_hab  = function(){hide_all();$('#tab-hab').show();}
+	show_mob  = function(){hide_all();$('#tab-mob').show();}
 
 	// Mostrar e ocultar descrição em histórico
 	desc = function(id){
