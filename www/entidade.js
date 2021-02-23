@@ -1,12 +1,14 @@
 $(function(){
 	// Controle das sessões
-	show_ge   = function(){$('#tab-ge').show();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();}
-	show_sau  = function(){$('#tab-ge').hide();$('#tab-sau').show();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();}
-	show_ed   = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').show();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();}
-	show_assi = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').show();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();}
-	show_tra  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').show();$('#tab-vin').hide();$('#tab-his').hide();}
-	show_vin  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').show();$('#tab-his').hide();}
-	show_his  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').show();}
+	show_ge   = function(){$('#tab-ge').show();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_sau  = function(){$('#tab-ge').hide();$('#tab-sau').show();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_ed   = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').show();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_assi = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').show();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_tra  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').show();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_vin  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').show();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_his  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').show();$('#tab-hab').hide();$('#tab-mob').hide();}
+	show_hab  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').show();$('#tab-mob').hide();}
+	show_mob  = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').show();}
 
 	// Mostrar e ocultar descrição em histórico
 	desc = function(id){

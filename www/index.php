@@ -44,7 +44,12 @@ if($_SESSION['user']){
 	echo
 		'<section id="about">', $EOL,
 			'<h1>Sobre o GEPI</h1>', $EOL,
-			'<p>Texto a ser inserido.</p>', $EOL,
+			'<p>', $EOL,
+				'A presente aplicação web e sua base de dados são de uso interno da Prefeitura do Rio Grande e têm como objetivo englobar questões sociodemográficas, escolares, socioassistenciais, de saúde, habitação e mobilidade a fim de promover maior visibilidade para as demandas da população com deficiência de Rio Grande, e agilizar os encaminhamentos desses serviços urbanos. Objetiva ainda, auxiliar a elaboração de análises contextuais para subsidiar a formulação de políticas públicas para potencializar o acesso e atendimentos nesses serviços e a garantia de direitos da população com deficiência. Esse projeto é uma parceria entre a Universidade Federal do Rio Grande, Hospital Universitário, Santa Casa e as Secretarias Secretaria Municipal da Cidadania e Assistência Social (SMCAS), Secretaria Municipal da Saúde (SMS), Secretaria Municipal da Habitação e Regularização Fundiária (SMHARF), Secretaria Municipal da Mobilidade, Acessibilidade e Segurança (SMMAS) e Secretaria Municipal da Educação (SMEd).', $EOL,
+			'</p>', $EOL,
+			'<p>', $EOL,
+				'Para maiores informações sobre a utilização desta aplicação web, acesse o manual.', $EOL,
+			'</p>', $EOL,
 		'</section>', $EOL
 	;
 

@@ -62,6 +62,8 @@ if($_SESSION['user']){
 							'<li><a href="javascript:show_ed();">Educação</a></li>',
 							'<li><a href="javascript:show_assi();">Assistência social</a></li>',
 							'<li><a href="javascript:show_tra();">Trabalho</a></li>',
+							'<li><a href="javascript:show_hab();">Habitação</a></li>',
+							'<li><a href="javascript:show_mob();">Mobilidade Urbana</a></li>',
 							'<li><a href="javascript:show_vin();">Vínculos</a></li>',
 							'<li><a href="javascript:show_his();">Histórico</a></li>',
 						'</ul>',
