@@ -50,6 +50,7 @@ option {
 
 /* Links */
 a {
+	font-size: inherit;    /* Herdar tamanho de fonte */
 	color: #0040ff;        /* Em azul */
 	text-decoration: none; /* Sem estilização */
 	transition: 0.5s;      /* Transição de estilo em meio segundo */
