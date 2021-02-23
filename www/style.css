@@ -76,11 +76,13 @@ nav {
 
 /* Títulos de cada secção */
 section#about h1, section.cad h1 {
+	font-size: 16px;    /* Fonte no tamanho de 16 pixeis */
 	margin: 0 0 20px 0; /* Margem inferior de 20 pixeis e nula nas outras */
 }
 
 /* Parágrafos na página inicial */
 section#about p {
+	font-size: 16px;     /* Fonte no tamanho de 16 pixeis */
 	text-align: justify; /* Justificados */
 	margin: 20px 0 0 0;  /* Margem superior de 20 pixeis e nula nas outras */
 }
