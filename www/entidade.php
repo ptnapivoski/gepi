@@ -771,7 +771,7 @@ if($_SESSION['user']){
 
 								echo
 											'</select>', $EOL,
-											'<input type="number" name="repetencia" id="repetencia" value="" min="0" placeholder="Repetência" /> ', $EOL,
+											'<input type="number" name="repetencia" id="repetencia" value="" min="0" placeholder="Repetência" style="width:85px" /> ', $EOL,
 											'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar o histórico escolar?\');"/>', $EOL,
 										'</form>', $EOL,
 									'</p>', $EOL
