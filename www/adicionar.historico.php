@@ -52,8 +52,10 @@ if($_SESSION['user']){
 						$arquivo_addr = "$FDIR/$arquivo";
 						// Tenta mover o arquivo
 						if(move_uploaded_file($_FILES['arquivo']['tmp_name'],$arquivo_addr)){
+							// Escapa nome do arquivo para DB
+							$arquivo_db = mysqli_real_escape_string($db_link, $arquivo);
 							// Nome a colocar no DB
-							$arquivo_db = "'$arquivo'";
+							$arquivo_db = "'$arquivo_db'";
 						// Ao ocorrer problema ao mover o arquivo
 						} else {
 							// Variável de teste de arquivo

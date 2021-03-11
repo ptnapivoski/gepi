@@ -24,7 +24,7 @@ if($_SESSION['user']){
 
 			// Tenta selecionar o arquivo anexo
 			if($db_query = mysqli_query($db_link, "SELECT arquivo FROM historico WHERE entidade = $entidade AND sobre = $sobre AND quando = '$quando';")){
-				// Caso tenha conseguido selecionar o histórico
+				// Caso tenha conseguido selecionar o arquivo do histórico
 				if(mysqli_num_rows($db_query)){
 					// Busca dados pedidos pela consulta
 					$db_result = mysqli_fetch_row($db_query);
@@ -32,16 +32,19 @@ if($_SESSION['user']){
 					$ok = TRUE;
 					// Se há arquivo a excluir
 					if($db_result[0] !== NULL){
-						// Lugar e nome do arquivo
-						$file = "$FDIR/$db_result[0]";
-						// Caso exista arquivo do histórico
-						if(file_exists($file)){
-							// Tenta excluir arquivo
-							if(!unlink($file))
-								// Caso ocorra erro, nem tenta excluir o histórico do DB
-								$ok = FALSE;
-						// Caso não exista o arquivo do histórico
-						} else $ok = FALSE;
+						// Se arquivo for de um único histórico
+						if(mysqli_num_rows(mysqli_query($db_link, "SELECT NULL FROM historico WHERE arquivo = '$db_result[0]';")) === 1){
+							// Lugar e nome do arquivo
+							$file = "$FDIR/$db_result[0]";
+							// Caso exista arquivo do histórico
+							if(file_exists($file)){
+								// Tenta excluir arquivo
+								if(!unlink($file))
+									// Caso ocorra erro, nem tenta excluir o histórico do DB
+									$ok = FALSE;
+							// Caso não exista o arquivo do histórico
+							} else $ok = FALSE;
+						}
 					}
 					// Caso possa continuar excluindo histórico do DB
 					if($ok){
