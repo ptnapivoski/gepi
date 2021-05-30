@@ -705,7 +705,7 @@ if($_SESSION['user']){
 												'<input type="hidden" name="escola" value="', $escola, '"/>',
 												'<input type="hidden" name="serie" value="', $serie, '"/>',
 												'<label>Frequência: ',
-													'<input type="number" name="frequencia" value="', $freq, '" min="0" max="100" step="0.01"/> ',
+													'<input type="number" name="frequencia" value="', $freq, '" min="0" max="100" step="0.01"/> % ',
 												'</label>',
 												'<input type="submit" value="Alterar" onclick="return confirm(\'Tem certeza que deseja alterar a frequência do histórico escolar?\');"/>',
 											'</p>', $EOL,
