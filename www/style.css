@@ -61,7 +61,7 @@ a:hover, a:focus {
 	color: #c08000; /* Na cor laranja */
 }
 
-/* Secções e menus de navegação */
+/* Seções e menus de navegação */
 section, nav {
 	margin: 20px auto;         /* Margens superior e inferior de 20 pixeis e laterais automáticas */
 	padding: 20px;             /* Preenchimento de 20 pixeis */
@@ -75,7 +75,7 @@ nav {
 	padding: 10px; /* Preenchimento de 10 pixeis */
 }
 
-/* Títulos de cada secção */
+/* Títulos de cada seção */
 section#about h1, section.cad h1 {
 	font-size: 16px;    /* Fonte no tamanho de 16 pixeis */
 	margin: 0 0 20px 0; /* Margem inferior de 20 pixeis e nula nas outras */

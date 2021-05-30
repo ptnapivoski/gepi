@@ -128,7 +128,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre gêneros
+			// Fim da seção e exibe permissões sobre gêneros
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -256,7 +256,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre estados civis
+			// Fim da seção e exibe permissões sobre estados civis
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -384,7 +384,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre diagnósticos
+			// Fim da seção e exibe permissões sobre diagnósticos
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -518,7 +518,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre status de diagnósticos
+			// Fim da seção e exibe permissões sobre status de diagnósticos
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -646,7 +646,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre escolaridades
+			// Fim da seção e exibe permissões sobre escolaridades
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -774,7 +774,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre séries escolares
+			// Fim da seção e exibe permissões sobre séries escolares
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -902,7 +902,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre turnos escolares
+			// Fim da seção e exibe permissões sobre turnos escolares
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1030,7 +1030,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre raças
+			// Fim da seção e exibe permissões sobre raças
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1158,7 +1158,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre benefícios
+			// Fim da seção e exibe permissões sobre benefícios
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1286,7 +1286,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre tecnologias
+			// Fim da seção e exibe permissões sobre tecnologias
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1414,7 +1414,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre barreiras
+			// Fim da seção e exibe permissões sobre barreiras
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1542,7 +1542,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre tipos de entidades
+			// Fim da seção e exibe permissões sobre tipos de entidades
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1670,7 +1670,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre vínculos pessoais
+			// Fim da seção e exibe permissões sobre vínculos pessoais
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1798,7 +1798,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre profissões
+			// Fim da seção e exibe permissões sobre profissões
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -1926,7 +1926,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre serviços de assistência social
+			// Fim da seção e exibe permissões sobre serviços de assistência social
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2054,7 +2054,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre serviços de defesa dos direitos das pessoas com deficiência
+			// Fim da seção e exibe permissões sobre serviços de defesa dos direitos das pessoas com deficiência
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2182,7 +2182,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre tipos de logradouro
+			// Fim da seção e exibe permissões sobre tipos de logradouro
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2310,7 +2310,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre países
+			// Fim da seção e exibe permissões sobre países
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2438,7 +2438,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre unidades federativas
+			// Fim da seção e exibe permissões sobre unidades federativas
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2540,7 +2540,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre cidades
+			// Fim da seção e exibe permissões sobre cidades
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2642,7 +2642,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre logradouros
+			// Fim da seção e exibe permissões sobre logradouros
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2744,7 +2744,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre bairros
+			// Fim da seção e exibe permissões sobre bairros
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2846,7 +2846,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção e exibe permissões sobre endereços
+			// Fim da seção e exibe permissões sobre endereços
 			echo
 				'</section>', $EOL,
 				'<section class="cad">', $EOL,
@@ -2956,7 +2956,7 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
-			// Fim da secção
+			// Fim da seção
 			echo
 				'</section>', $EOL
 			;

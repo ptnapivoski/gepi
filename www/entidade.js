@@ -1,5 +1,5 @@
 $(function(){
-	// Controle das secções
+	// Controle das seções
 	hide_all = function(){$('#tab-ge').hide();$('#tab-sau').hide();$('#tab-ed').hide();$('#tab-assi').hide();$('#tab-tra').hide();$('#tab-vin').hide();$('#tab-his').hide();$('#tab-hab').hide();$('#tab-mob').hide();}
 	show_ge   = function(){hide_all();$('#tab-ge').show();}
 	show_sau  = function(){hide_all();$('#tab-sau').show();}
