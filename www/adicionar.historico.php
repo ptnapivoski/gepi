@@ -9,6 +9,8 @@ ini_set('upload_max_filesize',$FMS);
 if($_SESSION['user']){
 	// Trata entrada de a quem adicionar
 	$id = (int) $_POST['sobre'];
+	// E força inteiro para seção
+	$sec = (int) $_POST['sec'];
 
 	// Tenta conectar ao DB
 	require_once('db.link.php');
@@ -24,6 +26,8 @@ if($_SESSION['user']){
 			$descricao = mysqli_real_escape_string($db_link, $_POST['descricao']);
 			// E título
 			$titulo = mysqli_real_escape_string($db_link, $_POST['titulo']);
+			// Seção na qual inserir
+			if($sec) $secq = $sec; else $secq = 'NULL';
 
 			// Valida conteúdo da descrição
 			if($descricao !== '' && $titulo !== ''){
@@ -68,7 +72,7 @@ if($_SESSION['user']){
 					// Prossegue tentando inserir no DB
 					if($ok){
 						// Tenta inserir
-						if($db_query = mysqli_query($db_link, "INSERT INTO historico VALUES ($_SESSION[user], $id, NOW(), '$titulo', '$descricao', $arquivo_db);")){
+						if($db_query = mysqli_query($db_link, "INSERT INTO historico VALUES ($_SESSION[user], $id, $secq, NOW(), '$titulo', '$descricao', $arquivo_db);")){
 							// Se consulta inseriu uma linha
 							if(mysqli_affected_rows($db_link) === 1)
 								// Informa que houve a inserção
@@ -102,7 +106,10 @@ if($_SESSION['user']){
 	// Informa que há problema na conexão com o DB
 	} else require_once('db.link.err.php');
 
+	// Abra para a qual retornar
+	if($sec >= 1 && $sec <= 6) $tab = $sec; else $tab = 8;
+
 	// Volta para a página da entidade na aba dos históricos
-	header("Location:entidade.php?id=$id&tab=6");
+	header("Location:entidade.php?id=$id&tab=$tab");
 // Se não logado
 } else require_once('login.err.php');

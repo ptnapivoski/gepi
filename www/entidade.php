@@ -17,15 +17,15 @@ if($_SESSION['user']){
 	// Aba a mostrar
 	if(isset($_GET['tab'])) $tab = (int) $_GET['tab']; else $tab = 0;
 	echo '<script>$(function(){';
-	if($tab === 1)      echo 'show_sau();';
+	if($tab === 0)      echo 'show_ge();';
+	else if($tab === 1) echo 'show_sau();';
 	else if($tab === 2) echo 'show_ed();';
 	else if($tab === 3) echo 'show_assi();';
 	else if($tab === 4) echo 'show_tra();';
-	else if($tab === 5) echo 'show_vin();';
-	else if($tab === 6) echo 'show_his();';
-	else if($tab === 7) echo 'show_hab();';
-	else if($tab === 8) echo 'show_mob();';
-	else echo 'show_ge();';
+	else if($tab === 5) echo 'show_hab();';
+	else if($tab === 6) echo 'show_mob();';
+	else if($tab === 7) echo 'show_vin();';
+	else if($tab === 8) echo 'show_his();';
 	echo '});</script>';
 
 	// Coloca JavaScript para CPF
@@ -521,7 +521,9 @@ if($_SESSION['user']){
 				if($db_result_1[0] === 1){
 					// Insere manipulação de permissões
 					require_once('perm.php');
+					require_once('historico.php');
 
+					// Começa a aba da Saúde
 					echo
 						'<div id="tab-sau">', $EOL,
 							'<section>Nome: ', $db_result_1[2], '</section>', $EOL,
@@ -655,7 +657,14 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
-							'</section>', $EOL,
+							'</section>', $EOL
+					;
+
+					// Históricos para Saúde
+					historico($db_link, 1);
+
+					// Fim da aba da Saúde e começa a aba da Educação
+					echo
 						'</div>', $EOL,
 						'<div id="tab-ed">', $EOL,
 							'<section>Nome: ', $db_result_1[2], '</section>', $EOL,
@@ -880,7 +889,14 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
-							'</section>', $EOL,
+							'</section>', $EOL
+					;
+
+					// Histórico para Educação
+					historico($db_link, 2);
+
+					// Fim da aba da Educação e começa a aba da Assistência Social
+					echo
 						'</div>', $EOL,
 						'<div id="tab-assi">', $EOL,
 							'<section>Nome: ', $db_result_1[2], '</section>', $EOL,
@@ -1230,7 +1246,14 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
-							'</section>', $EOL,
+							'</section>', $EOL
+					;
+
+					// Histórico para Assistência Social
+					historico($db_link, 3);
+
+					// Fim da aba da Assistência e começo da aba do Trabalho
+					echo
 						'</div>', $EOL,
 						'<div id="tab-tra">', $EOL,
 							'<section>Nome: ', $db_result_1[2], '</section>', $EOL,
@@ -1675,7 +1698,14 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
-							'</section>', $EOL,
+							'</section>', $EOL
+					;
+
+					// Histórico para Trabalho
+					historico($db_link, 4);
+
+					// Fim da aba do Trabalho e começo da aba da Vínculos
+					echo
 						'</div>', $EOL,
 						'<div id="tab-vin">', $EOL,
 							'<section>Nome: ', $db_result_1[2], '</section>', $EOL,
@@ -1864,96 +1894,15 @@ if($_SESSION['user']){
 					// Caso não possua permissão
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
+					// Fim da aba de Vínculos e começo da aba de Históricos gerais
 					echo
 							'</section>', $EOL,
 						'</div>', $EOL,
 						'<div id="tab-his">', $EOL,
-							'<section>Nome: ', $db_result_1[2], '</section>', $EOL,
-							'<section class="cad">', $EOL,
-								'<h1>Histórico</h1>', $EOL,
-								'<form action="adicionar.historico.php" method="post" enctype="multipart/form-data" class="new">', $EOL,
-									'<input type="hidden" name="sobre" value="', $id, '" />', $EOL,
-									'<p class="lab"><label>Título: <input type="text" name="titulo" style="width:885px"/></label></p>', $EOL,
-									'<p class="lab"><label for="descricao">Descrição: </label></p>', $EOL,
-									'<p><textarea id="descricao" name="descricao" style="width:918px;height:150px"></textarea></p>', $EOL,
-									'<input type="hidden" name="MAX_FILE_SIZE" value="', $FMS, '" />', $EOL,
-									'<p class="lab but"><label>Anexo: <input id="arquivo" name="arquivo" type="file"/></label> Máximo: ', number_format($FMS,0,',','.'), ' bytes</p>', $EOL,
-									'<p class="but"><input type="submit" value="Adicionar"/></p>', $EOL,
-								'</form>', $EOL,
-							'</section>', $EOL
+							'<section>Nome: ', $db_result_1[2], '</section>', $EOL
 					;
 
-					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 83, $id)){
-						// Tenta selecionar históricos
-						if($db_query_2 = mysqli_query($db_link, "SELECT ent1.id, ent1.nome, DATE_FORMAT(his.quando, '%Y-%m-%d %H:%i:%s'), DATE_FORMAT(his.quando, '%d/%m/%Y %H:%i:%s'), his.titulo, his.descricao, his.arquivo FROM historico his LEFT JOIN entidade ent1 ON ent1.id = his.entidade LEFT JOIN entidade ent2 ON ent2.id = his.sobre WHERE ent2.id = $id ORDER BY his.quando DESC;")){
-							// Ao selecionar pelo menos um histórico
-							if(mysqli_num_rows($db_query_2)){
-								// Para cada possível histórico existente cadastrado
-								for($i = 1;$db_result_2 = mysqli_fetch_row($db_query_2);$i++){
-									// Trata entrada
-									$db_result_2[0] = (int) $db_result_2[0];
-									$db_result_2[1] = htmlspecialchars($db_result_2[1]);
-									$db_result_2[2] = htmlspecialchars($db_result_2[2]);
-									$db_result_2[3] = htmlspecialchars($db_result_2[3]);
-									$db_result_2[4] = htmlspecialchars($db_result_2[4]);
-									$db_result_2[5] = htmlspecialchars($db_result_2[5]);
-									if($db_result_2[6] !== NULL) $db_result_2[6] = htmlspecialchars($db_result_2[6]);
-
-									// Imprime os dados pertinentes
-									echo
-										'<section>', $EOL,
-											'<p><b>Por:</b> ', $db_result_2[1], '</p>', $EOL,
-											'<p class="but"><b>Quando:</b> ', $db_result_2[3], '</p>', $EOL,
-											'<p class="but"><b>Título:</b> ', $db_result_2[4], '</p>', $EOL,
-											// Link para mostrar a descrição
-											'<p class="but">',
-												'<a href="javascript:desc(', $i, ')"><b>Descrição <span id="hist-', $i, '-a">▼</span><span id="hist-', $i, '-b">▲</span></b></a>',
-											'</p>', $EOL,
-											// Esconde descrição inicialmente
-											'<script>',
-												'$(function(){',
-													'$("#hist-', $i, '").hide();',
-													'$("#hist-', $i, '-b").hide();',
-												'});',
-											'</script>', $EOL,
-											'<div id="hist-', $i, '">',
-												'<p class="but" style="text-align:justify">'
-									;
-
-									// Parágrafos a exibir
-									$pars = str_replace("\r\n",'</p><p class="but" style="text-align:justify">',$db_result_2[5]);
-
-									echo $pars, '</p></div>', $EOL;
-
-									// Se tem anexo, exibe link
-									if($db_result_2[6])
-										echo '<p class="but"><b><a href="', $FDIR, '/', $db_result_2[6], '">Anexo</a></b></p>', $EOL;
-									else
-										echo '<p class="but"><b>Sem anexo</b></p>', $EOL;
-
-									// Formulário para exclusão
-									echo
-											'<form method="post" action="excluir.historico.php" class="but">',
-												'<input type="hidden" name="entidade" value="', $db_result_2[0], '"/>',
-												'<input type="hidden" name="sobre" value="', $id, '"/>',
-												'<input type="hidden" name="quando" value="', $db_result_2[2], '"/>',
-												'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir este histórico?\');"/>',
-											'</form>', $EOL,
-										'</section>', $EOL
-									;
-								}
-							// Caso não tenha selecionado históricos
-							} else echo '<section><p>Nenhum histórico a listar</p></section>', $EOL;
-						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<section><p class="error">Erro na consulta com a Base de Dados: ', $error, '</p></section>', $EOL;
-						}
-					// Caso não possua permissão
-					} else echo '<section><p class="error">Você não tem permissão para visualizar estes dados.</p></section>', $EOL;
+					historico($db_link, 0);
 
 					echo
 						'</div>', $EOL

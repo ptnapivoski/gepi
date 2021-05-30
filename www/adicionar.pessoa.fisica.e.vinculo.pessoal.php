@@ -11,10 +11,10 @@ if($_SESSION['user']){
 	$de = (int) $_POST['de'];
 
 	// Tratamento para voltar para página de pessoa objetivada
-	$page = "entidade.php?id=$id&tab=5";
+	$page = "entidade.php?id=$id&tab=7";
 	if(isset($_POST['go-de'])){
 		$_POST['go-de'] = (int) $_POST['go-de'];
-		if($_POST['go-de'] === 1) $page = "entidade.php?id=$de&tab=5";
+		if($_POST['go-de'] === 1) $page = "entidade.php?id=$de&tab=7";
 	}
 
 	// Tenta conectar ao DB

@@ -123,6 +123,11 @@ p.success {
 	color: green; /* Verde */
 }
 
+/* Parágrafos de texto */
+p.text {
+	text-align: justify; /* Justificado */
+}
+
 /* Campos no formulário de login */
 input#login-id, input#login-password {
 	width: 160px;

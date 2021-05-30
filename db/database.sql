@@ -39,6 +39,7 @@ DROP TABLE IF EXISTS permissao_e_estado_civil;
 DROP TABLE IF EXISTS permissao_e_genero;
 DROP TABLE IF EXISTS acao;
 DROP TABLE IF EXISTS historico;
+DROP TABLE IF EXISTS secao_de_historico;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd;
 DROP TABLE IF EXISTS servico_de_ddpd;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_as;
@@ -601,10 +602,17 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd (
 		ON DELETE CASCADE
 );
 
+-- Propriedade seção em histórico
+CREATE TABLE IF NOT EXISTS secao_de_historico (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
 -- Histórico de informações compartilhadas entre as entidades
 CREATE TABLE IF NOT EXISTS historico (
 	 entidade  BIGINT UNSIGNED
 	,sobre     BIGINT UNSIGNED
+	,secao     BIGINT UNSIGNED
 	,quando    DATETIME
 	,titulo    VARCHAR(255) NOT NULL
 	,descricao TEXT NOT NULL
@@ -616,6 +624,10 @@ CREATE TABLE IF NOT EXISTS historico (
 		ON DELETE CASCADE
 	,FOREIGN KEY (sobre)
 		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (secao)
+		REFERENCES secao_de_historico (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2109,6 +2121,16 @@ INSERT INTO servico_de_ddpd (nome) VALUES
 ,('Defensoria Pública')
 ,('Fóruns')
 ,('Ministério Público')
+;
+
+-- Seções de histórico iniciais
+INSERT INTO secao_de_historico (nome) VALUES
+ (/*1*/'Saúde')
+,(/*2*/'Educação')
+,(/*3*/'Assitência Social')
+,(/*4*/'Trabalho')
+,(/*5*/'Habitação')
+,(/*6*/'Mobilidade Urbana')
 ;
 
 -- Ações iniciais

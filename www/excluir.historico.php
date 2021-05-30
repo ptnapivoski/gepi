@@ -8,6 +8,7 @@ if($_SESSION['user']){
 	// Trata entrada do que excluir
 	$entidade = (int) $_POST['entidade'];
 	$sobre = (int) $_POST['sobre'];
+	$sec = (int) $_POST['sec'];
 
 	// Tenta conectar ao DB
 	require_once('db.link.php');
@@ -85,7 +86,10 @@ if($_SESSION['user']){
 	// Informa que há problema na conexão com o DB
 	} else require_once('db.link.err.php');
 
+	// Abra para a qual retornar
+	if($sec >= 1 && $sec <= 6) $tab = $sec; else $tab = 8;
+
 	// Volta para a página da entidade na aba dos históricos
-	header("Location:entidade.php?id=$sobre&tab=6");
+	header("Location:entidade.php?id=$sobre&tab=$tab");
 // Se não logado
 } else require_once('login.err.php');

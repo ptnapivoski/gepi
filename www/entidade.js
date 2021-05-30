@@ -12,10 +12,10 @@ $(function(){
 	show_mob  = function(){hide_all();$('#tab-mob').show();}
 
 	// Mostrar e ocultar descrição em histórico
-	desc = function(id){
-		$('#hist-'+id).toggle(250);
-		$('#hist-'+id+'-a').toggle();
-		$('#hist-'+id+'-b').toggle();
+	desc = function(sec, id){
+		$('#hist-'+sec+'-'+id).toggle(250);
+		$('#hist-'+sec+'-'+id+'-a').toggle();
+		$('#hist-'+sec+'-'+id+'-b').toggle();
 	}
 
 	// Validação do CPF
