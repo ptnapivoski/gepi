@@ -62,7 +62,7 @@ if($_SESSION['user']){
 							'<li><a href="javascript:show_ge();">Geral</a></li>',
 							'<li><a href="javascript:show_sau();">Saúde</a></li>',
 							'<li><a href="javascript:show_ed();">Educação</a></li>',
-							'<li><a href="javascript:show_assi();">Assistência social</a></li>',
+							'<li><a href="javascript:show_assi();">Assistência Social</a></li>',
 							'<li><a href="javascript:show_tra();">Trabalho</a></li>',
 							'<li><a href="javascript:show_hab();">Habitação</a></li>',
 							'<li><a href="javascript:show_mob();">Mobilidade Urbana</a></li>',
