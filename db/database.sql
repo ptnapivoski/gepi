@@ -1320,6 +1320,8 @@ INSERT INTO tipo_de_entidade (nome) VALUES
 ,(/*08*/'Escola Particular')
 ,(/*09*/'Escola Filantrópica')
 ,(/*10*/'UBS')
+,(/*11*/'CRAS')
+,(/*12*/'CREAS')
 ;
 
 -- Países iniciais
@@ -2451,6 +2453,8 @@ INSERT INTO permissao_e_tipo_de_entidade VALUES
 ,(3,TRUE,55,7)
 ,(3,TRUE,55,8)
 ,(3,TRUE,55,9)
+,(4,TRUE,55,11)
+,(4,TRUE,55,12)
 ;
 
 INSERT INTO permissao_e_vinculo_pessoal VALUES
