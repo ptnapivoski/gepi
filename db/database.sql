@@ -2567,3 +2567,16 @@ INSERT INTO permissao_e_entidade VALUES
 ,(NULL,FALSE,87,NULL)
 ,(1,TRUE,87,NULL)
 ;
+
+-- Dados para teste. Excluir em produção {
+INSERT INTO entidade (tipo_de_entidade,inserido_por,endereco,nome) VALUES
+ (1,1,NULL,'Fulano de Tal')
+,(5,3,NULL,'E.M.E.F. A')
+,(6,3,NULL,'E.E.E.M. B')
+,(11,4,NULL,'CRAS A')
+,(11,4,NULL,'CRAS B')
+,(11,4,NULL,'CRAS C')
+,(12,4,NULL,'CREAS A')
+;
+
+INSERT INTO pessoa_fisica (id) VALUES (5);
