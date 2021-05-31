@@ -285,6 +285,25 @@ $(function(){
 	});
 
 	// Ao alterar o ID
+	$('#medicacao-entidade-id').change(function(){
+		// Se for um ID válido
+		if($('#medicacao-entidade-id').val() > 0){
+			// Requisita via AJAX
+			$.ajax({
+				// De modo sincronizado
+				async: false,
+				// Os dados para inserção num input
+				url: 'input.entidade.php?id='+$('#medicacao-entidade-id').val()
+			// Com os dados requisitados
+			}).done(function(data){
+				// Insere no lugar apropriado
+				$('#medicacao-entidade-nome').val(data);
+			});
+		// Caso não seja válido, colocar o nome adequado
+		} else $('#medicacao-entidade-nome').val('Qualquer um');
+	});
+
+	// Ao alterar o ID
 	$('#servico-de-ddpd-entidade-id').change(function(){
 		// Se for um ID válido
 		if($('#servico-de-ddpd-entidade-id').val() > 0){

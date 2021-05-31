@@ -1172,6 +1172,63 @@ if($_SESSION['user']){
 					'</p>', $EOL,
 				'</form>', $EOL,
 			'</section>', $EOL,
+			// Inicia a seção das medicações
+			'<section class="cad" id="medicacao-sec">', $EOL,
+				'<h1>Medicações</h1>', $EOL
+		;
+
+		// Tenta selecionar as medicações
+		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM medicacao ORDER BY nome;")){
+			// Se selecionou pelo menos uma linha
+			if(mysqli_num_rows($db_query)){
+				// Inicia a tabela
+				echo '<table>', $EOL;
+				// Para cada linha selecionada
+				while($db_result = mysqli_fetch_row($db_query)){
+					// Valida os dados vindos
+					$db_result[0] = (int) $db_result[0];
+					$db_result[1] = htmlspecialchars($db_result[1]);
+
+					// Cria os formulários para aqueles dados
+					echo
+						'<tr>', $EOL,
+							'<td>', $EOL,
+								'<form action="alterar.medicacao.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="text" name="nome" id="medicacao-', $db_result[0], '" required="required" value="', $db_result[1], '"/> ',
+									'<input type="submit" value="Alterar" onclick="if($(\'#medicacao-', $db_result[0], '\').val()) return confirm(\'Tem certeza que deseja alterar a medicação \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+							'<td>', $EOL,
+								'<form action="excluir.medicacao.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir a medicação \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+						'</tr>', $EOL
+					;
+				}
+				// Finaliza a tabela
+				echo '</table>', $EOL;
+
+			// Se não selecionou nenhuma linha
+			} else echo '<p class="error">Nenhuma encontrada</p>', $EOL;
+
+			// Limpa a consulta no servidor
+			mysqli_free_result($db_query);
+
+		// Caso tenha problema na consulta
+		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+
+		// Formulário para inserção e finaliza seção
+		echo
+				'<form action="adicionar.medicacao.php" method="post" class="new">', $EOL,
+					'<p>',
+						'<label>Nova: <input type="text" name="nome" id="nova-medicacao" required="required" value="" /></label> ',
+						'<input type="submit" value="Inserir" onclick="if($(\'#nova-medicacao\').val()) return confirm(\'Tem certeza que deseja inserir a medicação \\\'\' + $(\'#nova-medicacao\').val() + \'\\\'?\');"/>',
+					'</p>', $EOL,
+				'</form>', $EOL,
+			'</section>', $EOL,
 			// Inicia a seção dos serviços de assistência social
 			'<section class="cad" id="servico-de-as-sec">', $EOL,
 				'<h1>Serviços de Assitência Social</h1>', $EOL

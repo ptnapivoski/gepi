@@ -16,6 +16,7 @@ USE gepi;
 DROP TABLE IF EXISTS permissao_e_entidade;
 DROP TABLE IF EXISTS permissao_e_servico_de_ddpd;
 DROP TABLE IF EXISTS permissao_e_servico_de_as;
+DROP TABLE IF EXISTS permissao_e_medicacao;
 DROP TABLE IF EXISTS permissao_e_profissao;
 DROP TABLE IF EXISTS permissao_e_vinculo_pessoal;
 DROP TABLE IF EXISTS permissao_e_tipo_de_entidade;
@@ -46,6 +47,7 @@ DROP TABLE IF EXISTS servico_de_ddpd;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_as;
 DROP TABLE IF EXISTS pessoa_fisica_e_conhecimento_de_servico_de_as;
 DROP TABLE IF EXISTS servico_de_as;
+DROP TABLE IF EXISTS medicacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_interesse_em_trabalho;
 DROP TABLE IF EXISTS pessoa_fisica_e_interesse_em_qualificacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_qualificacao;
@@ -544,6 +546,12 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_interesse_em_trabalho (
 		REFERENCES profissao (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
+);
+
+-- Medicação
+CREATE TABLE IF NOT EXISTS medicacao (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- Serviços de assistência social
@@ -1092,6 +1100,27 @@ CREATE TABLE IF NOT EXISTS permissao_e_profissao (
 		ON DELETE CASCADE
 	,FOREIGN KEY (com)
 		REFERENCES profissao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Permissões sobre medicações
+CREATE TABLE IF NOT EXISTS permissao_e_medicacao (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES medicacao (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2124,6 +2153,48 @@ INSERT INTO vinculo_pessoal (nome) VALUES
 ,('Monitor/Monitora')
 ;
 
+-- Medicação
+INSERT INTO medicacao (nome) VALUES
+ ('Agentes colinérgicos')
+,('Amebicida e tricomonicida')
+,('Aminoglicosídeos')
+,('Analgésicos')
+,('Antiarritmicos')
+,('Anticoagulantes')
+,('Anticonvulsivantes')
+,('Antidepressivos')
+,('Antifúngicos')
+,('Anti-helmínticos')
+,('Anti-hipertensivos')
+,('Anti-histamínicos')
+,('Anti-inflamatórios')
+,('Antimaláricos')
+,('Antineoplásicos')
+,('Antiparkinsonianos')
+,('Antivirais')
+,('Barbitúricos')
+,('Benzodiazepínicos')
+,('Bloqueadores alfa-adrenérgico')
+,('Bloqueadores beta-adrenérgico')
+,('Bloqueadores dos canais de cálcio')
+,('Broncodilatadores')
+,('Cardiotônicos')
+,('Cefalosporina')
+,('Corticoides')
+,('Diuréticos')
+,('Hipoglicêmicos')
+,('Inibidor de colinesterase')
+,('Insulina')
+,('Narcóticos')
+,('Penicilina')
+,('Sedativos')
+,('Sulfonamida')
+,('Teofilina')
+,('Tetraciclina')
+,('Vagotônico')
+,('Vasodilatador coronariano')
+;
+
 -- Serviços de assistência social iniciais
 INSERT INTO servico_de_as (nome) VALUES
  ('CRAS')
@@ -2243,6 +2314,9 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*088*/'Adicionar tecnologia',FALSE)
 ,(/*089*/'Alterar a tecnologia',TRUE)
 ,(/*090*/'Excluir a tecnologia',TRUE)
+,(/*091*/'Adicionar medicação',FALSE)
+,(/*092*/'Alterar a medicação',TRUE)
+,(/*093*/'Excluir a medicação',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -2485,6 +2559,12 @@ INSERT INTO permissao_e_profissao VALUES
 ,(1,TRUE,65,NULL)
 ,(NULL,FALSE,66,NULL)
 ,(1,TRUE,66,NULL)
+;
+
+INSERT INTO permissao_e_medicacao VALUES
+ (NULL,TRUE,91,NULL)
+,(NULL,FALSE,92,NULL)
+,(NULL,FALSE,93,NULL)
 ;
 
 INSERT INTO permissao_e_servico_de_as VALUES
