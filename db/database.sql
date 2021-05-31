@@ -40,6 +40,7 @@ DROP TABLE IF EXISTS permissao_e_genero;
 DROP TABLE IF EXISTS acao;
 DROP TABLE IF EXISTS historico;
 DROP TABLE IF EXISTS secao_de_historico;
+DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_cras_ou_creas;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd;
 DROP TABLE IF EXISTS servico_de_ddpd;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_as;
@@ -598,6 +599,21 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd (
 		ON DELETE CASCADE
 	,FOREIGN KEY (uso)
 		REFERENCES servico_de_ddpd (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Relação de uso de CRAS ou CREAS
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_cras_ou_creas (
+	 pessoa_fisica BIGINT UNSIGNED
+	,uso           BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,uso)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (uso)
+		REFERENCES entidade (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );

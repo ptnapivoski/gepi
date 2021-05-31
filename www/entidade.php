@@ -990,6 +990,92 @@ if($_SESSION['user']){
 					echo
 							'</section>', $EOL,
 							'<section class="cad">', $EOL,
+								'<h1>Uso de CRAS ou CREAS</h1>', $EOL
+					;
+
+					// Caso possua permissão
+					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
+						// Tenta selecionar os CRASs ou CREASs dos quais a pessoa faz uso
+						if($db_query_2 = mysqli_query($db_link, "SELECT cc.id, cc.nome FROM pessoa_fisica_e_uso_de_cras_ou_creas pfucc LEFT JOIN entidade cc ON cc.id = pfucc.uso WHERE pfucc.pessoa_fisica = $id;")){
+							// Se selecionou pelo menos um
+							if(mysqli_num_rows($db_query_2)){
+								// Inicia as linhas
+								echo '<div class="but">', $EOL;
+
+								// Para cada selecionado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata as entradas
+									$cr   = (int) $db_result_2[0];
+									$cr_n = htmlspecialchars($db_result_2[1]);
+
+									// Imprime em campos num formulário para exclusão
+									echo
+										'<form action="excluir.pessoa.fisica.e.uso.de.cras.ou.creas.php" method="post">', $EOL,
+											'<p class="lab">',
+												'<input type="hidden" name="id" value="', $id, '"/>',
+												'<input type="hidden" name="cr" value="', $cr, '"/>',
+												'<input readonly="readonly" type="text" value="', $cr_n, '" class="name"/> ',
+												'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir?\');"/>',
+											'</p>', $EOL,
+										'</form>', $EOL
+									;
+								}
+
+								// Finaliza linhas
+								echo '</div>', $EOL;
+							// Caso não tenha selecionado algum
+							} else echo '<p class="but">Nenhum CRAS ou CREAS vinculado a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+
+						// Tenta selecionar CRAS ou CREAS
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM entidade WHERE tipo_de_entidade IN (11,12) ORDER BY nome;")){
+							// Ao selecionar pelo menos um
+							if(mysqli_num_rows($db_query_2)){
+								// Gera formulário para inserção
+								echo
+									'<form action="adicionar.pessoa.fisica.e.uso.de.cras.ou.creas.php" method="post" class="new">', $EOL,
+										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
+										'<select name="cr">',
+											'<option value="0">Selecione CRAS ou CREAS</option>'
+								;
+
+								// Para cada selecionado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata entrada
+									$db_result_2[0] = (int) $db_result_2[0];
+									$db_result_2[1] = htmlspecialchars($db_result_2[1]);
+									echo '<option value="', $db_result_2[0], '">', $db_result_2[1], '</option>';
+								}
+
+								// Limpa consulta no servidor
+								mysqli_free_result($db_query_2);
+
+								echo
+										'</select>', $EOL,
+										'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar CRAS ou CREAS a esta pessoa?\');"/>', $EOL,
+									'</form>', $EOL
+								;
+							// Caso não tenha selecionado algum
+							} else echo '<p class="but">Nenhum CRAS ou CREAS a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+					// Caso não possua permissão
+					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+
+					echo
+							'</section>', $EOL,
+							'<section class="cad">', $EOL,
 								'<h1>Conhecimento de Serviço de Assistência Social</h1>', $EOL
 					;
 
