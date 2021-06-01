@@ -46,6 +46,10 @@ DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd;
 DROP TABLE IF EXISTS servico_de_ddpd;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_as;
 DROP TABLE IF EXISTS servico_de_as;
+DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_educacao;
+DROP TABLE IF EXISTS servico_de_educacao;
+DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_saude;
+DROP TABLE IF EXISTS servico_de_saude;
 DROP TABLE IF EXISTS pessoa_fisica_e_medicacao;
 DROP TABLE IF EXISTS medicacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_interesse_em_trabalho;
@@ -565,6 +569,48 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_medicacao (
 		ON DELETE CASCADE
 	,FOREIGN KEY (medicacao)
 		REFERENCES medicacao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Serviços de saúde
+CREATE TABLE IF NOT EXISTS servico_de_saude (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Relação de uso de serviço de saúde de uma pessoa física
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_saude (
+	 pessoa_fisica BIGINT UNSIGNED
+	,uso           BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,uso)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (uso)
+		REFERENCES servico_de_saude (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Serviços de educação
+CREATE TABLE IF NOT EXISTS servico_de_educacao (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Relação de uso de serviço de educação de uma pessoa física
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_educacao (
+	 pessoa_fisica BIGINT UNSIGNED
+	,uso           BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,uso)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (uso)
+		REFERENCES servico_de_educacao (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2193,6 +2239,16 @@ INSERT INTO medicacao (nome) VALUES
 ,('Tetraciclina')
 ,('Vagotônico')
 ,('Vasodilatador coronariano')
+;
+
+-- Serviços de saúde iniciais
+INSERT INTO servico_de_saude (nome) VALUES
+ ('Medicação')
+;
+
+-- Serviços de educação iniciais
+INSERT INTO servico_de_educacao (nome) VALUES
+ ('Sala de Recursos Multifuncionais')
 ;
 
 -- Serviços de assistência social iniciais
