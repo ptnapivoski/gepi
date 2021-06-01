@@ -657,6 +657,93 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
+							'</section>', $EOL,
+							'<section class="cad">', $EOL,
+								'<h1>Medicações</h1>', $EOL
+					;
+
+					// Caso possua permissão
+					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
+
+						// Tenta selecionar as medicações da pessoa em questão
+						if($db_query_2 = mysqli_query($db_link, "SELECT med.id, med.nome FROM pessoa_fisica_e_medicacao pfm LEFT JOIN medicacao med ON med.id = pfm.medicacao WHERE pfm.pessoa_fisica = $id;")){
+							// Se selecionou pelo menos uma medicação
+							if(mysqli_num_rows($db_query_2)){
+								// Inicia as linhas
+								echo '<div class="but">', $EOL;
+
+								// Para cada selecionado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata as entradas
+									$medicacao   = (int) $db_result_2[0];
+									$medicacao_n = htmlspecialchars($db_result_2[1]);
+
+									// Imprime em campos num formulário para exclusão
+									echo
+										'<form action="excluir.pessoa.fisica.e.medicacao.php" method="post">', $EOL,
+											'<p class="lab">',
+												'<input type="hidden" name="id" value="', $id, '"/>',
+												'<input type="hidden" name="medicacao" value="', $medicacao, '"/>',
+												'<input readonly="readonly" type="text" value="', $medicacao_n, '" class="name"/> ',
+												'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta medicação?\');"/>',
+											'</p>', $EOL,
+										'</form>', $EOL
+									;
+								}
+
+								// Finaliza linhas
+								echo '</div>', $EOL;
+							// Caso não tenha selecionado alguma medicação
+							} else echo '<p class="but">Nenhuma medicação a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+
+						// Tenta selecionar as medicações
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM medicacao ORDER BY nome;")){
+							// Ao selecionar pelo menos uma medicação
+							if(mysqli_num_rows($db_query_2)){
+								// Gera formulário para inserção
+								echo
+									'<form action="adicionar.pessoa.fisica.e.medicacao.php" method="post" class="new">', $EOL,
+										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
+										'<select name="medicacao">',
+											'<option value="0">Selecione medicação</option>'
+								;
+
+								// Para cada possível medicação existente cadastrada
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata entrada
+									$db_result_2[0] = (int) $db_result_2[0];
+									$db_result_2[1] = htmlspecialchars($db_result_2[1]);
+									echo '<option value="', $db_result_2[0], '">', $db_result_2[1], '</option>';
+								}
+
+								// Limpa consulta no servidor
+								mysqli_free_result($db_query_2);
+
+								echo
+										'</select>', $EOL,
+										'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar a medicação?\');"/>', $EOL,
+									'</form>', $EOL
+								;
+							// Caso não tenha selecionado medicação
+							} else echo '<p class="but">Nenhuma medicação a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+					// Caso não possua permissão
+					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+
+					echo
 							'</section>', $EOL
 					;
 

@@ -47,6 +47,7 @@ DROP TABLE IF EXISTS servico_de_ddpd;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_as;
 DROP TABLE IF EXISTS pessoa_fisica_e_conhecimento_de_servico_de_as;
 DROP TABLE IF EXISTS servico_de_as;
+DROP TABLE IF EXISTS pessoa_fisica_e_medicacao;
 DROP TABLE IF EXISTS medicacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_interesse_em_trabalho;
 DROP TABLE IF EXISTS pessoa_fisica_e_interesse_em_qualificacao;
@@ -552,6 +553,21 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_interesse_em_trabalho (
 CREATE TABLE IF NOT EXISTS medicacao (
 	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
 	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Relação de pessoa física e uso de medicações
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_medicacao (
+	 pessoa_fisica BIGINT UNSIGNED
+	,medicacao  BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,medicacao)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (medicacao)
+		REFERENCES medicacao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
 );
 
 -- Serviços de assistência social
