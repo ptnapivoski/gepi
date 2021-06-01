@@ -45,7 +45,6 @@ DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_cras_ou_creas;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd;
 DROP TABLE IF EXISTS servico_de_ddpd;
 DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_as;
-DROP TABLE IF EXISTS pessoa_fisica_e_conhecimento_de_servico_de_as;
 DROP TABLE IF EXISTS servico_de_as;
 DROP TABLE IF EXISTS pessoa_fisica_e_medicacao;
 DROP TABLE IF EXISTS medicacao;
@@ -574,21 +573,6 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_medicacao (
 CREATE TABLE IF NOT EXISTS servico_de_as (
 	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
 	,nome VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Relação de conhecimento de serviço de assistência que uma pessoa física tem
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_conhecimento_de_servico_de_as (
-	 pessoa_fisica BIGINT UNSIGNED
-	,conhecimento  BIGINT UNSIGNED
-	,PRIMARY KEY (pessoa_fisica,conhecimento)
-	,FOREIGN KEY (pessoa_fisica)
-		REFERENCES pessoa_fisica (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (conhecimento)
-		REFERENCES servico_de_as (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
 );
 
 -- Relação de uso de serviço de assistência social de uma pessoa física
