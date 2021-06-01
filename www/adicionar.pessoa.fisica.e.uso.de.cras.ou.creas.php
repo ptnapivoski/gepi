@@ -26,7 +26,7 @@ if($_SESSION['user']){
 				$db_result[0] = (int) $db_result[0];
 
 				// Se CRAS ou CREAS
-				if(in_array($db_result[0],array(11,12))){
+				if(in_array($db_result[0],array(11,12),TRUE)){
 					// Insere manipulação de permissões
 					require_once('perm.php');
 
