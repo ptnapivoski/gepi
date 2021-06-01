@@ -56,6 +56,6 @@ else if($_SESSION['IP'] !== $_SERVER['REMOTE_ADDR']){
 	header($SITE_CONTENT_TYPE);
 	// Informa que a sessão é inválida
 	echo $SITE_FILE_HEADER, $EOL, '<p style="color:red">Sessão inválida</p>', $EOL;
-	// E não faz mais nada
+	// E faz nada mais
 	exit();
 }
