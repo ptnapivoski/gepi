@@ -1229,6 +1229,120 @@ if($_SESSION['user']){
 					'</p>', $EOL,
 				'</form>', $EOL,
 			'</section>', $EOL,
+			// Inicia a seção dos serviços de saúde
+			'<section class="cad" id="servico-de-saude-sec">', $EOL,
+				'<h1>Serviços de Saúde</h1>', $EOL
+		;
+
+		// Tenta selecionar os serviços de saúde
+		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM servico_de_saude ORDER BY nome;")){
+			// Se selecionou pelo menos uma linha
+			if(mysqli_num_rows($db_query)){
+				// Inicia a tabela
+				echo '<table>', $EOL;
+				// Para cada linha selecionada
+				while($db_result = mysqli_fetch_row($db_query)){
+					// Valida os dados vindos
+					$db_result[0] = (int) $db_result[0];
+					$db_result[1] = htmlspecialchars($db_result[1]);
+
+					// Cria os formulários para aqueles dados
+					echo
+						'<tr>', $EOL,
+							'<td>', $EOL,
+								'<form action="alterar.servico.de.saude.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="text" name="nome" id="servico-de-saude-', $db_result[0], '" required="required" value="', $db_result[1], '"/> ',
+									'<input type="submit" value="Alterar" onclick="if($(\'#servico-de-saude-', $db_result[0], '\').val()) return confirm(\'Tem certeza que deseja alterar o serviço de saúde \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+							'<td>', $EOL,
+								'<form action="excluir.servico.de.saude.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir o serviço de saúde \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+						'</tr>', $EOL
+					;
+				}
+				// Finaliza a tabela
+				echo '</table>', $EOL;
+
+			// Se não selecionou nenhuma linha
+			} else echo '<p class="error">Nenhum encontrado</p>', $EOL;
+
+			// Limpa a consulta no servidor
+			mysqli_free_result($db_query);
+
+		// Caso tenha problema na consulta
+		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+
+		// Formulário para inserção e finaliza seção
+		echo
+				'<form action="adicionar.servico.de.saude.php" method="post" class="new">', $EOL,
+					'<p>',
+						'<label>Novo: <input type="text" name="nome" id="novo-servico-de-saude" required="required" value="" /></label> ',
+						'<input type="submit" value="Inserir" onclick="if($(\'#novo-servico-de-saude\').val()) return confirm(\'Tem certeza que deseja inserir o serviço de saúde \\\'\' + $(\'#novo-servico-de-saude\').val() + \'\\\'?\');"/>',
+					'</p>', $EOL,
+				'</form>', $EOL,
+			'</section>', $EOL,
+			// Inicia a seção dos serviços de educação
+			'<section class="cad" id="servico-de-educacao-sec">', $EOL,
+				'<h1>Serviços de Educação</h1>', $EOL
+		;
+
+		// Tenta selecionar os serviços de educação
+		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM servico_de_educacao ORDER BY nome;")){
+			// Se selecionou pelo menos uma linha
+			if(mysqli_num_rows($db_query)){
+				// Inicia a tabela
+				echo '<table>', $EOL;
+				// Para cada linha selecionada
+				while($db_result = mysqli_fetch_row($db_query)){
+					// Valida os dados vindos
+					$db_result[0] = (int) $db_result[0];
+					$db_result[1] = htmlspecialchars($db_result[1]);
+
+					// Cria os formulários para aqueles dados
+					echo
+						'<tr>', $EOL,
+							'<td>', $EOL,
+								'<form action="alterar.servico.de.educacao.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="text" name="nome" id="servico-de-educacao-', $db_result[0], '" required="required" value="', $db_result[1], '"/> ',
+									'<input type="submit" value="Alterar" onclick="if($(\'#servico-de-educacao-', $db_result[0], '\').val()) return confirm(\'Tem certeza que deseja alterar o serviço de educação \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+							'<td>', $EOL,
+								'<form action="excluir.servico.de.educacao.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir o serviço de educação \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+						'</tr>', $EOL
+					;
+				}
+				// Finaliza a tabela
+				echo '</table>', $EOL;
+
+			// Se não selecionou nenhuma linha
+			} else echo '<p class="error">Nenhum encontrado</p>', $EOL;
+
+			// Limpa a consulta no servidor
+			mysqli_free_result($db_query);
+
+		// Caso tenha problema na consulta
+		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+
+		// Formulário para inserção e finaliza seção
+		echo
+				'<form action="adicionar.servico.de.educacao.php" method="post" class="new">', $EOL,
+					'<p>',
+						'<label>Novo: <input type="text" name="nome" id="novo-servico-de-educacao" required="required" value="" /></label> ',
+						'<input type="submit" value="Inserir" onclick="if($(\'#novo-servico-de-educacao\').val()) return confirm(\'Tem certeza que deseja inserir o serviço de educação \\\'\' + $(\'#novo-servico-de-educacao\').val() + \'\\\'?\');"/>',
+					'</p>', $EOL,
+				'</form>', $EOL,
+			'</section>', $EOL,
 			// Inicia a seção dos serviços de assistência social
 			'<section class="cad" id="servico-de-as-sec">', $EOL,
 				'<h1>Serviços de Assitência Social</h1>', $EOL

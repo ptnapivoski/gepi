@@ -16,6 +16,8 @@ USE gepi;
 DROP TABLE IF EXISTS permissao_e_entidade;
 DROP TABLE IF EXISTS permissao_e_servico_de_ddpd;
 DROP TABLE IF EXISTS permissao_e_servico_de_as;
+DROP TABLE IF EXISTS permissao_e_servico_de_educacao;
+DROP TABLE IF EXISTS permissao_e_servico_de_saude;
 DROP TABLE IF EXISTS permissao_e_medicacao;
 DROP TABLE IF EXISTS permissao_e_profissao;
 DROP TABLE IF EXISTS permissao_e_vinculo_pessoal;
@@ -1167,6 +1169,48 @@ CREATE TABLE IF NOT EXISTS permissao_e_medicacao (
 		ON DELETE CASCADE
 	,FOREIGN KEY (com)
 		REFERENCES medicacao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Permissões sobre serviços de saúde
+CREATE TABLE IF NOT EXISTS permissao_e_servico_de_saude (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES servico_de_saude (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Permissões sobre serviços de educação
+CREATE TABLE IF NOT EXISTS permissao_e_servico_de_educacao (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES servico_de_educacao (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2373,6 +2417,12 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*091*/'Adicionar medicação',FALSE)
 ,(/*092*/'Alterar a medicação',TRUE)
 ,(/*093*/'Excluir a medicação',TRUE)
+,(/*094*/'Adicionar serviços de saúde',FALSE)
+,(/*095*/'Alterar o serviço de saúde',TRUE)
+,(/*096*/'Excluir o serviço de saúde',TRUE)
+,(/*097*/'Adicionar serviços de educação',FALSE)
+,(/*098*/'Alterar o serviço de educação',TRUE)
+,(/*099*/'Excluir o serviço de educação',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -2620,15 +2670,39 @@ INSERT INTO permissao_e_profissao VALUES
 INSERT INTO permissao_e_medicacao VALUES
  (NULL,TRUE,91,NULL)
 ,(NULL,FALSE,92,NULL)
+,(2,TRUE,92,NULL)
 ,(NULL,FALSE,93,NULL)
+,(2,TRUE,93,NULL)
+;
+
+INSERT INTO permissao_e_servico_de_saude VALUES
+ (NULL,TRUE,94,NULL)
+,(NULL,FALSE,95,NULL)
+,(1,TRUE,95,NULL)
+,(2,TRUE,95,NULL)
+,(NULL,FALSE,96,NULL)
+,(1,TRUE,96,NULL)
+,(2,TRUE,96,NULL)
+;
+
+INSERT INTO permissao_e_servico_de_educacao VALUES
+ (NULL,TRUE,97,NULL)
+,(NULL,FALSE,98,NULL)
+,(1,TRUE,98,NULL)
+,(3,TRUE,98,NULL)
+,(NULL,FALSE,99,NULL)
+,(1,TRUE,99,NULL)
+,(3,TRUE,99,NULL)
 ;
 
 INSERT INTO permissao_e_servico_de_as VALUES
  (NULL,TRUE,67,NULL)
 ,(NULL,FALSE,68,NULL)
 ,(1,TRUE,68,NULL)
+,(4,TRUE,68,NULL)
 ,(NULL,FALSE,69,NULL)
 ,(1,TRUE,69,NULL)
+,(4,TRUE,69,NULL)
 ;
 
 INSERT INTO permissao_e_servico_de_ddpd VALUES

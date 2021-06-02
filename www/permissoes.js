@@ -266,6 +266,44 @@ $(function(){
 	});
 
 	// Ao alterar o ID
+	$('#servico-de-saude-entidade-id').change(function(){
+		// Se for um ID válido
+		if($('#servico-de-saude-entidade-id').val() > 0){
+			// Requisita via AJAX
+			$.ajax({
+				// De modo sincronizado
+				async: false,
+				// Os dados para inserção num input
+				url: 'input.entidade.php?id='+$('#servico-de-saude-entidade-id').val()
+			// Com os dados requisitados
+			}).done(function(data){
+				// Insere no lugar apropriado
+				$('#servico-de-saude-entidade-nome').val(data);
+			});
+		// Caso não seja válido, colocar o nome adequado
+		} else $('#servico-de-saude-entidade-nome').val('Qualquer um');
+	});
+
+	// Ao alterar o ID
+	$('#servico-de-educacao-entidade-id').change(function(){
+		// Se for um ID válido
+		if($('#servico-de-educacao-entidade-id').val() > 0){
+			// Requisita via AJAX
+			$.ajax({
+				// De modo sincronizado
+				async: false,
+				// Os dados para inserção num input
+				url: 'input.entidade.php?id='+$('#servico-de-educacao-entidade-id').val()
+			// Com os dados requisitados
+			}).done(function(data){
+				// Insere no lugar apropriado
+				$('#servico-de-educacao-entidade-nome').val(data);
+			});
+		// Caso não seja válido, colocar o nome adequado
+		} else $('#servico-de-educacao-entidade-nome').val('Qualquer um');
+	});
+
+	// Ao alterar o ID
 	$('#servico-de-as-entidade-id').change(function(){
 		// Se for um ID válido
 		if($('#servico-de-as-entidade-id').val() > 0){
