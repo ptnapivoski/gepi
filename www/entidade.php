@@ -16,17 +16,19 @@ if($_SESSION['user']){
 
 	// Aba a mostrar
 	if(isset($_GET['tab'])) $tab = (int) $_GET['tab']; else $tab = 0;
-	echo '<script>$(function(){';
-	if($tab === 0)      echo 'show_ge();';
-	else if($tab === 1) echo 'show_sau();';
-	else if($tab === 2) echo 'show_ed();';
-	else if($tab === 3) echo 'show_assi();';
-	else if($tab === 4) echo 'show_tra();';
-	else if($tab === 5) echo 'show_hab();';
-	else if($tab === 6) echo 'show_mob();';
-	else if($tab === 7) echo 'show_vin();';
-	else if($tab === 8) echo 'show_his();';
-	echo '});</script>';
+	if($tab < 0 || $tab > 8) $tab = 0;
+	$tabs = array(
+		 'show_ge();'
+		,'show_sau();'
+		,'show_ed();'
+		,'show_assi();'
+		,'show_tra();'
+		,'show_hab();'
+		,'show_mob();'
+		,'show_vin();'
+		,'show_his();'
+	);
+	echo '<script>$(function(){', $tabs[$tab], '});</script>';
 
 	// Coloca JavaScript para CPF
 	echo '<script src="cpf.js"></script>', $EOL;
@@ -744,6 +746,92 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
+							'</section>', $EOL,
+							'<section class="cad">', $EOL,
+								'<h1>Uso de Serviço de Saúde</h1>', $EOL
+					;
+
+					// Caso possua permissão
+					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
+						// Tenta selecionar os serviços de saúde dos quais a pessoa faz uso
+						if($db_query_2 = mysqli_query($db_link, "SELECT ss.id, ss.nome FROM pessoa_fisica_e_servico_de_saude pfss LEFT JOIN servico_de_saude ss ON ss.id = pfss.uso WHERE pfss.pessoa_fisica = $id;")){
+							// Se selecionou pelo menos um serviço
+							if(mysqli_num_rows($db_query_2)){
+								// Inicia as linhas
+								echo '<div class="but">', $EOL;
+
+								// Para cada selecionado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata as entradas
+									$servico   = (int) $db_result_2[0];
+									$servico_n = htmlspecialchars($db_result_2[1]);
+
+									// Imprime em campos num formulário para exclusão
+									echo
+										'<form action="excluir.pessoa.fisica.e.servico.de.saude.php" method="post">', $EOL,
+											'<p class="lab">',
+												'<input type="hidden" name="id" value="', $id, '"/>',
+												'<input type="hidden" name="servico" value="', $servico, '"/>',
+												'<input readonly="readonly" type="text" value="', $servico_n, '" class="name"/> ',
+												'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir o serviço?\');"/>',
+											'</p>', $EOL,
+										'</form>', $EOL
+									;
+								}
+
+								// Finaliza linhas
+								echo '</div>', $EOL;
+							// Caso não tenha selecionado algum serviço
+							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+
+						// Tenta selecionar os serviços de saúde
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_saude ORDER BY nome;")){
+							// Ao selecionar pelo menos um serviço
+							if(mysqli_num_rows($db_query_2)){
+								// Gera formulário para inserção
+								echo
+									'<form action="adicionar.pessoa.fisica.e.servico.de.saude.php" method="post" class="new">', $EOL,
+										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
+										'<select name="servico">',
+											'<option value="0">Selecione serviço</option>'
+								;
+
+								// Para cada possível serviço existente cadastrado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata entrada
+									$db_result_2[0] = (int) $db_result_2[0];
+									$db_result_2[1] = htmlspecialchars($db_result_2[1]);
+									echo '<option value="', $db_result_2[0], '">', $db_result_2[1], '</option>';
+								}
+
+								// Limpa consulta no servidor
+								mysqli_free_result($db_query_2);
+
+								echo
+										'</select>', $EOL,
+										'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar o serviço de saúde?\');"/>', $EOL,
+									'</form>', $EOL
+								;
+							// Caso não tenha selecionado serviços
+							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+					// Caso não possua permissão
+					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+
+					echo
 							'</section>', $EOL
 					;
 
@@ -976,6 +1064,92 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
+							'</section>', $EOL,
+							'<section class="cad">', $EOL,
+								'<h1>Uso de Serviço de Educação</h1>', $EOL
+					;
+
+					// Caso possua permissão
+					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
+						// Tenta selecionar os serviços de saúde dos quais a pessoa faz uso
+						if($db_query_2 = mysqli_query($db_link, "SELECT se.id, se.nome FROM pessoa_fisica_e_servico_de_educacao pfse LEFT JOIN servico_de_educacao se ON se.id = pfse.uso WHERE pfse.pessoa_fisica = $id;")){
+							// Se selecionou pelo menos um serviço
+							if(mysqli_num_rows($db_query_2)){
+								// Inicia as linhas
+								echo '<div class="but">', $EOL;
+
+								// Para cada selecionado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata as entradas
+									$servico   = (int) $db_result_2[0];
+									$servico_n = htmlspecialchars($db_result_2[1]);
+
+									// Imprime em campos num formulário para exclusão
+									echo
+										'<form action="excluir.pessoa.fisica.e.servico.de.educacao.php" method="post">', $EOL,
+											'<p class="lab">',
+												'<input type="hidden" name="id" value="', $id, '"/>',
+												'<input type="hidden" name="servico" value="', $servico, '"/>',
+												'<input readonly="readonly" type="text" value="', $servico_n, '" class="name"/> ',
+												'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir o serviço?\');"/>',
+											'</p>', $EOL,
+										'</form>', $EOL
+									;
+								}
+
+								// Finaliza linhas
+								echo '</div>', $EOL;
+							// Caso não tenha selecionado algum serviço
+							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+
+						// Tenta selecionar os serviços de educação
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_educacao ORDER BY nome;")){
+							// Ao selecionar pelo menos um serviço
+							if(mysqli_num_rows($db_query_2)){
+								// Gera formulário para inserção
+								echo
+									'<form action="adicionar.pessoa.fisica.e.servico.de.educacao.php" method="post" class="new">', $EOL,
+										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
+										'<select name="servico">',
+											'<option value="0">Selecione serviço</option>'
+								;
+
+								// Para cada possível serviço existente cadastrado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata entrada
+									$db_result_2[0] = (int) $db_result_2[0];
+									$db_result_2[1] = htmlspecialchars($db_result_2[1]);
+									echo '<option value="', $db_result_2[0], '">', $db_result_2[1], '</option>';
+								}
+
+								// Limpa consulta no servidor
+								mysqli_free_result($db_query_2);
+
+								echo
+										'</select>', $EOL,
+										'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar o serviço de educação?\');"/>', $EOL,
+									'</form>', $EOL
+								;
+							// Caso não tenha selecionado serviços
+							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+					// Caso não possua permissão
+					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+
+					echo
 							'</section>', $EOL
 					;
 
@@ -1097,7 +1271,7 @@ if($_SESSION['user']){
 
 									// Imprime em campos num formulário para exclusão
 									echo
-										'<form action="excluir.pessoa.fisica.e.uso.de.cras.ou.creas.php" method="post">', $EOL,
+										'<form action="excluir.pessoa.fisica.e.cras.ou.creas.php" method="post">', $EOL,
 											'<p class="lab">',
 												'<input type="hidden" name="id" value="', $id, '"/>',
 												'<input type="hidden" name="cr" value="', $cr, '"/>',
@@ -1126,7 +1300,7 @@ if($_SESSION['user']){
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
 								echo
-									'<form action="adicionar.pessoa.fisica.e.uso.de.cras.ou.creas.php" method="post" class="new">', $EOL,
+									'<form action="adicionar.pessoa.fisica.e.cras.ou.creas.php" method="post" class="new">', $EOL,
 										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
 										'<select name="cr">',
 											'<option value="0">Selecione CRAS ou CREAS</option>'
@@ -1183,7 +1357,7 @@ if($_SESSION['user']){
 
 									// Imprime em campos num formulário para exclusão
 									echo
-										'<form action="excluir.pessoa.fisica.e.uso.de.servico.de.as.php" method="post">', $EOL,
+										'<form action="excluir.pessoa.fisica.e.servico.de.as.php" method="post">', $EOL,
 											'<p class="lab">',
 												'<input type="hidden" name="id" value="', $id, '"/>',
 												'<input type="hidden" name="servico" value="', $servico, '"/>',
@@ -1212,7 +1386,7 @@ if($_SESSION['user']){
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
 								echo
-									'<form action="adicionar.pessoa.fisica.e.uso.de.servico.de.as.php" method="post" class="new">', $EOL,
+									'<form action="adicionar.pessoa.fisica.e.servico.de.as.php" method="post" class="new">', $EOL,
 										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
 										'<select name="servico">',
 											'<option value="0">Selecione serviço</option>'
@@ -1269,7 +1443,7 @@ if($_SESSION['user']){
 
 									// Imprime em campos num formulário para exclusão
 									echo
-										'<form action="excluir.pessoa.fisica.e.uso.de.servico.de.ddpd.php" method="post">', $EOL,
+										'<form action="excluir.pessoa.fisica.e.servico.de.ddpd.php" method="post">', $EOL,
 											'<p class="lab">',
 												'<input type="hidden" name="id" value="', $id, '"/>',
 												'<input type="hidden" name="servico" value="', $servico, '"/>',
@@ -1298,7 +1472,7 @@ if($_SESSION['user']){
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
 								echo
-									'<form action="adicionar.pessoa.fisica.e.uso.de.servico.de.ddpd.php" method="post" class="new">', $EOL,
+									'<form action="adicionar.pessoa.fisica.e.servico.de.ddpd.php" method="post" class="new">', $EOL,
 										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
 										'<select name="servico">',
 											'<option value="0">Selecione serviço</option>'
