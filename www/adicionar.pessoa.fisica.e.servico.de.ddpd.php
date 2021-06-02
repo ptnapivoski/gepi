@@ -5,7 +5,7 @@ require_once('init.php');
 
 // Se logado
 if($_SESSION['user']){
-	// Pessoa à qual adicionar uso de serviço de assitência social
+	// Pessoa à qual adicionar uso de serviço de defesa dos direitos da pessoa com deficiência
 	$id = (int) $_POST['id'];
 
 	// Tenta conectar ao DB
@@ -22,7 +22,7 @@ if($_SESSION['user']){
 			$servico = (int) $_POST['servico'];
 
 			// Tenta inserir
-			if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_uso_de_servico_de_as (pessoa_fisica, uso) VALUES ($id, $servico);")){
+			if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_servico_de_ddpd (pessoa_fisica, uso) VALUES ($id, $servico);")){
 				// Se consulta inseriu uma linha
 				if(mysqli_affected_rows($db_link) === 1)
 					// Informa que houve a inserção

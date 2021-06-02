@@ -5,7 +5,7 @@ require_once('init.php');
 
 // Se logado
 if($_SESSION['user']){
-	// Pessoa à qual adicionar uso de serviço de defesa dos direitos da pessoa com deficiência
+	// Pessoa da qual excluir
 	$id = (int) $_POST['id'];
 
 	// Tenta conectar ao DB
@@ -18,17 +18,17 @@ if($_SESSION['user']){
 
 		// Caso possua permissão
 		if(perm($db_link, 'permissao_e_entidade', 78, $id)){
-			// Valida dados vindo do formulário
+			// Trata entrada
 			$servico = (int) $_POST['servico'];
 
-			// Tenta inserir
-			if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_uso_de_servico_de_ddpd (pessoa_fisica, uso) VALUES ($id, $servico);")){
-				// Se consulta inseriu uma linha
+			// Tenta excluir
+			if($db_query = mysqli_query($db_link, "DELETE FROM pessoa_fisica_e_servico_de_as WHERE pessoa_fisica = $id AND uso = $servico;")){
+				// Se consulta excluiu uma linha
 				if(mysqli_affected_rows($db_link) === 1)
-					// Informa que houve a inserção
-					$_SESSION['msg'] = '<p class="success">Inserção efetuada.</p>';
-				// Caso contrário, informa que não houve a inserção
-				else $_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
+					// Informa que houve a exclusão
+					$_SESSION['msg'] = '<p class="success">Exclusão efetuada.</p>';
+				// Caso contrário, informa que não houve a exclusão
+				else $_SESSION['msg'] = '<p class="error">Exclusão não efetuada.</p>';
 			// Caso não tenha conseguido realizar a consulta
 			} else {
 				// Seleciona-se e escapa-se o erro
@@ -44,7 +44,7 @@ if($_SESSION['user']){
 	// Informa que há problema na conexão com o DB
 	} else require_once('db.link.err.php');
 
-	// Volta para a página da entidade e na aba adequada
+	// Volta para a página da pessoa na aba apropriada
 	header("Location:entidade.php?id=$id&tab=3");
 // Se não logado
 } else require_once('login.err.php');

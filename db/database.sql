@@ -41,14 +41,14 @@ DROP TABLE IF EXISTS permissao_e_genero;
 DROP TABLE IF EXISTS acao;
 DROP TABLE IF EXISTS historico;
 DROP TABLE IF EXISTS secao_de_historico;
-DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_cras_ou_creas;
-DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd;
+DROP TABLE IF EXISTS pessoa_fisica_e_cras_ou_creas;
+DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_ddpd;
 DROP TABLE IF EXISTS servico_de_ddpd;
-DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_as;
+DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_as;
 DROP TABLE IF EXISTS servico_de_as;
-DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_educacao;
+DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_educacao;
 DROP TABLE IF EXISTS servico_de_educacao;
-DROP TABLE IF EXISTS pessoa_fisica_e_uso_de_servico_de_saude;
+DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_saude;
 DROP TABLE IF EXISTS servico_de_saude;
 DROP TABLE IF EXISTS pessoa_fisica_e_medicacao;
 DROP TABLE IF EXISTS medicacao;
@@ -580,7 +580,7 @@ CREATE TABLE IF NOT EXISTS servico_de_saude (
 );
 
 -- Relação de uso de serviço de saúde de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_saude (
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_saude (
 	 pessoa_fisica BIGINT UNSIGNED
 	,uso           BIGINT UNSIGNED
 	,PRIMARY KEY (pessoa_fisica,uso)
@@ -601,7 +601,7 @@ CREATE TABLE IF NOT EXISTS servico_de_educacao (
 );
 
 -- Relação de uso de serviço de educação de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_educacao (
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_educacao (
 	 pessoa_fisica BIGINT UNSIGNED
 	,uso           BIGINT UNSIGNED
 	,PRIMARY KEY (pessoa_fisica,uso)
@@ -622,7 +622,7 @@ CREATE TABLE IF NOT EXISTS servico_de_as (
 );
 
 -- Relação de uso de serviço de assistência social de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_as (
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_as (
 	 pessoa_fisica BIGINT UNSIGNED
 	,uso           BIGINT UNSIGNED
 	,PRIMARY KEY (pessoa_fisica,uso)
@@ -643,7 +643,7 @@ CREATE TABLE IF NOT EXISTS servico_de_ddpd (
 );
 
 -- Relação de uso de Serviços de Defesa dos Direitos da Pessoa com Deficiência de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd (
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_ddpd (
 	 pessoa_fisica BIGINT UNSIGNED
 	,uso           BIGINT UNSIGNED
 	,PRIMARY KEY (pessoa_fisica,uso)
@@ -658,7 +658,7 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_servico_de_ddpd (
 );
 
 -- Relação de uso de CRAS ou CREAS
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_uso_de_cras_ou_creas (
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_cras_ou_creas (
 	 pessoa_fisica BIGINT UNSIGNED
 	,uso           BIGINT UNSIGNED
 	,PRIMARY KEY (pessoa_fisica,uso)

@@ -1083,7 +1083,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
 						// Tenta selecionar os CRASs ou CREASs dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT cc.id, cc.nome FROM pessoa_fisica_e_uso_de_cras_ou_creas pfucc LEFT JOIN entidade cc ON cc.id = pfucc.uso WHERE pfucc.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT cc.id, cc.nome FROM pessoa_fisica_e_cras_ou_creas pfcc LEFT JOIN entidade cc ON cc.id = pfcc.uso WHERE pfcc.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -1169,7 +1169,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
 						// Tenta selecionar os serviços de assistência social dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT sas.id, sas.nome FROM pessoa_fisica_e_uso_de_servico_de_as pfusas LEFT JOIN servico_de_as sas ON sas.id = pfusas.uso WHERE pfusas.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT sas.id, sas.nome FROM pessoa_fisica_e_servico_de_as pfsas LEFT JOIN servico_de_as sas ON sas.id = pfsas.uso WHERE pfsas.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -1255,7 +1255,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
 						// Tenta selecionar os serviços de defesa dos direitos da pessoa com deficiência dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT sddpd.id, sddpd.nome FROM pessoa_fisica_e_uso_de_servico_de_ddpd pfusddpd LEFT JOIN servico_de_ddpd sddpd ON sddpd.id = pfusddpd.uso WHERE pfusddpd.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT sddpd.id, sddpd.nome FROM pessoa_fisica_e_servico_de_ddpd pfsddpd LEFT JOIN servico_de_ddpd sddpd ON sddpd.id = pfsddpd.uso WHERE pfsddpd.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas

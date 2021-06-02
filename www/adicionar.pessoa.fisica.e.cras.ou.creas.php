@@ -33,7 +33,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 78, $id)){
 						// Tenta inserir
-						if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_uso_de_cras_ou_creas (pessoa_fisica, uso) VALUES ($id, $cr);")){
+						if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_cras_ou_creas (pessoa_fisica, uso) VALUES ($id, $cr);")){
 							// Se consulta inseriu uma linha
 							if(mysqli_affected_rows($db_link) === 1)
 								// Informa que houve a inserção

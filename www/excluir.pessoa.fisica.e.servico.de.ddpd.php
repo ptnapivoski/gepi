@@ -19,10 +19,10 @@ if($_SESSION['user']){
 		// Caso possua permissão
 		if(perm($db_link, 'permissao_e_entidade', 78, $id)){
 			// Trata entrada
-			$cr = (int) $_POST['cr'];
+			$servico = (int) $_POST['servico'];
 
 			// Tenta excluir
-			if($db_query = mysqli_query($db_link, "DELETE FROM pessoa_fisica_e_uso_de_cras_ou_creas WHERE pessoa_fisica = $id AND uso = $cr;")){
+			if($db_query = mysqli_query($db_link, "DELETE FROM pessoa_fisica_e_servico_de_ddpd WHERE pessoa_fisica = $id AND uso = $servico;")){
 				// Se consulta excluiu uma linha
 				if(mysqli_affected_rows($db_link) === 1)
 					// Informa que houve a exclusão
