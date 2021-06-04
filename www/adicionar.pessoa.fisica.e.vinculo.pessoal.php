@@ -30,21 +30,25 @@ if($_SESSION['user']){
 			// Valida dados vindos do formulário
 			$eh = (int) $_POST['eh'];
 
-			// Tenta inserir
-			if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_vinculo_pessoal (pessoa_fisica, eh, de) VALUES ($id, $eh, $de);")){
-				// Se consulta inseriu uma linha
-				if(mysqli_affected_rows($db_link) === 1)
-					// Informa que houve a inserção
-					$_SESSION['msg'] = '<p class="success">Inserção efetuada.</p>';
-				// Caso contrário, informa que não houve a inserção
-				else $_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
-			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// E o inclui na mensagem passada ao usuário
-				$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-			}
+			// Ninguém é algo de si mesmo
+			if($id !== $de){
+				// Tenta inserir
+				if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_vinculo_pessoal (pessoa_fisica, eh, de) VALUES ($id, $eh, $de);")){
+					// Se consulta inseriu uma linha
+					if(mysqli_affected_rows($db_link) === 1)
+						// Informa que houve a inserção
+						$_SESSION['msg'] = '<p class="success">Inserção efetuada.</p>';
+					// Caso contrário, informa que não houve a inserção
+					else $_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
+				// Caso não tenha conseguido realizar a consulta
+				} else {
+					// Seleciona-se e escapa-se o erro
+					$error = htmlspecialchars(mysqli_error($db_link));
+					// E o inclui na mensagem passada ao usuário
+					$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
+				}
+			// Avisa do problema
+			} else $_SESSION['msg'] = '<p class="error">Seleção incorreta.</p>';
 		// Caso não possua permissão
 		} else $_SESSION['msg'] = '<p class="error">Você não tem permissão para executar esta ação.</p>';
 
