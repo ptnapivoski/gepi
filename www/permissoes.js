@@ -361,6 +361,25 @@ $(function(){
 	});
 
 	// Ao alterar o ID
+	$('#servico-de-mob-entidade-id').change(function(){
+		// Se for um ID válido
+		if($('#servico-de-mob-entidade-id').val() > 0){
+			// Requisita via AJAX
+			$.ajax({
+				// De modo sincronizado
+				async: false,
+				// Os dados para inserção num input
+				url: 'input.entidade.php?id='+$('#servico-de-mob-entidade-id').val()
+			// Com os dados requisitados
+			}).done(function(data){
+				// Insere no lugar apropriado
+				$('#servico-de-mob-entidade-nome').val(data);
+			});
+		// Caso não seja válido, colocar o nome adequado
+		} else $('#servico-de-mob-entidade-nome').val('Qualquer um');
+	});
+
+	// Ao alterar o ID
 	$('#tipo-de-logradouro-entidade-id').change(function(){
 		// Se for um ID válido
 		if($('#tipo-de-logradouro-entidade-id').val() > 0){

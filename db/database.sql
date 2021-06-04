@@ -14,6 +14,7 @@ USE gepi;
 
 -- Exclusão de tabelas caso não possa executar as modificações no DB
 DROP TABLE IF EXISTS permissao_e_entidade;
+DROP TABLE IF EXISTS permissao_e_servico_de_mob;
 DROP TABLE IF EXISTS permissao_e_servico_de_ddpd;
 DROP TABLE IF EXISTS permissao_e_servico_de_as;
 DROP TABLE IF EXISTS permissao_e_servico_de_educacao;
@@ -44,6 +45,8 @@ DROP TABLE IF EXISTS acao;
 DROP TABLE IF EXISTS historico;
 DROP TABLE IF EXISTS secao_de_historico;
 DROP TABLE IF EXISTS pessoa_fisica_e_cras_ou_creas;
+DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_mob;
+DROP TABLE IF EXISTS servico_de_mob;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_ddpd;
 DROP TABLE IF EXISTS servico_de_ddpd;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_as;
@@ -659,6 +662,27 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_ddpd (
 		ON DELETE CASCADE
 );
 
+-- Serviços de Mobilidade Urbana
+CREATE TABLE IF NOT EXISTS servico_de_mob (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Relação de uso de serviço de Mobilidade Urbana
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_mob (
+	 pessoa_fisica BIGINT UNSIGNED
+	,uso           BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,uso)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (uso)
+		REFERENCES servico_de_mob (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
 -- Relação de uso de CRAS ou CREAS
 CREATE TABLE IF NOT EXISTS pessoa_fisica_e_cras_ou_creas (
 	 pessoa_fisica BIGINT UNSIGNED
@@ -1253,6 +1277,27 @@ CREATE TABLE IF NOT EXISTS permissao_e_servico_de_ddpd (
 		ON DELETE CASCADE
 	,FOREIGN KEY (com)
 		REFERENCES servico_de_ddpd (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Permissões sobre serviços de mobilidade
+CREATE TABLE IF NOT EXISTS permissao_e_servico_de_mob (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES servico_de_mob (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2312,6 +2357,11 @@ INSERT INTO servico_de_ddpd (nome) VALUES
 ,('Ministério Público')
 ;
 
+-- Serviços de mobilidade urbana iniciais
+INSERT INTO servico_de_mob (nome) VALUES
+ ('Passe livre')
+;
+
 -- Seções de histórico iniciais
 INSERT INTO secao_de_historico (nome) VALUES
  (/*1*/'Saúde')
@@ -2423,6 +2473,11 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*097*/'Adicionar serviços de educação',FALSE)
 ,(/*098*/'Alterar o serviço de educação',TRUE)
 ,(/*099*/'Excluir o serviço de educação',TRUE)
+,(/*100*/'Adicionar serviços de mobilidade urbana',FALSE)
+,(/*101*/'Alterar o serviço de mobilidade urbana',TRUE)
+,(/*102*/'Excluir o serviço de mobilidade urbana',TRUE)
+,(/*103*/'Exibir dados sobre mobilidade urbana da pessoa física',TRUE)
+,(/*104*/'Manipular dados sobre mobilidade urbana da pessoa física',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -2713,6 +2768,14 @@ INSERT INTO permissao_e_servico_de_ddpd VALUES
 ,(1,TRUE,72,NULL)
 ;
 
+INSERT INTO permissao_e_servico_de_mob VALUES
+ (NULL,TRUE,100,NULL)
+,(NULL,FALSE,101,NULL)
+,(1,TRUE,101,NULL)
+,(NULL,FALSE,102,NULL)
+,(1,TRUE,102,NULL)
+;
+
 INSERT INTO permissao_e_entidade VALUES
  (NULL,TRUE,56,NULL)
 ,(NULL,FALSE,56,1)
@@ -2776,6 +2839,9 @@ INSERT INTO permissao_e_entidade VALUES
 ,(1,TRUE,86,NULL)
 ,(NULL,FALSE,87,NULL)
 ,(1,TRUE,87,NULL)
+,(NULL,TRUE,103,NULL)
+,(NULL,FALSE,104,NULL)
+,(1,TRUE,104,NULL)
 ;
 
 -- Dados para teste. Excluir em produção
