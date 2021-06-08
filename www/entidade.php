@@ -2042,6 +2042,9 @@ if($_SESSION['user']){
 							'</section>', $EOL
 					;
 
+					// Histórico para Habitação
+					historico($db_link, 5);
+
 					// Fim da aba da Habitação e começo da aba da Mobilidade Urbana
 					echo
 						'</div>', $EOL,
@@ -2134,6 +2137,9 @@ if($_SESSION['user']){
 					echo
 							'</section>', $EOL
 					;
+
+					// Histórico para Mobilidade Urbana
+					historico($db_link, 6);
 
 					// Fim da aba da Mobilidade Urbana e começo da aba de Vínculos
 					echo
