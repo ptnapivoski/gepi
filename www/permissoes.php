@@ -65,7 +65,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -167,7 +167,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -295,7 +295,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -427,7 +427,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -557,7 +557,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -685,7 +685,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -813,7 +813,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -941,7 +941,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1069,7 +1069,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1197,7 +1197,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1325,7 +1325,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1453,7 +1453,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1581,7 +1581,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1709,7 +1709,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1837,7 +1837,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -1965,7 +1965,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2093,7 +2093,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2221,7 +2221,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2349,7 +2349,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2477,7 +2477,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2605,7 +2605,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2733,7 +2733,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2861,7 +2861,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -2989,7 +2989,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -3117,7 +3117,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -3219,7 +3219,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -3321,7 +3321,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -3423,7 +3423,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
@@ -3533,7 +3533,7 @@ if($_SESSION['user']){
 								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
 								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
 								'<input type="text" value="', $end,'" class="name"/>', $EOL,
-								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja exclui esta permissão?\');"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
 							'</form>', $EOL
 						;
 					}
