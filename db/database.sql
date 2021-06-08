@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS permissao_e_medicacao;
 DROP TABLE IF EXISTS permissao_e_profissao;
 DROP TABLE IF EXISTS permissao_e_vinculo_pessoal;
 DROP TABLE IF EXISTS permissao_e_tipo_de_entidade;
+DROP TABLE IF EXISTS permissao_e_tipo_de_residencia;
 DROP TABLE IF EXISTS permissao_e_endereco;
 DROP TABLE IF EXISTS permissao_e_bairro;
 DROP TABLE IF EXISTS permissao_e_logradouro;
@@ -75,6 +76,7 @@ DROP TABLE IF EXISTS email;
 DROP TABLE IF EXISTS telefone;
 DROP TABLE IF EXISTS pessoa_fisica;
 DROP TABLE IF EXISTS entidade;
+DROP TABLE IF EXISTS tipo_de_residencia;
 DROP TABLE IF EXISTS endereco;
 DROP TABLE IF EXISTS bairro;
 DROP TABLE IF EXISTS logradouro;
@@ -254,6 +256,12 @@ CREATE TABLE IF NOT EXISTS endereco (
 		ON DELETE CASCADE
 );
 
+-- Propriedade nominal de tipo de residência de pessoa física
+CREATE TABLE IF NOT EXISTS tipo_de_residencia (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
 -- Entidades cadastradas
 CREATE TABLE IF NOT EXISTS entidade (
 	 id               BIGINT UNSIGNED AUTO_INCREMENT KEY
@@ -290,6 +298,7 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica (
 	,renda                  DOUBLE
 	,escolaridade           BIGINT UNSIGNED
 	,naturalidade           BIGINT UNSIGNED
+	,tipo_de_residencia     BIGINT UNSIGNED
 	,FOREIGN KEY (id)
 		REFERENCES entidade (id)
 		ON UPDATE CASCADE
@@ -312,6 +321,10 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica (
 		ON DELETE SET NULL
 	,FOREIGN KEY (naturalidade)
 		REFERENCES cidade (id)
+		ON UPDATE CASCADE
+		ON DELETE SET NULL
+	,FOREIGN KEY (tipo_de_residencia)
+		REFERENCES tipo_de_residencia (id)
 		ON UPDATE CASCADE
 		ON DELETE SET NULL
 );
@@ -1109,6 +1122,27 @@ CREATE TABLE IF NOT EXISTS permissao_e_endereco (
 		ON DELETE CASCADE
 	,FOREIGN KEY (com)
 		REFERENCES endereco (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Permissões sobre tipos de residência
+CREATE TABLE IF NOT EXISTS permissao_e_tipo_de_residencia (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES tipo_de_residencia (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2256,6 +2290,14 @@ INSERT INTO bairro (cidade,nome) VALUES
 ,(1,'Zona Portuária')
 ;
 
+-- Tipos de residência iniciais
+INSERT INTO tipo_de_residencia (nome) VALUES
+ (/*1*/'Própria financiada')
+,(/*2*/'Própria quitada')
+,(/*3*/'Alugada')
+,(/*4*/'Emprestada')
+;
+
 -- Endereços iniciais
 INSERT INTO endereco (bairro,logradouro,numero,complemento,cep,geocodigo,geom) VALUES
  (1,1,NULL,NULL,'96200-900',NULL,NULL)
@@ -2478,6 +2520,11 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*102*/'Excluir o serviço de mobilidade urbana',TRUE)
 ,(/*103*/'Exibir dados sobre mobilidade urbana da pessoa física',TRUE)
 ,(/*104*/'Manipular dados sobre mobilidade urbana da pessoa física',TRUE)
+,(/*105*/'Exibir dados sobre habitação da pessoa física',TRUE)
+,(/*106*/'Manipular dados sobre habitação da pessoa física',TRUE)
+,(/*107*/'Adicionar tipos de residência',FALSE)
+,(/*108*/'Alterar o tipo de residência',TRUE)
+,(/*109*/'Excluir o tipo de residência',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -2680,6 +2727,15 @@ INSERT INTO permissao_e_bairro VALUES
 ,(1,TRUE,48,NULL)
 ;
 
+INSERT INTO permissao_e_tipo_de_residencia VALUES
+ (NULL,FALSE,107,NULL)
+,(1,TRUE,107,NULL)
+,(NULL,FALSE,108,NULL)
+,(1,TRUE,108,NULL)
+,(NULL,FALSE,109,NULL)
+,(1,TRUE,109,NULL)
+;
+
 INSERT INTO permissao_e_endereco VALUES
  (NULL,TRUE,49,NULL)
 ,(NULL,TRUE,50,NULL)
@@ -2842,6 +2898,9 @@ INSERT INTO permissao_e_entidade VALUES
 ,(NULL,TRUE,103,NULL)
 ,(NULL,FALSE,104,NULL)
 ,(1,TRUE,104,NULL)
+,(NULL,TRUE,105,NULL)
+,(NULL,FALSE,106,NULL)
+,(1,TRUE,106,NULL)
 ;
 
 -- Dados para teste. Excluir em produção

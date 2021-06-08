@@ -1001,6 +1001,63 @@ if($_SESSION['user']){
 					'</p>', $EOL,
 				'</form>', $EOL,
 			'</section>', $EOL,
+			// Inicia a seção dos tipos de residência
+			'<section class="cad" id="tipo-de-residencia-sec">', $EOL,
+				'<h1>Tipos de residência</h1>', $EOL
+		;
+
+		// Tenta selecionar os tipos de residência
+		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM tipo_de_residencia ORDER BY id;")){
+			// Se selecionou pelo menos uma linha
+			if(mysqli_num_rows($db_query)){
+				// Inicia a tabela
+				echo '<table>', $EOL;
+				// Para cada linha selecionada
+				while($db_result = mysqli_fetch_row($db_query)){
+					// Valida os dados vindos
+					$db_result[0] = (int) $db_result[0];
+					$db_result[1] = htmlspecialchars($db_result[1]);
+
+					// Cria os formulários para aqueles dados
+					echo
+						'<tr>', $EOL,
+							'<td>', $EOL,
+								'<form action="alterar.tipo.de.residencia.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="text" name="nome" id="tipo-de-residencia-', $db_result[0], '" required="required" value="', $db_result[1], '"/> ',
+									'<input type="submit" value="Alterar" onclick="if($(\'#tipo-de-residencia-', $db_result[0], '\').val()) return confirm(\'Tem certeza que deseja alterar o tipo de residência \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+							'<td>', $EOL,
+								'<form action="excluir.tipo.de.residencia.php" method="post">', $EOL,
+									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+									'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir o tipo de residência \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+								'</form>', $EOL,
+							'</td>', $EOL,
+						'</tr>', $EOL
+					;
+				}
+				// Finaliza a tabela
+				echo '</table>', $EOL;
+
+			// Se não selecionou nenhuma linha
+			} else echo '<p class="error">Nenhum encontrado</p>', $EOL;
+
+			// Limpa a consulta no servidor
+			mysqli_free_result($db_query);
+
+		// Caso tenha problema na consulta
+		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+
+		// Formulário para inserção e finaliza seção
+		echo
+				'<form action="adicionar.tipo.de.residencia.php" method="post" class="new">', $EOL,
+					'<p>',
+						'<label>Novo: <input type="text" name="nome" id="novo-tipo-de-residencia" required="required" value="" /></label> ',
+						'<input type="submit" value="Inserir" onclick="if($(\'#novo-tipo-de-residencia\').val()) return confirm(\'Tem certeza que deseja inserir o tipo de residência \\\'\' + $(\'#novo-tipo-de-residencia\').val() + \'\\\'?\');"/>',
+					'</p>', $EOL,
+				'</form>', $EOL,
+			'</section>', $EOL,
 			// Inicia a seção dos tipos de logradouro
 			'<section class="cad" id="tipo-de-logradouro-sec">', $EOL,
 				'<h1>Tipos de logradouro</h1>', $EOL

@@ -1968,7 +1968,78 @@ if($_SESSION['user']){
 					// Fim da aba do Trabalho e começo da aba da Habitação
 					echo
 						'</div>', $EOL,
-						'<div id="tab-hab">', $EOL
+						'<div id="tab-hab">', $EOL,
+							'<section>Nome: ', $db_result_1[2], '</section>', $EOL,
+							'<section class="cad">', $EOL,
+								'<h1>Tipo de residência</h1>', $EOL
+					;
+
+					// Caso possua permissão
+					if(perm($db_link, 'permissao_e_entidade', 105, $id)){
+						// Tenta selecionar o tipo de residência da pessoa
+						if($db_query_2 = mysqli_query($db_link, "SELECT tipo_de_residencia FROM pessoa_fisica WHERE id = $id;")){
+							// Tenta selecionar os tipos de residência
+							if($db_query_3 = mysqli_query($db_link, "SELECT id, nome FROM tipo_de_residencia;")){
+								// Se houve seleção correta
+								if(mysqli_num_rows($db_query_2) === 1 && mysqli_num_rows($db_query_3)){
+									// Recebe dados da consulta pelo tipo de residência da pessoa
+									$db_result_2 = mysqli_fetch_row($db_query_2);
+									// Força tipo inteiro
+									$db_result_2[0] = (int) $db_result_2[0];
+
+									// Inicia formulário para alteração
+									echo
+										'<form action="alterar.pessoa.fisica.e.tipo.de.residencia.php" method="post">', $EOL,
+											'<input type="hidden" name="id" value="', $id, '"/>',
+											'<p class="select-field">', $EOL,
+												'<label>Selecione: ', $EOL,
+													'<select name="tipo-de-residencia">', $EOL,
+														'<option value="0">Não especificado</option>', $EOL
+									;
+
+									// Para cada tipo de residência selecionado
+									while($db_result_3 = mysqli_fetch_row($db_query_3)){
+										// Valida dados vindos
+										$db_result_3[0] = (int) $db_result_3[0];
+										$db_result_3[1] = htmlspecialchars($db_result_3[1]);
+										echo '<option value="', $db_result_3[0], '"', ($db_result_3[0] === $db_result_2[0] ? ' selected="selected"' : ''), '>', $db_result_3[1], '</option>', $EOL;
+									}
+
+									echo
+													'</select>', $EOL,
+												'</label>', $EOL,
+												'<input type="submit" value="Alterar"/>',
+											'</p>', $EOL,
+									// Finaliza formulário
+										'</form>', $EOL
+									;
+								// Caso contrário
+								} else echo '<p class="error but">Nenhum tipo de residência a selecionar.</p>', $EOL;
+
+								// Limpa consulta no servidor
+								mysqli_free_result($db_query_3);
+							// Caso tenha ocorrido problema com a consulta
+							} else {
+								// Seleciona-se e escapa-se o erro
+								$error = htmlspecialchars(mysqli_error($db_link));
+								// E o inclui na mensagem passada ao usuário
+								echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+							}
+
+							// Limpa consulta no servidor
+							mysqli_free_result($db_query_2);
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+					// Caso não possua permissão
+					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+
+					echo
+							'</section>', $EOL
 					;
 
 					// Fim da aba da Habitação e começo da aba da Mobilidade Urbana
