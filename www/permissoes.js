@@ -209,6 +209,25 @@ $(function(){
 	});
 
 	// Ao alterar o ID
+	$('#adaptacao-arquitetonica-entidade-id').change(function(){
+		// Se for um ID válido
+		if($('#adaptacao-arquitetonica-entidade-id').val() > 0){
+			// Requisita via AJAX
+			$.ajax({
+				// De modo sincronizado
+				async: false,
+				// Os dados para inserção num input
+				url: 'input.entidade.php?id='+$('#adaptacao-arquitetonica-entidade-id').val()
+			// Com os dados requisitados
+			}).done(function(data){
+				// Insere no lugar apropriado
+				$('#adaptacao-arquitetonica-entidade-nome').val(data);
+			});
+		// Caso não seja válido, colocar o nome adequado
+		} else $('#adaptacao-arquitetonica-entidade-nome').val('Qualquer um');
+	});
+
+	// Ao alterar o ID
 	$('#tipo-de-entidade-entidade-id').change(function(){
 		// Se for um ID válido
 		if($('#tipo-de-entidade-entidade-id').val() > 0){

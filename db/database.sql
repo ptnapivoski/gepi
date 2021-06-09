@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS permissao_e_tipo_de_logradouro;
 DROP TABLE IF EXISTS permissao_e_cidade;
 DROP TABLE IF EXISTS permissao_e_uf;
 DROP TABLE IF EXISTS permissao_e_pais;
+DROP TABLE IF EXISTS permissao_e_adaptacao_arquitetonica;
 DROP TABLE IF EXISTS permissao_e_barreira;
 DROP TABLE IF EXISTS permissao_e_tecnologia;
 DROP TABLE IF EXISTS permissao_e_beneficio;
@@ -66,6 +67,8 @@ DROP TABLE IF EXISTS profissao;
 DROP TABLE IF EXISTS pessoa_fisica_e_vinculo_pessoal;
 DROP TABLE IF EXISTS vinculo_pessoal;
 DROP TABLE IF EXISTS pessoa_fisica_e_escola;
+DROP TABLE IF EXISTS endereco_e_adaptacao_arquitetonica;
+DROP TABLE IF EXISTS pessoa_fisica_e_adaptacao_arquitetonica;
 DROP TABLE IF EXISTS pessoa_fisica_e_barreira_no_trabalho;
 DROP TABLE IF EXISTS pessoa_fisica_e_barreira_no_ensino;
 DROP TABLE IF EXISTS pessoa_fisica_e_tecnologia;
@@ -85,6 +88,7 @@ DROP TABLE IF EXISTS cidade;
 DROP TABLE IF EXISTS uf;
 DROP TABLE IF EXISTS pais;
 DROP TABLE IF EXISTS tipo_de_entidade;
+DROP TABLE IF EXISTS adaptacao_arquitetonica;
 DROP TABLE IF EXISTS barreira;
 DROP TABLE IF EXISTS tecnologia;
 DROP TABLE IF EXISTS beneficio;
@@ -160,6 +164,12 @@ CREATE TABLE IF NOT EXISTS tecnologia (
 
 -- Barreiras que uma pessoa física pode encontrar
 CREATE TABLE IF NOT EXISTS barreira (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Adaptações arquitetônicas que uma pessoa física pode precisar
+CREATE TABLE IF NOT EXISTS adaptacao_arquitetonica (
 	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
 	,nome VARCHAR(255) NOT NULL UNIQUE
 );
@@ -440,6 +450,36 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_barreira_no_trabalho (
 		ON DELETE CASCADE
 	,FOREIGN KEY (barreira_no_trabalho)
 		REFERENCES barreira (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Relação de adaptações arquitetônicas que uma pessoa física pode precisar
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_adaptacao_arquitetonica (
+	 pessoa_fisica           BIGINT UNSIGNED
+	,adaptacao_arquitetonica BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,adaptacao_arquitetonica)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (adaptacao_arquitetonica)
+		REFERENCES adaptacao_arquitetonica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Relação de adaptações arquitetônicas presentes em um endereço
+CREATE TABLE IF NOT EXISTS endereco_e_adaptacao_arquitetonica (
+	 endereco                BIGINT UNSIGNED
+	,adaptacao_arquitetonica BIGINT UNSIGNED
+	,PRIMARY KEY (endereco,adaptacao_arquitetonica)
+	,FOREIGN KEY (endereco)
+		REFERENCES endereco (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (adaptacao_arquitetonica)
+		REFERENCES adaptacao_arquitetonica (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -979,6 +1019,27 @@ CREATE TABLE IF NOT EXISTS permissao_e_barreira (
 		ON DELETE CASCADE
 );
 
+-- Permissões sobre adaptações arquitetônicas
+CREATE TABLE IF NOT EXISTS permissao_e_adaptacao_arquitetonica (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES adaptacao_arquitetonica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
 -- Permissões sobre países
 CREATE TABLE IF NOT EXISTS permissao_e_pais (
 	 entidade BIGINT UNSIGNED
@@ -1467,6 +1528,12 @@ INSERT INTO tecnologia (nome) VALUES
 INSERT INTO barreira (nome) VALUES
  ('Arquitetônica')
 ,('Transporte')
+;
+
+-- Adaptações arquitetônicas iniciais
+INSERT INTO adaptacao_arquitetonica (nome) VALUES
+ ('Rampa')
+,('Piso podotátil')
 ;
 
 -- Profissões iniciais
@@ -2525,6 +2592,9 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*107*/'Adicionar tipos de residência',FALSE)
 ,(/*108*/'Alterar o tipo de residência',TRUE)
 ,(/*109*/'Excluir o tipo de residência',TRUE)
+,(/*110*/'Adicionar adaptações arquitetônicas',FALSE)
+,(/*111*/'Alterar a adaptação arquitetônica',TRUE)
+,(/*112*/'Excluir a adaptação arquitetônica',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -2628,6 +2698,15 @@ INSERT INTO permissao_e_barreira VALUES
 ,(1,TRUE,29,NULL)
 ,(NULL,FALSE,30,NULL)
 ,(1,TRUE,30,NULL)
+;
+
+INSERT INTO permissao_e_adaptacao_arquitetonica VALUES
+ (NULL,FALSE,110,NULL)
+,(1,TRUE,110,NULL)
+,(NULL,FALSE,111,NULL)
+,(1,TRUE,111,NULL)
+,(NULL,FALSE,112,NULL)
+,(1,TRUE,112,NULL)
 ;
 
 INSERT INTO permissao_e_pais VALUES
