@@ -5,7 +5,7 @@ require_once('init.php');
 
 // Se logado
 if($_SESSION['user']){
-	// Pessoa à qual adicionar diagnóstico
+	// Pessoa à qual adicionar medicação
 	$id = (int) $_POST['id'];
 
 	// Tenta conectar ao DB
