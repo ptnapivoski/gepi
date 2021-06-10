@@ -2125,6 +2125,96 @@ if($_SESSION['user']){
 					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 
 					echo
+							'</section>', $EOL,
+							'<section class="cad">', $EOL,
+								'<h1>Presença de adaptações arquitetônicas na residência</h1>', $EOL
+					;
+
+					// Caso tenha endereço especificado
+					if($db_result_1[1]){
+						// Caso possua permissão
+						if(perm($db_link, 'permissao_e_entidade', 105, $id)){
+							// Tenta selecionar as adaptações arquitetônicas presentes na residencia
+							if($db_query_2 = mysqli_query($db_link, "SELECT aa.id, aa.nome FROM endereco_e_adaptacao_arquitetonica eaa LEFT JOIN adaptacao_arquitetonica aa ON aa.id = eaa.adaptacao_arquitetonica WHERE eaa.endereco = $db_result_1[1];")){
+								// Se selecionou pelo menos uma adaptação arquitetônica
+								if(mysqli_num_rows($db_query_2)){
+									// Inicia as linhas
+									echo '<div class="but">', $EOL;
+
+									// Para cada selecionada
+									while($db_result_2 = mysqli_fetch_row($db_query_2)){
+										// Trata as entradas
+										$adaptacao_arquitetonica   = (int) $db_result_2[0];
+										$adaptacao_arquitetonica_n = htmlspecialchars($db_result_2[1]);
+
+										// Imprime em campos num formulário para exclusão
+										echo
+											'<form action="excluir.endereco.e.adaptacao.arquitetonica.php" method="post">', $EOL,
+												'<p class="lab">',
+													'<input type="hidden" name="id" value="', $id, '"/>',
+													'<input type="hidden" name="adaptacao_arquitetonica" value="', $adaptacao_arquitetonica, '"/>',
+													'<input readonly="readonly" type="text" value="', $adaptacao_arquitetonica_n, '" class="name"/> ',
+													'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta adaptação arquitetônica das presentes?\');"/>',
+												'</p>', $EOL,
+											'</form>', $EOL
+										;
+									}
+
+									// Finaliza linhas
+									echo '</div>', $EOL;
+								// Caso não tenha selecionado alguma adaptação arquitetônica
+								} else echo '<p class="but">Nenhuma adaptação arquitetônica a listar</p>', $EOL;
+							// Caso tenha ocorrido problema com a consulta
+							} else {
+								// Seleciona-se e escapa-se o erro
+								$error = htmlspecialchars(mysqli_error($db_link));
+								// E o inclui na mensagem passada ao usuário
+								echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+							}
+
+							// Tenta selecionar as adaptações arquitetônicas
+							if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM adaptacao_arquitetonica ORDER BY nome;")){
+								// Ao selecionar pelo menos uma adaptação arquitetônica
+								if(mysqli_num_rows($db_query_2)){
+									// Gera formulário para inserção
+									echo
+										'<form action="adicionar.endereco.e.adaptacao.arquitetonica.php" method="post" class="new">', $EOL,
+											'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
+											'<select name="adaptacao_arquitetonica">',
+												'<option value="0">Selecione adaptação arquitetônica</option>'
+									;
+
+									// Para cada possível adaptação arquitetônica existente cadastrada
+									while($db_result_2 = mysqli_fetch_row($db_query_2)){
+										// Trata entrada
+										$db_result_2[0] = (int) $db_result_2[0];
+										$db_result_2[1] = htmlspecialchars($db_result_2[1]);
+										echo '<option value="', $db_result_2[0], '">', $db_result_2[1], '</option>';
+									}
+
+									// Limpa consulta no servidor
+									mysqli_free_result($db_query_2);
+
+									echo
+											'</select>', $EOL,
+											'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar a adaptação arquitetônica à residência desta pessoa?\');"/>', $EOL,
+										'</form>', $EOL
+									;
+								// Caso não tenha selecionado adaptações arquitetônicas
+								} else echo '<p class="but">Nenhuma adaptação arquitetônica a listar</p>', $EOL;
+							// Caso tenha ocorrido problema com a consulta
+							} else {
+								// Seleciona-se e escapa-se o erro
+								$error = htmlspecialchars(mysqli_error($db_link));
+								// E o inclui na mensagem passada ao usuário
+								echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+							}
+						// Caso não possua permissão
+						} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					// Se não houver endereço especificado
+				  } else echo '<p class="but">Residência não especificada.</p>', $EOL;
+
+					echo
 							'</section>', $EOL
 					;
 
