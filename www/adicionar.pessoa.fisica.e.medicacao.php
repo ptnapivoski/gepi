@@ -18,7 +18,7 @@ if($_SESSION['user']){
 
 		// Caso possua permissão
 		if(perm($db_link, 'permissao_e_entidade', 74, $id)){
-			// Valida dados vindo do formulário
+			// Valida dados vindos do formulário
 			$medicacao = (int) $_POST['medicacao'];
 
 			// Tenta inserir

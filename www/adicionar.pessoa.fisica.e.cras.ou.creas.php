@@ -13,7 +13,7 @@ if($_SESSION['user']){
 
 	// Se conectado ao DB
 	if($db_link){
-		// Valida dados vindo do formulário
+		// Valida dados vindos do formulário
 		$cr = (int) $_POST['cr'];
 
 		// Tenta selecionar tipo de entidade do que veio do formulário

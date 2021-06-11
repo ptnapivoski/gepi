@@ -18,7 +18,7 @@ if($_SESSION['user']){
 
 		// Caso possua permissão
 		if(perm($db_link, 'permissao_e_entidade', 74, $id)){
-			// Valida dados vindo do formulário
+			// Valida dados vindos do formulário
 			$diagnostico = (int) $_POST['diagnostico'];
 			$status_de_diagnostico = (int) $_POST['status_de_diagnostico'];
 			$permanente = $_POST['permanente'];

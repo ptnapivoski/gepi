@@ -1595,7 +1595,7 @@ if($_SESSION['user']){
 								'<form action="alterar.servico.de.mob.php" method="post">', $EOL,
 									'<input type="hidden" name="id" value="', $db_result[0], '"/>',
 									'<input type="text" name="nome" id="servico-de-mob-', $db_result[0], '" required="required" value="', $db_result[1], '"/> ',
-									'<input type="submit" value="Alterar" onclick="if($(\'#servico-de-mob-', $db_result[0], '\').val()) return confirm(\'Tem certeza que deseja alterar o serviço de mobilidade urbana\\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+									'<input type="submit" value="Alterar" onclick="if($(\'#servico-de-mob-', $db_result[0], '\').val()) return confirm(\'Tem certeza que deseja alterar o serviço de mobilidade urbana \\\'', str_replace('\'', '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
 								'</form>', $EOL,
 							'</td>', $EOL,
 							'<td>', $EOL,
