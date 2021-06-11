@@ -14,6 +14,7 @@ USE gepi;
 
 -- Exclusão de tabelas caso não possa executar as modificações no DB
 DROP TABLE IF EXISTS permissao_e_entidade;
+DROP TABLE IF EXISTS permissao_e_servico_de_hab;
 DROP TABLE IF EXISTS permissao_e_servico_de_mob;
 DROP TABLE IF EXISTS permissao_e_servico_de_ddpd;
 DROP TABLE IF EXISTS permissao_e_servico_de_as;
@@ -47,6 +48,8 @@ DROP TABLE IF EXISTS acao;
 DROP TABLE IF EXISTS historico;
 DROP TABLE IF EXISTS secao_de_historico;
 DROP TABLE IF EXISTS pessoa_fisica_e_cras_ou_creas;
+DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_hab;
+DROP TABLE IF EXISTS servico_de_hab;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_mob;
 DROP TABLE IF EXISTS servico_de_mob;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_ddpd;
@@ -736,6 +739,27 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_mob (
 		ON DELETE CASCADE
 );
 
+-- Serviços de Habitação
+CREATE TABLE IF NOT EXISTS servico_de_hab (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Relação de uso de serviço de Habitação
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_hab (
+	 pessoa_fisica BIGINT UNSIGNED
+	,uso           BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,uso)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (uso)
+		REFERENCES servico_de_hab (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
 -- Relação de uso de CRAS ou CREAS
 CREATE TABLE IF NOT EXISTS pessoa_fisica_e_cras_ou_creas (
 	 pessoa_fisica BIGINT UNSIGNED
@@ -1393,6 +1417,27 @@ CREATE TABLE IF NOT EXISTS permissao_e_servico_de_mob (
 		ON DELETE CASCADE
 	,FOREIGN KEY (com)
 		REFERENCES servico_de_mob (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Permissões sobre serviços de habitação
+CREATE TABLE IF NOT EXISTS permissao_e_servico_de_hab (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES servico_de_hab (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2471,6 +2516,11 @@ INSERT INTO servico_de_mob (nome) VALUES
  ('Passe livre')
 ;
 
+-- Serviços de habitação iniciais
+INSERT INTO servico_de_hab (nome) VALUES
+ ('Minha Casa Minha Vida')
+;
+
 -- Seções de histórico iniciais
 INSERT INTO secao_de_historico (nome) VALUES
  (/*1*/'Saúde')
@@ -2595,6 +2645,9 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*110*/'Adicionar adaptações arquitetônicas',FALSE)
 ,(/*111*/'Alterar a adaptação arquitetônica',TRUE)
 ,(/*112*/'Excluir a adaptação arquitetônica',TRUE)
+,(/*113*/'Adicionar serviços de habitação',FALSE)
+,(/*114*/'Alterar o serviço de habitação',TRUE)
+,(/*115*/'Excluir o serviço de habitação',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -2909,6 +2962,14 @@ INSERT INTO permissao_e_servico_de_mob VALUES
 ,(1,TRUE,101,NULL)
 ,(NULL,FALSE,102,NULL)
 ,(1,TRUE,102,NULL)
+;
+
+INSERT INTO permissao_e_servico_de_hab VALUES
+ (NULL,TRUE,113,NULL)
+,(NULL,FALSE,114,NULL)
+,(1,TRUE,114,NULL)
+,(NULL,FALSE,115,NULL)
+,(1,TRUE,115,NULL)
 ;
 
 INSERT INTO permissao_e_entidade VALUES

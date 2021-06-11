@@ -2215,6 +2215,92 @@ if($_SESSION['user']){
 				  } else echo '<p class="but">Residência não especificada.</p>', $EOL;
 
 					echo
+							'</section>', $EOL,
+							'<section class="cad">', $EOL,
+								'<h1>Uso de Serviço de Habitação</h1>', $EOL
+					;
+
+					// Caso possua permissão
+					if(perm($db_link, 'permissao_e_entidade', 105, $id)){
+						// Tenta selecionar os serviços de habitação dos quais a pessoa faz uso
+						if($db_query_2 = mysqli_query($db_link, "SELECT sh.id, sh.nome FROM pessoa_fisica_e_servico_de_hab pfsh LEFT JOIN servico_de_hab sh ON sh.id = pfsh.uso WHERE pfsh.pessoa_fisica = $id;")){
+							// Se selecionou pelo menos um serviço
+							if(mysqli_num_rows($db_query_2)){
+								// Inicia as linhas
+								echo '<div class="but">', $EOL;
+
+								// Para cada selecionado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata as entradas
+									$servico   = (int) $db_result_2[0];
+									$servico_n = htmlspecialchars($db_result_2[1]);
+
+									// Imprime em campos num formulário para exclusão
+									echo
+										'<form action="excluir.pessoa.fisica.e.servico.de.hab.php" method="post">', $EOL,
+											'<p class="lab">',
+												'<input type="hidden" name="id" value="', $id, '"/>',
+												'<input type="hidden" name="servico" value="', $servico, '"/>',
+												'<input readonly="readonly" type="text" value="', $servico_n, '" class="name"/> ',
+												'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir o serviço?\');"/>',
+											'</p>', $EOL,
+										'</form>', $EOL
+									;
+								}
+
+								// Finaliza linhas
+								echo '</div>', $EOL;
+							// Caso não tenha selecionado algum serviço
+							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+
+						// Tenta selecionar os serviços de habitação
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_hab ORDER BY nome;")){
+							// Ao selecionar pelo menos um serviço
+							if(mysqli_num_rows($db_query_2)){
+								// Gera formulário para inserção
+								echo
+									'<form action="adicionar.pessoa.fisica.e.servico.de.hab.php" method="post" class="new">', $EOL,
+										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
+										'<select name="servico">',
+											'<option value="0">Selecione serviço</option>'
+								;
+
+								// Para cada possível serviço existente cadastrado
+								while($db_result_2 = mysqli_fetch_row($db_query_2)){
+									// Trata entrada
+									$db_result_2[0] = (int) $db_result_2[0];
+									$db_result_2[1] = htmlspecialchars($db_result_2[1]);
+									echo '<option value="', $db_result_2[0], '">', $db_result_2[1], '</option>';
+								}
+
+								// Limpa consulta no servidor
+								mysqli_free_result($db_query_2);
+
+								echo
+										'</select>', $EOL,
+										'<input type="submit" value="Adicionar" onclick="return confirm(\'Tem certeza que deseja adicionar o serviço de habitação?\');"/>', $EOL,
+									'</form>', $EOL
+								;
+							// Caso não tenha selecionado serviços
+							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
+						// Caso tenha ocorrido problema com a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+						}
+					// Caso não possua permissão
+					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+
+					echo
 							'</section>', $EOL
 					;
 

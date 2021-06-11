@@ -2950,6 +2950,134 @@ if($_SESSION['user']){
 				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
 			}
 
+			// Fim da seção e exibe permissões sobre serviços de habitação
+			echo
+				'</section>', $EOL,
+				'<section class="cad">', $EOL,
+					'<h1>Permissões sobre serviços de habitação</h1>', $EOL
+			;
+
+			// Tenta selecionar as permissões de habitação
+			if($db_query = mysqli_query($db_link, "SELECT ent.id, acao.id, obj.id, ent.nome, rel.pode, acao.nome, obj.nome, acao.tem_objeto FROM permissao_e_servico_de_hab rel LEFT JOIN entidade ent ON ent.id = rel.entidade LEFT JOIN acao ON acao.id = rel.acao LEFT JOIN servico_de_hab obj ON obj.id = rel.com ORDER BY ent.id, acao.id, obj.id;")){
+				// Caso possua linhas da permissão
+				if(mysqli_num_rows($db_query)){
+					// Para cada linha
+					while($db_result = mysqli_fetch_row($db_query)){
+						// Valida dados vindos do DB
+						$db_result[0] = (int) $db_result[0];
+						$db_result[1] = (int) $db_result[1];
+						$db_result[2] = (int) $db_result[2];
+						$db_result[3] = htmlspecialchars($db_result[3]);
+						if($db_result[3] === '') $db_result[3] = 'Qualquer um';
+						$db_result[4] = (int) $db_result[4];
+						if($db_result[4] === 1) $db_result[4] = 'Pode'; else $db_result[4] = 'Não pode';
+						$db_result[5] = htmlspecialchars($db_result[5]);
+						// Nome do objeto
+						$db_result[7] = (int) $db_result[7];
+						if($db_result[7] === 1){
+							$db_result[6] = htmlspecialchars($db_result[6]);
+							if($db_result[6] === '') $db_result[6] = 'Qualquer';
+						} else $db_result[6] = '';
+
+						// Imprime linha
+						echo
+							'<form action="excluir.permissao.e.servico.de.hab.php" method="post" class="row">', $EOL,
+								'<input type="hidden" name="entidade" value="', $db_result[0], '"/>', $EOL,
+								'<input type="hidden" name="acao" value="', $db_result[1], '"/>', $EOL,
+								'<input type="hidden" name="obj" value="', $db_result[2], '"/>', $EOL,
+								'<input type="text" value="', $db_result[3], '" class="name"/>', $EOL,
+								'<input type="text" value="', $db_result[4], '" class="short"/>', $EOL,
+								'<input type="text" value="', $db_result[5], '" class="name"/>', $EOL,
+								'<input type="text" value="', $db_result[6], '" class="name"/>', $EOL,
+								'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir esta permissão?\');"/>', $EOL,
+							'</form>', $EOL
+						;
+					}
+				// Caso não possua linhas de permissão a exibir
+				} else echo '<p>Sem dados a exibir.</p>', $EOL;
+
+				// Limpa dados no servidor
+				mysqli_free_result($db_query);
+			// Caso não tenha conseguido realizar a consulta
+			} else {
+				// Seleciona-se e escapa-se o erro
+				$error = htmlspecialchars(mysqli_error($db_link));
+				// Exibe a mensagem de erro
+				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
+			}
+
+			// Tenta selecionar ações
+			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (113,114,115) ORDER BY id;")){
+				// Tenta selecionar serviços de habitação
+				if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_hab ORDER BY id;")){
+					// Se retornou linhas para as duas consultas
+					if(mysqli_num_rows($db_query_1) && mysqli_num_rows($db_query_2)){
+						// Inicia formulário
+						echo
+							'<form action="adicionar.permissao.e.servico.de.hab.php" method="post" class="new">', $EOL,
+								'<input type="number" id="servico-de-hab-entidade-id" value="0" name="entidade" min="0"/>', $EOL,
+								'<input type="text" id="servico-de-hab-entidade-nome" value="Qualquer um"/>', $EOL,
+								'<select name="pode">', $EOL,
+									'<option value="1">Pode</option>', $EOL,
+									'<option value="0">Não pode</option>', $EOL,
+								'</select>', $EOL,
+								'<select name="acao">', $EOL
+						;
+
+						// Para cada ação selecionada
+						while($db_result = mysqli_fetch_row($db_query_1)){
+							// Valida dados vindos do DB
+							$db_result[0] = (int) $db_result[0];
+							$db_result[1] = htmlspecialchars($db_result[1]);
+							// Imprime
+							echo '<option value="', $db_result[0], '">', $db_result[1], '</option>', $EOL;
+						}
+
+						// Serviços de habitação
+						echo
+								'</select>', $EOL,
+								'<select name="obj">', $EOL,
+									'<option value="0">Qualquer</option>', $EOL
+						;
+
+						// Para cada serviço de habitação
+						while($db_result = mysqli_fetch_row($db_query_2)){
+							// Valida dados vindos do DB
+							$db_result[0] = (int) $db_result[0];
+							$db_result[1] = htmlspecialchars($db_result[1]);
+							// Imprime
+							echo '<option value="', $db_result[0], '">', $db_result[1], '</option>', $EOL;
+						}
+
+						// Fim do formulário
+						echo
+								'</select>', $EOL,
+								'<input type="submit" value="Adicionar"/>', $EOL,
+							'</form>', $EOL
+						;
+					// Caso contrário
+					} else echo '<p class="but">Sem possibilidade de inserção.</p>', $EOL;
+
+					// Limpa dados no servidor
+					mysqli_free_result($db_query_2);
+				// Caso não tenha conseguido realizar a consulta
+				} else {
+					// Seleciona-se e escapa-se o erro
+					$error = htmlspecialchars(mysqli_error($db_link));
+					// Exibe a mensagem de erro
+					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
+				}
+
+				// Limpa dados no servidor
+				mysqli_free_result($db_query_1);
+			// Caso não tenha conseguido realizar a consulta
+			} else {
+				// Seleciona-se e escapa-se o erro
+				$error = htmlspecialchars(mysqli_error($db_link));
+				// Exibe a mensagem de erro
+				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
+			}
+
 			// Fim da seção e exibe permissões sobre tipos de logradouro
 			echo
 				'</section>', $EOL,
