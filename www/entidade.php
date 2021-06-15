@@ -598,7 +598,7 @@ if($_SESSION['user']){
 								echo
 									'<form action="adicionar.pessoa.fisica.e.diagnostico.php" method="post" class="new">', $EOL,
 										'<input type="hidden" name="id" value="', $id, '"/>', $EOL,
-										'<select name="diagnostico">',
+										'<select name="diagnostico" style="width:470px">',
 											'<option value="0">Selecione diagnóstico</option>'
 								;
 
