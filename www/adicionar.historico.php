@@ -46,13 +46,18 @@ if($_SESSION['user']){
 						// Extensão do arquivo enviada
 						$ext = pathinfo($_FILES['arquivo']['name'],PATHINFO_EXTENSION);
 						// Caso válida a extensão
-						if($ext !== '')
-							// Nome do arquivo
+						if($ext !== ''){
+							// Força minúsculas
+							$ext = mb_strtolower($ext,'UTF-8');
+							// Caso tenha enviado um arquivo PHP, mudar para arquivo de texto
+							if($ext === 'php') $ext = 'txt';
+							// Nome do arquivo é seu hash e extensão
 							$arquivo = "$hash.$ext";
 						//Sem extensão
-						else
-							// Nome do arquivo
+						} else
+							// Nome do arquivo é apenas seu hash
 							$arquivo = "$hash";
+
 						$arquivo_addr = "$FDIR/$arquivo";
 						// Tenta mover o arquivo
 						if(move_uploaded_file($_FILES['arquivo']['tmp_name'],$arquivo_addr)){
