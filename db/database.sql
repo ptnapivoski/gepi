@@ -1621,7 +1621,7 @@ INSERT INTO beneficio (nome) VALUES
 
 -- Tecnologias iniciais
 INSERT INTO tecnologia (nome) VALUES
-,('Andador')
+ ('Andador')
 ,('Cadeira de rodas')
 ,('Celular')
 ,('Computador pessoal')
@@ -2615,7 +2615,7 @@ INSERT INTO servico_de_educacao (nome) VALUES
 
 -- Serviços de assistência social iniciais
 INSERT INTO servico_de_as (nome) VALUES
-,('Aposentadoria para pessoas de baixa renda')
+ ('Aposentadoria para pessoas de baixa renda')
 ,('Banco do Vestuário')
 ,('CRAS')
 ,('CREAS')
