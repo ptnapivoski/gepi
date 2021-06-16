@@ -2212,7 +2212,7 @@ if($_SESSION['user']){
 						// Caso não possua permissão
 						} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
 					// Se não houver endereço especificado
-				  } else echo '<p class="but">Residência não especificada.</p>', $EOL;
+					} else echo '<p class="but">Residência não especificada.</p>', $EOL;
 
 					echo
 							'</section>', $EOL,
