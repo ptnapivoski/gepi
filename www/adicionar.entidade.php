@@ -37,45 +37,32 @@ if($_SESSION['user']){
 					// Flag de exclusão caso ocorra algum problema
 					$problem = TRUE;
 
-					// Tenta adicionar permissões iniciais de alteração e exclusão
-					if($db_query = mysqli_query($db_link, "INSERT INTO permissao_e_entidade VALUES ($_SESSION[user], TRUE, 56, $id),($_SESSION[user], TRUE, 57, $id);")){
-						// Se consulta inseriu duas linhas
-						if(mysqli_affected_rows($db_link) === 2){
-							// Se o tipo de entidade for pessoa física
-							if($tipo_de_entidade === 1){
-								// Tenta inserir linha na tabela de pessoas físicas
-								if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica (id) VALUES ($id);")){
-									// Se consulta inseriu uma linha
-									if(mysqli_affected_rows($db_link) === 1){
-										// Ações a adicionar e depois excluir
-										$acoes = array(73,74,75,76,77,78,79,80,81,82,83,84,85,103,104,105,106);
-										// Prepara linhas a inserir
+					// Se o tipo de entidade for pessoa física
+					if($tipo_de_entidade === 1){
+						// Tenta inserir linha na tabela de pessoas físicas
+						if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica (id) VALUES ($id);")){
+							// Se consulta inseriu uma linha
+							if(mysqli_affected_rows($db_link) === 1){
+								// Ações a adicionar e depois excluir
+								$acoes = array(56,57,73,74,75,76,77,78,79,80,81,82,83,84,85,103,104,105,106);
+								// Prepara linhas a inserir
+								$acoes_q = array();
+								foreach($acoes as $val) $acoes_q[] = "($_SESSION[user], TRUE, $val, $id)";
+								$acoes_q = implode(',',$acoes_q);
+
+								// Tenta inserir permissões mais específicas
+								if($db_query = mysqli_query($db_link, "INSERT INTO permissao_e_entidade VALUES $acoes_q;")){
+									// Se consulta inseriu linhas de permissões
+									if(mysqli_affected_rows($db_link) === count($acoes)){
+										// Prepara linhas a excluir
 										$acoes_q = array();
-										foreach($acoes as $val) $acoes_q[] = "($_SESSION[user], TRUE, $val, $id)";
-										$acoes_q = implode(',',$acoes_q);
+										foreach($acoes as $val) $acoes_q[] = "entidade = $_SESSION[user] AND pode = TRUE AND acao = $val AND com = $id";
+										$acoes_q = implode(' OR ',$acoes_q);
 
-										// Tenta inserir permissões mais específicas
-										if($db_query = mysqli_query($db_link, "INSERT INTO permissao_e_entidade VALUES $acoes_q;")){
-											// Se consulta inseriu linhas de permissões
-											if(mysqli_affected_rows($db_link) === count($acoes)){
-												// Prepara linhas a excluir
-												$acoes_q = array();
-												foreach($acoes as $val) $acoes_q[] = "entidade = $_SESSION[user] AND pode = TRUE AND acao = $val AND com = $id";
-												$acoes_q = implode(' OR ',$acoes_q);
-
-												// Tenta inserir evento de exclusão das permissões depois de um dia
-												if($db_query = mysqli_query($db_link, "CREATE EVENT del_perms_$id ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY DO DELETE FROM permissao_e_entidade WHERE $acoes_q;")){
-													// Ocorreu tudo bem
-													$problem = FALSE;
-												// Caso não tenha conseguido realizar a consulta
-												} else {
-													// Seleciona-se e escapa-se o erro
-													$error = htmlspecialchars(mysqli_error($db_link));
-													// E o inclui na mensagem passada ao usuário
-													$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-												}
-											// Caso contrário, informa que não houve a inserção
-											} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linhas de permissões não inseridas.</p>';
+										// Tenta inserir evento de exclusão das permissões depois de um dia
+										if($db_query = mysqli_query($db_link, "CREATE EVENT del_perms_$id ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY ON COMPLETION NOT PRESERVE DO DELETE FROM permissao_e_entidade WHERE $acoes_q;")){
+											// Ocorreu tudo bem
+											$problem = FALSE;
 										// Caso não tenha conseguido realizar a consulta
 										} else {
 											// Seleciona-se e escapa-se o erro
@@ -84,7 +71,7 @@ if($_SESSION['user']){
 											$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
 										}
 									// Caso contrário, informa que não houve a inserção
-									} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linha em pessoa física não inserida.</p>';
+									} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linhas de permissões não inseridas.</p>';
 								// Caso não tenha conseguido realizar a consulta
 								} else {
 									// Seleciona-se e escapa-se o erro
@@ -92,16 +79,41 @@ if($_SESSION['user']){
 									// E o inclui na mensagem passada ao usuário
 									$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
 								}
-							// Caso contrário, não houve problema na inserção
-							} else $problem = FALSE;
-						// Caso contrário, informa que não houve a inserção
-						} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linhas de permissões não inseridas.</p>';
-					// Caso não tenha conseguido realizar a consulta
-					} else {
-						// Seleciona-se e escapa-se o erro
-						$error = htmlspecialchars(mysqli_error($db_link));
-						// E o inclui na mensagem passada ao usuário
-						$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
+							// Caso contrário, informa que não houve a inserção
+							} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linha em pessoa física não inserida.</p>';
+						// Caso não tenha conseguido realizar a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
+						}
+					// Pessoa jurídica
+					} else if($tipo_de_entidade === 2) $problem = FALSE;
+					// Outro
+					else {
+						// Ações a adicionar
+						$acoes = array(56,57,58,59,60,86);
+						// Prepara linhas a inserir
+						$acoes_q = array();
+						foreach($acoes as $val) $acoes_q[] = "($_SESSION[user], TRUE, $val, $id)";
+						$acoes_q = implode(',',$acoes_q);
+
+						// Tenta inserir permissões mais específicas
+						if($db_query = mysqli_query($db_link, "INSERT INTO permissao_e_entidade VALUES $acoes_q;")){
+							// Se consulta inseriu linhas de permissões
+							if(mysqli_affected_rows($db_link) === count($acoes)){
+								// TODO
+								$problem = FALSE;
+							// Caso contrário, informa que não houve a inserção
+							} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linhas de permissões não inseridas.</p>';
+						// Caso não tenha conseguido realizar a consulta
+						} else {
+							// Seleciona-se e escapa-se o erro
+							$error = htmlspecialchars(mysqli_error($db_link));
+							// E o inclui na mensagem passada ao usuário
+							$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
+						}
 					}
 
 					// Caso tenha ocorrido um problema ao longo da inserção
