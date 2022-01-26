@@ -323,6 +323,25 @@ $(function(){
 	});
 
 	// Ao alterar o ID
+	$('#servico-entidade-id').change(function(){
+		// Se for um ID válido
+		if($('#servico-entidade-id').val() > 0){
+			// Requisita via AJAX
+			$.ajax({
+				// De modo sincronizado
+				async: false,
+				// Os dados para inserção num input
+				url: 'input.entidade.php?id='+$('#servico-entidade-id').val()
+			// Com os dados requisitados
+			}).done(function(data){
+				// Insere no lugar apropriado
+				$('#servico-entidade-nome').val(data);
+			});
+		// Caso não seja válido, colocar o nome adequado
+		} else $('#servico-entidade-nome').val('Qualquer um');
+	});
+
+	// Ao alterar o ID
 	$('#servico-de-saude-entidade-id').change(function(){
 		// Se for um ID válido
 		if($('#servico-de-saude-entidade-id').val() > 0){
