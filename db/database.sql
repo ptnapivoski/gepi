@@ -20,6 +20,7 @@ DROP TABLE IF EXISTS permissao_e_servico_de_ddpd;
 DROP TABLE IF EXISTS permissao_e_servico_de_as;
 DROP TABLE IF EXISTS permissao_e_servico_de_educacao;
 DROP TABLE IF EXISTS permissao_e_servico_de_saude;
+DROP TABLE IF EXISTS permissao_e_servico;
 DROP TABLE IF EXISTS permissao_e_tipo_de_servico;
 DROP TABLE IF EXISTS permissao_e_medicacao;
 DROP TABLE IF EXISTS permissao_e_profissao;
@@ -61,6 +62,7 @@ DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_educacao;
 DROP TABLE IF EXISTS servico_de_educacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_saude;
 DROP TABLE IF EXISTS servico_de_saude;
+DROP TABLE IF EXISTS servico;
 DROP TABLE IF EXISTS tipo_de_servico;
 DROP TABLE IF EXISTS pessoa_fisica_e_medicacao;
 DROP TABLE IF EXISTS medicacao;
@@ -640,6 +642,17 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_medicacao (
 CREATE TABLE IF NOT EXISTS tipo_de_servico (
 	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
 	,nome VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Serviços
+CREATE TABLE IF NOT EXISTS servico (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,tipo_de_servico  BIGINT UNSIGNED NOT NULL
+	,nome VARCHAR(255) NOT NULL UNIQUE
+	,FOREIGN KEY (tipo_de_servico)
+		REFERENCES tipo_de_servico (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
 );
 
 -- Serviços de saúde
@@ -1345,6 +1358,27 @@ CREATE TABLE IF NOT EXISTS permissao_e_tipo_de_servico (
 		ON DELETE CASCADE
 );
 
+-- Permissões sobre serviços
+CREATE TABLE IF NOT EXISTS permissao_e_servico (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES servico (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
 -- Permissões sobre serviços de saúde
 CREATE TABLE IF NOT EXISTS permissao_e_servico_de_saude (
 	 entidade BIGINT UNSIGNED
@@ -1549,35 +1583,35 @@ INSERT INTO diagnostico (nome,cid) VALUES
 ,('Def. intelectual - Retardo mental leve',NULL)
 ,('Def. intelectual - Retardo mental moderado',NULL)
 ,('Def. intelectual - Retardo mental profundo',NULL)
-,('Def. mútipla - Paralisia cerebral',NULL)
-,('Def. mútipla - Paralisia cerebral atáxica',NULL)
-,('Def. mútipla - Paralisia cerebral diplégica espástica',NULL)
-,('Def. mútipla - Paralisia cerebral discinética',NULL)
-,('Def. mútipla - Paralisia cerebral hemiplégica espástica',NULL)
-,('Def. mútipla - Paralisia cerebral não especificada',NULL)
-,('Def. mútipla - Paralisia cerebral quadriplágica espástica',NULL)
-,('Def. mútipla - Paralisia das cordas vocais e da laringe',NULL)
-,('Def. mútipla - Paralisia de Bell',NULL)
-,('Def. mútipla - Paralisia de Erb devida a traumatismo de parto',NULL)
-,('Def. mútipla - Paralisia de Klumpke devida a traumatismo de parto',NULL)
-,('Def. mútipla - Paralisia do nervo frênico devida a traumatismo de parto',NULL)
-,('Def. mútipla - Paralisia do olhar conjugado',NULL)
-,('Def. mútipla - Paralisia do quarto par (troclear)',NULL)
-,('Def. mútipla - Paralisia do sexto par (abducente)',NULL)
-,('Def. mútipla - Paralisia do terceiro par (oculomotor)',NULL)
-,('Def. mútipla - Paralisia periódica',NULL)
-,('Def. mútipla - Paralisias de múltiplos nervos cranianos em doenças infecciosas e parasitárias classificadas em outra parte',NULL)
-,('Def. mútipla - Paralisias de múltiplos nervos cranianos em doenças neoplásicas',NULL)
-,('Def. mútipla - Paralisias de múltiplos nervos cranianos na sarcoidose',NULL)
-,('Sídrome - Desmatemática',NULL)
-,('Sídrome - Dislexia',NULL)
-,('Sídrome - Distúrbios da leitura e escrita',NULL)
-,('Sídrome - Down',NULL)
-,('Sídrome - Rett',NULL)
-,('Sídrome - TEA',NULL)
-,('Sídrome - THDA',NULL)
-,('Sídrome - Tourette',NULL)
-,('Sídrome - X-frágil',NULL)
+,('Def. múltipla - Paralisia cerebral',NULL)
+,('Def. múltipla - Paralisia cerebral atáxica',NULL)
+,('Def. múltipla - Paralisia cerebral diplégica espástica',NULL)
+,('Def. múltipla - Paralisia cerebral discinética',NULL)
+,('Def. múltipla - Paralisia cerebral hemiplégica espástica',NULL)
+,('Def. múltipla - Paralisia cerebral não especificada',NULL)
+,('Def. múltipla - Paralisia cerebral quadriplágica espástica',NULL)
+,('Def. múltipla - Paralisia das cordas vocais e da laringe',NULL)
+,('Def. múltipla - Paralisia de Bell',NULL)
+,('Def. múltipla - Paralisia de Erb devida a traumatismo de parto',NULL)
+,('Def. múltipla - Paralisia de Klumpke devida a traumatismo de parto',NULL)
+,('Def. múltipla - Paralisia do nervo frênico devida a traumatismo de parto',NULL)
+,('Def. múltipla - Paralisia do olhar conjugado',NULL)
+,('Def. múltipla - Paralisia do quarto par (troclear)',NULL)
+,('Def. múltipla - Paralisia do sexto par (abducente)',NULL)
+,('Def. múltipla - Paralisia do terceiro par (oculomotor)',NULL)
+,('Def. múltipla - Paralisia periódica',NULL)
+,('Def. múltipla - Paralisias de múltiplos nervos cranianos em doenças infecciosas e parasitárias classificadas em outra parte',NULL)
+,('Def. múltipla - Paralisias de múltiplos nervos cranianos em doenças neoplásicas',NULL)
+,('Def. múltipla - Paralisias de múltiplos nervos cranianos na sarcoidose',NULL)
+,('Síndrome - Desmatemática',NULL)
+,('Síndrome - Dislexia',NULL)
+,('Síndrome - Distúrbios da leitura e escrita',NULL)
+,('Síndrome - Down',NULL)
+,('Síndrome - Rett',NULL)
+,('Síndrome - TEA',NULL)
+,('Síndrome - THDA',NULL)
+,('Síndrome - Tourette',NULL)
+,('Síndrome - X-frágil',NULL)
 ,('Transtorno mental',NULL)
 ,('Altas habilidades',NULL)
 ;
@@ -2598,6 +2632,81 @@ INSERT INTO tipo_de_servico (nome) VALUES
 ,(/*6*/'Saúde')
 ;
 
+-- Serviços
+INSERT INTO servico (tipo_de_servico,nome) VALUES
+ (/*01*/1,'Aposentadoria para pessoas de baixa renda')
+,(/*02*/1,'Banco do Vestuário')
+,(/*03*/1,'CRAS')
+,(/*04*/1,'CREAS')
+,(/*05*/1,'Cadastro Único')
+,(/*06*/1,'Carteira do Idoso')
+,(/*07*/1,'Castração de animais')
+,(/*08*/1,'Construa a casa no seu terreno')
+,(/*09*/1,'Criança feliz')
+,(/*10*/1,'Identidade Jovem (ID Jovem)')
+,(/*11*/1,'Inclusão Produtiva')
+,(/*12*/1,'Isenção de Pagamento de Taxa de Inscrição em Concursos Públicos')
+,(/*13*/1,'Isenção de Pagamento de Taxa no ENEM')
+,(/*14*/1,'Programa de Erradicação do Trabalho Infantil')
+,(/*15*/1,'Tarifa Social da água')
+,(/*16*/1,'Tarifa social de energia Elétrica')
+,(/*17*/1,'Telefone Popular')
+,(/*18*/2,'Conselho Tutelar')
+,(/*19*/2,'Conselho de Direitos das Pessoas com Deficiência')
+,(/*20*/2,'Defensoria Pública')
+,(/*21*/2,'Fóruns')
+,(/*22*/2,'Ministério Público')
+,(/*23*/3,'Monitor (aguardando)')
+,(/*24*/3,'Monitor')
+,(/*25*/3,'Psicopedagogia privado')
+,(/*26*/3,'Psicopedagogia')
+,(/*27*/3,'Sala de Recursos Multifuncionais')
+,(/*28*/4,'Minha Casa Minha Vida (aguardando)')
+,(/*29*/4,'Minha Casa Minha Vida')
+,(/*30*/5,'Passe livre')
+,(/*31*/6,'CAPS - Assistente Social')
+,(/*32*/6,'CAPS - Psicólogo')
+,(/*33*/6,'CAPS - Psiquiatra')
+,(/*34*/6,'CAPSI - Arte Educador')
+,(/*35*/6,'CAPSI - Assistente Social')
+,(/*36*/6,'CAPSI - Fonoaudiólogo')
+,(/*37*/6,'CAPSI - Psicólogo')
+,(/*38*/6,'CAPSI - Psicopedagogo')
+,(/*39*/6,'CAPSI - Psiquiatra')
+,(/*40*/6,'Farmácia Municipal')
+,(/*41*/6,'Fisioterapia público (aguardando)')
+,(/*42*/6,'Fisioterapia público')
+,(/*43*/6,'Fisioterapia privado')
+,(/*44*/6,'Fonoaudiólogo público')
+,(/*45*/6,'Fonoaudiólogo privado')
+,(/*46*/6,'Medicação do SUS')
+,(/*47*/6,'Neurologista público')
+,(/*48*/6,'Neurologista privado')
+,(/*49*/6,'Odontologia público')
+,(/*50*/6,'Primeira infância melhor')
+,(/*51*/6,'Programa de alimentação e nutrição')
+,(/*52*/6,'Programa de atenção à saúde da população negra')
+,(/*53*/6,'Programa de atenção à saúde de lésbicas, gays, bissexuais, travestis, transexuais e intersexuais')
+,(/*54*/6,'Programa de atenção à saúde do homem')
+,(/*55*/6,'Programa de atenção à saúde do idoso')
+,(/*56*/6,'Programa de atenção à saúde do indígena')
+,(/*57*/6,'Programa de atenção integral à saúde da criança')
+,(/*58*/6,'Programa de atenção integral à saúde da mulher')
+,(/*59*/6,'Programa de atenção integral à saúde do adolescente')
+,(/*60*/6,'Programa de combate ao tabagismo')
+,(/*61*/6,'Programa de controle de tuberculose')
+,(/*62*/6,'Programa de fisioterapia e programa de atenção integral à saúde da pessoa com deficiência')
+,(/*63*/6,'Programa municipal IST/AIDS e hepatites virais')
+,(/*64*/6,'Programa saúde na escola')
+,(/*65*/6,'Projeto vida ativa')
+,(/*66*/6,'Psicólogo público')
+,(/*67*/6,'Psicólogo privado')
+,(/*68*/6,'Psiquiatra público')
+,(/*69*/6,'Psiquiatra privado')
+,(/*70*/6,'Reabilitação público (aguardando)')
+,(/*71*/6,'Reabilitação público')
+;
+
 -- Serviços de saúde iniciais
 INSERT INTO servico_de_saude (nome) VALUES
  ('CAPS - Assistente Social')
@@ -2697,7 +2806,7 @@ INSERT INTO servico_de_hab (nome) VALUES
 INSERT INTO secao_de_historico (nome) VALUES
  (/*1*/'Saúde')
 ,(/*2*/'Educação')
-,(/*3*/'Assitência Social')
+,(/*3*/'Assistência Social')
 ,(/*4*/'Trabalho')
 ,(/*5*/'Habitação')
 ,(/*6*/'Mobilidade Urbana')
@@ -2821,6 +2930,8 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*114*/'Alterar o serviço de habitação',TRUE)
 ,(/*115*/'Excluir o serviço de habitação',TRUE)
 ,(/*116*/'Adicionar serviços do tipo',TRUE)
+,(/*117*/'Alterar o serviço',TRUE)
+,(/*118*/'Excluir o serviço',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -3098,6 +3209,80 @@ INSERT INTO permissao_e_tipo_de_servico VALUES
 ,(3,TRUE,116,3)
 ,(4,TRUE,116,1)
 ,(4,TRUE,116,2)
+;
+
+INSERT INTO permissao_e_servico VALUES
+ (NULL,FALSE,117,NULL)
+,(NULL,FALSE,118,NULL)
+,(1,TRUE,117,NULL),(1,TRUE,118,NULL)
+,(2,TRUE,117,31),(2,TRUE,118,31)
+,(2,TRUE,117,32),(2,TRUE,118,32)
+,(2,TRUE,117,33),(2,TRUE,118,33)
+,(2,TRUE,117,34),(2,TRUE,118,34)
+,(2,TRUE,117,35),(2,TRUE,118,35)
+,(2,TRUE,117,36),(2,TRUE,118,36)
+,(2,TRUE,117,37),(2,TRUE,118,37)
+,(2,TRUE,117,38),(2,TRUE,118,38)
+,(2,TRUE,117,39),(2,TRUE,118,39)
+,(2,TRUE,117,40),(2,TRUE,118,40)
+,(2,TRUE,117,41),(2,TRUE,118,41)
+,(2,TRUE,117,42),(2,TRUE,118,42)
+,(2,TRUE,117,43),(2,TRUE,118,43)
+,(2,TRUE,117,44),(2,TRUE,118,44)
+,(2,TRUE,117,45),(2,TRUE,118,45)
+,(2,TRUE,117,46),(2,TRUE,118,46)
+,(2,TRUE,117,47),(2,TRUE,118,47)
+,(2,TRUE,117,48),(2,TRUE,118,48)
+,(2,TRUE,117,49),(2,TRUE,118,49)
+,(2,TRUE,117,50),(2,TRUE,118,50)
+,(2,TRUE,117,51),(2,TRUE,118,51)
+,(2,TRUE,117,52),(2,TRUE,118,52)
+,(2,TRUE,117,53),(2,TRUE,118,53)
+,(2,TRUE,117,54),(2,TRUE,118,54)
+,(2,TRUE,117,55),(2,TRUE,118,55)
+,(2,TRUE,117,56),(2,TRUE,118,56)
+,(2,TRUE,117,57),(2,TRUE,118,57)
+,(2,TRUE,117,58),(2,TRUE,118,58)
+,(2,TRUE,117,59),(2,TRUE,118,59)
+,(2,TRUE,117,60),(2,TRUE,118,60)
+,(2,TRUE,117,61),(2,TRUE,118,61)
+,(2,TRUE,117,62),(2,TRUE,118,62)
+,(2,TRUE,117,63),(2,TRUE,118,63)
+,(2,TRUE,117,64),(2,TRUE,118,64)
+,(2,TRUE,117,65),(2,TRUE,118,65)
+,(2,TRUE,117,66),(2,TRUE,118,66)
+,(2,TRUE,117,67),(2,TRUE,118,67)
+,(2,TRUE,117,68),(2,TRUE,118,68)
+,(2,TRUE,117,69),(2,TRUE,118,69)
+,(2,TRUE,117,70),(2,TRUE,118,70)
+,(2,TRUE,117,71),(2,TRUE,118,71)
+,(3,TRUE,117,23),(3,TRUE,118,23)
+,(3,TRUE,117,24),(3,TRUE,118,24)
+,(3,TRUE,117,25),(3,TRUE,118,25)
+,(3,TRUE,117,26),(3,TRUE,118,26)
+,(3,TRUE,117,27),(3,TRUE,118,27)
+,(4,TRUE,117,1),(4,TRUE,118,1)
+,(4,TRUE,117,2),(4,TRUE,118,2)
+,(4,TRUE,117,3),(4,TRUE,118,3)
+,(4,TRUE,117,4),(4,TRUE,118,4)
+,(4,TRUE,117,5),(4,TRUE,118,5)
+,(4,TRUE,117,6),(4,TRUE,118,6)
+,(4,TRUE,117,7),(4,TRUE,118,7)
+,(4,TRUE,117,8),(4,TRUE,118,8)
+,(4,TRUE,117,9),(4,TRUE,118,9)
+,(4,TRUE,117,10),(4,TRUE,118,10)
+,(4,TRUE,117,11),(4,TRUE,118,11)
+,(4,TRUE,117,12),(4,TRUE,118,12)
+,(4,TRUE,117,13),(4,TRUE,118,13)
+,(4,TRUE,117,14),(4,TRUE,118,14)
+,(4,TRUE,117,15),(4,TRUE,118,15)
+,(4,TRUE,117,16),(4,TRUE,118,16)
+,(4,TRUE,117,17),(4,TRUE,118,17)
+,(4,TRUE,117,18),(4,TRUE,118,18)
+,(4,TRUE,117,19),(4,TRUE,118,19)
+,(4,TRUE,117,20),(4,TRUE,118,20)
+,(4,TRUE,117,21),(4,TRUE,118,21)
+,(4,TRUE,117,22),(4,TRUE,118,22)
 ;
 
 INSERT INTO permissao_e_servico_de_saude VALUES
