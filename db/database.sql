@@ -20,6 +20,7 @@ DROP TABLE IF EXISTS permissao_e_servico_de_ddpd;
 DROP TABLE IF EXISTS permissao_e_servico_de_as;
 DROP TABLE IF EXISTS permissao_e_servico_de_educacao;
 DROP TABLE IF EXISTS permissao_e_servico_de_saude;
+DROP TABLE IF EXISTS permissao_e_tipo_de_servico;
 DROP TABLE IF EXISTS permissao_e_medicacao;
 DROP TABLE IF EXISTS permissao_e_profissao;
 DROP TABLE IF EXISTS permissao_e_vinculo_pessoal;
@@ -60,6 +61,7 @@ DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_educacao;
 DROP TABLE IF EXISTS servico_de_educacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_saude;
 DROP TABLE IF EXISTS servico_de_saude;
+DROP TABLE IF EXISTS tipo_de_servico;
 DROP TABLE IF EXISTS pessoa_fisica_e_medicacao;
 DROP TABLE IF EXISTS medicacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_interesse_em_trabalho;
@@ -632,6 +634,12 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_medicacao (
 		REFERENCES medicacao (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
+);
+
+-- Tipos de serviço
+CREATE TABLE IF NOT EXISTS tipo_de_servico (
+	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
+	,nome VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- Serviços de saúde
@@ -1312,6 +1320,27 @@ CREATE TABLE IF NOT EXISTS permissao_e_medicacao (
 		ON DELETE CASCADE
 	,FOREIGN KEY (com)
 		REFERENCES medicacao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Permissões sobre tipos de serviços
+CREATE TABLE IF NOT EXISTS permissao_e_tipo_de_servico (
+	 entidade BIGINT UNSIGNED
+	,pode     BOOLEAN NOT NULL
+	,acao     BIGINT UNSIGNED
+	,com      BIGINT UNSIGNED
+	,UNIQUE (entidade,acao,com)
+	,FOREIGN KEY (entidade)
+		REFERENCES entidade (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (acao)
+		REFERENCES acao (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (com)
+		REFERENCES tipo_de_servico (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2559,6 +2588,16 @@ INSERT INTO medicacao (nome) VALUES
 ,('Vasodilatador coronariano')
 ;
 
+-- Tipos de serviço iniciais
+INSERT INTO tipo_de_servico (nome) VALUES
+ (/*1*/'Assistência Social')
+,(/*2*/'Defesa dos Direitos das Pessoas com Deficiência')
+,(/*3*/'Educação')
+,(/*4*/'Habitação')
+,(/*5*/'Mobilidade')
+,(/*6*/'Saúde')
+;
+
 -- Serviços de saúde iniciais
 INSERT INTO servico_de_saude (nome) VALUES
  ('CAPS - Assistente Social')
@@ -2781,6 +2820,7 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*113*/'Adicionar serviços de habitação',FALSE)
 ,(/*114*/'Alterar o serviço de habitação',TRUE)
 ,(/*115*/'Excluir o serviço de habitação',TRUE)
+,(/*116*/'Adicionar serviços do tipo',TRUE)
 ;
 
 -- Dados de permissões sobre o DB
@@ -3049,6 +3089,15 @@ INSERT INTO permissao_e_medicacao VALUES
 ,(2,TRUE,92,NULL)
 ,(NULL,FALSE,93,NULL)
 ,(2,TRUE,93,NULL)
+;
+
+INSERT INTO permissao_e_tipo_de_servico VALUES
+ (NULL,FALSE,116,NULL)
+,(1,TRUE,116,NULL)
+,(2,TRUE,116,6)
+,(3,TRUE,116,3)
+,(4,TRUE,116,1)
+,(4,TRUE,116,2)
 ;
 
 INSERT INTO permissao_e_servico_de_saude VALUES
