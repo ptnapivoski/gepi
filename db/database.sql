@@ -648,7 +648,8 @@ CREATE TABLE IF NOT EXISTS tipo_de_servico (
 CREATE TABLE IF NOT EXISTS servico (
 	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
 	,tipo_de_servico  BIGINT UNSIGNED NOT NULL
-	,nome VARCHAR(255) NOT NULL UNIQUE
+	,nome VARCHAR(255) NOT NULL
+	,UNIQUE (tipo_de_servico,nome)
 	,FOREIGN KEY (tipo_de_servico)
 		REFERENCES tipo_de_servico (id)
 		ON UPDATE CASCADE
