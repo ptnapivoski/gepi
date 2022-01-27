@@ -14,12 +14,6 @@ USE gepi;
 
 -- Exclusão de tabelas caso não possa executar as modificações no DB
 DROP TABLE IF EXISTS permissao_e_entidade;
-DROP TABLE IF EXISTS permissao_e_servico_de_hab;
-DROP TABLE IF EXISTS permissao_e_servico_de_mob;
-DROP TABLE IF EXISTS permissao_e_servico_de_ddpd;
-DROP TABLE IF EXISTS permissao_e_servico_de_as;
-DROP TABLE IF EXISTS permissao_e_servico_de_educacao;
-DROP TABLE IF EXISTS permissao_e_servico_de_saude;
 DROP TABLE IF EXISTS permissao_e_servico;
 DROP TABLE IF EXISTS permissao_e_tipo_de_servico;
 DROP TABLE IF EXISTS permissao_e_medicacao;
@@ -50,18 +44,6 @@ DROP TABLE IF EXISTS acao;
 DROP TABLE IF EXISTS historico;
 DROP TABLE IF EXISTS secao_de_historico;
 DROP TABLE IF EXISTS pessoa_fisica_e_cras_ou_creas;
-DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_hab;
-DROP TABLE IF EXISTS servico_de_hab;
-DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_mob;
-DROP TABLE IF EXISTS servico_de_mob;
-DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_ddpd;
-DROP TABLE IF EXISTS servico_de_ddpd;
-DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_as;
-DROP TABLE IF EXISTS servico_de_as;
-DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_educacao;
-DROP TABLE IF EXISTS servico_de_educacao;
-DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_saude;
-DROP TABLE IF EXISTS servico_de_saude;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico;
 DROP TABLE IF EXISTS servico;
 DROP TABLE IF EXISTS tipo_de_servico;
@@ -672,132 +654,6 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico (
 		ON DELETE CASCADE
 );
 
--- Serviços de saúde
-CREATE TABLE IF NOT EXISTS servico_de_saude (
-	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
-	,nome VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Relação de uso de serviço de saúde de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_saude (
-	 pessoa_fisica BIGINT UNSIGNED
-	,uso           BIGINT UNSIGNED
-	,PRIMARY KEY (pessoa_fisica,uso)
-	,FOREIGN KEY (pessoa_fisica)
-		REFERENCES pessoa_fisica (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (uso)
-		REFERENCES servico_de_saude (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Serviços de educação
-CREATE TABLE IF NOT EXISTS servico_de_educacao (
-	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
-	,nome VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Relação de uso de serviço de educação de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_educacao (
-	 pessoa_fisica BIGINT UNSIGNED
-	,uso           BIGINT UNSIGNED
-	,PRIMARY KEY (pessoa_fisica,uso)
-	,FOREIGN KEY (pessoa_fisica)
-		REFERENCES pessoa_fisica (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (uso)
-		REFERENCES servico_de_educacao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Serviços de assistência social
-CREATE TABLE IF NOT EXISTS servico_de_as (
-	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
-	,nome VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Relação de uso de serviço de assistência social de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_as (
-	 pessoa_fisica BIGINT UNSIGNED
-	,uso           BIGINT UNSIGNED
-	,PRIMARY KEY (pessoa_fisica,uso)
-	,FOREIGN KEY (pessoa_fisica)
-		REFERENCES pessoa_fisica (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (uso)
-		REFERENCES servico_de_as (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Serviços de Defesa dos Direitos da Pessoa com Deficiência
-CREATE TABLE IF NOT EXISTS servico_de_ddpd (
-	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
-	,nome VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Relação de uso de Serviços de Defesa dos Direitos da Pessoa com Deficiência de uma pessoa física
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_ddpd (
-	 pessoa_fisica BIGINT UNSIGNED
-	,uso           BIGINT UNSIGNED
-	,PRIMARY KEY (pessoa_fisica,uso)
-	,FOREIGN KEY (pessoa_fisica)
-		REFERENCES pessoa_fisica (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (uso)
-		REFERENCES servico_de_ddpd (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Serviços de Mobilidade Urbana
-CREATE TABLE IF NOT EXISTS servico_de_mob (
-	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
-	,nome VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Relação de uso de serviço de Mobilidade Urbana
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_mob (
-	 pessoa_fisica BIGINT UNSIGNED
-	,uso           BIGINT UNSIGNED
-	,PRIMARY KEY (pessoa_fisica,uso)
-	,FOREIGN KEY (pessoa_fisica)
-		REFERENCES pessoa_fisica (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (uso)
-		REFERENCES servico_de_mob (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Serviços de Habitação
-CREATE TABLE IF NOT EXISTS servico_de_hab (
-	 id   BIGINT UNSIGNED AUTO_INCREMENT KEY
-	,nome VARCHAR(255) NOT NULL UNIQUE
-);
-
--- Relação de uso de serviço de Habitação
-CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico_de_hab (
-	 pessoa_fisica BIGINT UNSIGNED
-	,uso           BIGINT UNSIGNED
-	,PRIMARY KEY (pessoa_fisica,uso)
-	,FOREIGN KEY (pessoa_fisica)
-		REFERENCES pessoa_fisica (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (uso)
-		REFERENCES servico_de_hab (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
 -- Relação de uso de CRAS ou CREAS
 CREATE TABLE IF NOT EXISTS pessoa_fisica_e_cras_ou_creas (
 	 pessoa_fisica BIGINT UNSIGNED
@@ -1392,132 +1248,6 @@ CREATE TABLE IF NOT EXISTS permissao_e_servico (
 		ON DELETE CASCADE
 	,FOREIGN KEY (com)
 		REFERENCES servico (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Permissões sobre serviços de saúde
-CREATE TABLE IF NOT EXISTS permissao_e_servico_de_saude (
-	 entidade BIGINT UNSIGNED
-	,pode     BOOLEAN NOT NULL
-	,acao     BIGINT UNSIGNED
-	,com      BIGINT UNSIGNED
-	,UNIQUE (entidade,acao,com)
-	,FOREIGN KEY (entidade)
-		REFERENCES entidade (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (acao)
-		REFERENCES acao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (com)
-		REFERENCES servico_de_saude (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Permissões sobre serviços de educação
-CREATE TABLE IF NOT EXISTS permissao_e_servico_de_educacao (
-	 entidade BIGINT UNSIGNED
-	,pode     BOOLEAN NOT NULL
-	,acao     BIGINT UNSIGNED
-	,com      BIGINT UNSIGNED
-	,UNIQUE (entidade,acao,com)
-	,FOREIGN KEY (entidade)
-		REFERENCES entidade (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (acao)
-		REFERENCES acao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (com)
-		REFERENCES servico_de_educacao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Permissões sobre serviços de assistência social
-CREATE TABLE IF NOT EXISTS permissao_e_servico_de_as (
-	 entidade BIGINT UNSIGNED
-	,pode     BOOLEAN NOT NULL
-	,acao     BIGINT UNSIGNED
-	,com      BIGINT UNSIGNED
-	,UNIQUE (entidade,acao,com)
-	,FOREIGN KEY (entidade)
-		REFERENCES entidade (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (acao)
-		REFERENCES acao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (com)
-		REFERENCES servico_de_as (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Permissões sobre serviços de defesa dos direitos da pessoa com deficiência
-CREATE TABLE IF NOT EXISTS permissao_e_servico_de_ddpd (
-	 entidade BIGINT UNSIGNED
-	,pode     BOOLEAN NOT NULL
-	,acao     BIGINT UNSIGNED
-	,com      BIGINT UNSIGNED
-	,UNIQUE (entidade,acao,com)
-	,FOREIGN KEY (entidade)
-		REFERENCES entidade (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (acao)
-		REFERENCES acao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (com)
-		REFERENCES servico_de_ddpd (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Permissões sobre serviços de mobilidade
-CREATE TABLE IF NOT EXISTS permissao_e_servico_de_mob (
-	 entidade BIGINT UNSIGNED
-	,pode     BOOLEAN NOT NULL
-	,acao     BIGINT UNSIGNED
-	,com      BIGINT UNSIGNED
-	,UNIQUE (entidade,acao,com)
-	,FOREIGN KEY (entidade)
-		REFERENCES entidade (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (acao)
-		REFERENCES acao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (com)
-		REFERENCES servico_de_mob (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-);
-
--- Permissões sobre serviços de habitação
-CREATE TABLE IF NOT EXISTS permissao_e_servico_de_hab (
-	 entidade BIGINT UNSIGNED
-	,pode     BOOLEAN NOT NULL
-	,acao     BIGINT UNSIGNED
-	,com      BIGINT UNSIGNED
-	,UNIQUE (entidade,acao,com)
-	,FOREIGN KEY (entidade)
-		REFERENCES entidade (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (acao)
-		REFERENCES acao (id)
-		ON UPDATE CASCADE
-		ON DELETE CASCADE
-	,FOREIGN KEY (com)
-		REFERENCES servico_de_hab (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2802,12 +2532,12 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*064*/'Adicionar profissões',FALSE)
 ,(/*065*/'Alterar a profissão',TRUE)
 ,(/*066*/'Excluir a profissão',TRUE)
-,(/*067*/'Adicionar serviços de assistência social',FALSE)
-,(/*068*/'Alterar o serviço de assistência social',TRUE)
-,(/*069*/'Excluir o serviço de assistência social',TRUE)
-,(/*070*/'Adicionar serviços de defesa dos direitos das pessoas com deficiência',FALSE)
-,(/*071*/'Alterar o serviço de defesa dos direitos das pessoas com deficiência',TRUE)
-,(/*072*/'Excluir o serviço de defesa dos direitos das pessoas com deficiência',TRUE)
+,(/*067*/'!!!Limpar 01',FALSE)
+,(/*068*/'!!!Limpar 02',FALSE)
+,(/*069*/'!!!Limpar 03',FALSE)
+,(/*070*/'!!!Limpar 04',FALSE)
+,(/*071*/'!!!Limpar 05',FALSE)
+,(/*072*/'!!!Limpar 06',FALSE)
 ,(/*073*/'Exibir dados sobre saúde da pessoa física',TRUE)
 ,(/*074*/'Manipular dados sobre saúde da pessoa física',TRUE)
 ,(/*075*/'Exibir dados sobre educação da pessoa física',TRUE)
@@ -2829,15 +2559,15 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*091*/'Adicionar medicação',FALSE)
 ,(/*092*/'Alterar a medicação',TRUE)
 ,(/*093*/'Excluir a medicação',TRUE)
-,(/*094*/'Adicionar serviços de saúde',FALSE)
-,(/*095*/'Alterar o serviço de saúde',TRUE)
-,(/*096*/'Excluir o serviço de saúde',TRUE)
-,(/*097*/'Adicionar serviços de educação',FALSE)
-,(/*098*/'Alterar o serviço de educação',TRUE)
-,(/*099*/'Excluir o serviço de educação',TRUE)
-,(/*100*/'Adicionar serviços de mobilidade urbana',FALSE)
-,(/*101*/'Alterar o serviço de mobilidade urbana',TRUE)
-,(/*102*/'Excluir o serviço de mobilidade urbana',TRUE)
+,(/*094*/'!!!Limpar 07',FALSE)
+,(/*095*/'!!!Limpar 08',FALSE)
+,(/*096*/'!!!Limpar 09',FALSE)
+,(/*097*/'!!!Limpar 10',FALSE)
+,(/*098*/'!!!Limpar 11',FALSE)
+,(/*099*/'!!!Limpar 12',FALSE)
+,(/*100*/'!!!Limpar 13',FALSE)
+,(/*101*/'!!!Limpar 14',FALSE)
+,(/*102*/'!!!Limpar 15',FALSE)
 ,(/*103*/'Exibir dados sobre mobilidade urbana da pessoa física',TRUE)
 ,(/*104*/'Manipular dados sobre mobilidade urbana da pessoa física',TRUE)
 ,(/*105*/'Exibir dados sobre habitação da pessoa física',TRUE)
@@ -2848,9 +2578,9 @@ INSERT INTO acao (nome,tem_objeto) VALUES
 ,(/*110*/'Adicionar adaptações arquitetônicas',FALSE)
 ,(/*111*/'Alterar a adaptação arquitetônica',TRUE)
 ,(/*112*/'Excluir a adaptação arquitetônica',TRUE)
-,(/*113*/'Adicionar serviços de habitação',FALSE)
-,(/*114*/'Alterar o serviço de habitação',TRUE)
-,(/*115*/'Excluir o serviço de habitação',TRUE)
+,(/*113*/'!!!Limpar 16',FALSE)
+,(/*114*/'!!!Limpar 17',FALSE)
+,(/*115*/'!!!Limpar 18',FALSE)
 ,(/*116*/'Adicionar serviços do tipo',TRUE)
 ,(/*117*/'Alterar o serviço',TRUE)
 ,(/*118*/'Excluir o serviço',TRUE)
@@ -3205,60 +2935,6 @@ INSERT INTO permissao_e_servico VALUES
 ,(4,TRUE,117,20),(4,TRUE,118,20)
 ,(4,TRUE,117,21),(4,TRUE,118,21)
 ,(4,TRUE,117,22),(4,TRUE,118,22)
-;
-
-INSERT INTO permissao_e_servico_de_saude VALUES
- (NULL,TRUE,94,NULL)
-,(NULL,FALSE,95,NULL)
-,(1,TRUE,95,NULL)
-,(2,TRUE,95,NULL)
-,(NULL,FALSE,96,NULL)
-,(1,TRUE,96,NULL)
-,(2,TRUE,96,NULL)
-;
-
-INSERT INTO permissao_e_servico_de_educacao VALUES
- (NULL,TRUE,97,NULL)
-,(NULL,FALSE,98,NULL)
-,(1,TRUE,98,NULL)
-,(3,TRUE,98,NULL)
-,(NULL,FALSE,99,NULL)
-,(1,TRUE,99,NULL)
-,(3,TRUE,99,NULL)
-;
-
-INSERT INTO permissao_e_servico_de_as VALUES
- (NULL,TRUE,67,NULL)
-,(NULL,FALSE,68,NULL)
-,(1,TRUE,68,NULL)
-,(4,TRUE,68,NULL)
-,(NULL,FALSE,69,NULL)
-,(1,TRUE,69,NULL)
-,(4,TRUE,69,NULL)
-;
-
-INSERT INTO permissao_e_servico_de_ddpd VALUES
- (NULL,TRUE,70,NULL)
-,(NULL,FALSE,71,NULL)
-,(1,TRUE,71,NULL)
-,(NULL,FALSE,72,NULL)
-,(1,TRUE,72,NULL)
-;
-
-INSERT INTO permissao_e_servico_de_mob VALUES
- (NULL,TRUE,100,NULL)
-,(NULL,FALSE,101,NULL)
-,(1,TRUE,101,NULL)
-,(NULL,FALSE,102,NULL)
-,(1,TRUE,102,NULL)
-;
-
-INSERT INTO permissao_e_servico_de_hab VALUES
- (NULL,TRUE,113,NULL)
-,(NULL,FALSE,114,NULL)
-,(1,TRUE,114,NULL)
-,(NULL,FALSE,115,NULL)
-,(1,TRUE,115,NULL)
 ;
 
 INSERT INTO permissao_e_entidade VALUES
