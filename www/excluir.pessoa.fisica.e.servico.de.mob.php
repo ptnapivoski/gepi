@@ -21,14 +21,26 @@ if($_SESSION['user']){
 			// Trata entrada
 			$servico = (int) $_POST['servico'];
 
-			// Tenta excluir
-			if($db_query = mysqli_query($db_link, "DELETE FROM pessoa_fisica_e_servico_de_mob WHERE pessoa_fisica = $id AND uso = $servico;")){
-				// Se consulta excluiu uma linha
-				if(mysqli_affected_rows($db_link) === 1)
-					// Informa que houve a exclusão
-					$_SESSION['msg'] = '<p class="success">Exclusão efetuada.</p>';
-				// Caso contrário, informa que não houve a exclusão
-				else $_SESSION['msg'] = '<p class="error">Exclusão não efetuada.</p>';
+			// Tenta checar se serviço é de mobilidade
+			if($db_query = mysqli_query($db_link, "SELECT NULL FROM servico WHERE id = $servico AND tipo_de_servico = 5;")){
+				// Se selecionou serviço de mobilidade
+				if(mysqli_num_rows($db_query)){
+					// Tenta excluir
+					if($db_query = mysqli_query($db_link, "DELETE FROM pessoa_fisica_e_servico WHERE pessoa_fisica = $id AND uso = $servico;")){
+						// Se consulta excluiu uma linha
+						if(mysqli_affected_rows($db_link) === 1)
+							// Informa que houve a exclusão
+							$_SESSION['msg'] = '<p class="success">Exclusão efetuada.</p>';
+						// Caso contrário, informa que não houve a exclusão
+						else $_SESSION['msg'] = '<p class="error">Exclusão não efetuada.</p>';
+					// Caso não tenha conseguido realizar a consulta
+					} else {
+						// Seleciona-se e escapa-se o erro
+						$error = htmlspecialchars(mysqli_error($db_link));
+						// E o inclui na mensagem passada ao usuário
+						$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
+					}
+				} else $_SESSION['msg'] = '<p class="error">Serviço não é de mobilidade.</p>';
 			// Caso não tenha conseguido realizar a consulta
 			} else {
 				// Seleciona-se e escapa-se o erro

@@ -754,7 +754,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
 						// Tenta selecionar os serviços de saúde dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT ss.id, ss.nome FROM pessoa_fisica_e_servico_de_saude pfss LEFT JOIN servico_de_saude ss ON ss.id = pfss.uso WHERE pfss.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 6;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -792,7 +792,7 @@ if($_SESSION['user']){
 						}
 
 						// Tenta selecionar os serviços de saúde
-						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_saude ORDER BY nome;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 6 ORDER BY nome;")){
 							// Ao selecionar pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
@@ -1072,7 +1072,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
 						// Tenta selecionar os serviços de saúde dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT se.id, se.nome FROM pessoa_fisica_e_servico_de_educacao pfse LEFT JOIN servico_de_educacao se ON se.id = pfse.uso WHERE pfse.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 3;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -1110,7 +1110,7 @@ if($_SESSION['user']){
 						}
 
 						// Tenta selecionar os serviços de educação
-						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_educacao ORDER BY nome;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 3 ORDER BY nome;")){
 							// Ao selecionar pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
@@ -1343,7 +1343,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
 						// Tenta selecionar os serviços de assistência social dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT sas.id, sas.nome FROM pessoa_fisica_e_servico_de_as pfsas LEFT JOIN servico_de_as sas ON sas.id = pfsas.uso WHERE pfsas.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 1;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -1381,7 +1381,7 @@ if($_SESSION['user']){
 						}
 
 						// Tenta selecionar os serviços de assistência social
-						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_as ORDER BY nome;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 1 ORDER BY nome;")){
 							// Ao selecionar pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
@@ -1429,7 +1429,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
 						// Tenta selecionar os serviços de defesa dos direitos da pessoa com deficiência dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT sddpd.id, sddpd.nome FROM pessoa_fisica_e_servico_de_ddpd pfsddpd LEFT JOIN servico_de_ddpd sddpd ON sddpd.id = pfsddpd.uso WHERE pfsddpd.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 2;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -1467,7 +1467,7 @@ if($_SESSION['user']){
 						}
 
 						// Tenta selecionar os serviços de defesa dos direitos da pessoa com deficiência
-						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_ddpd ORDER BY nome;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 2 ORDER BY nome;")){
 							// Ao selecionar pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
@@ -2223,7 +2223,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 105, $id)){
 						// Tenta selecionar os serviços de habitação dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT sh.id, sh.nome FROM pessoa_fisica_e_servico_de_hab pfsh LEFT JOIN servico_de_hab sh ON sh.id = pfsh.uso WHERE pfsh.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 4;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -2261,7 +2261,7 @@ if($_SESSION['user']){
 						}
 
 						// Tenta selecionar os serviços de habitação
-						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_hab ORDER BY nome;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 4 ORDER BY nome;")){
 							// Ao selecionar pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção
@@ -2319,7 +2319,7 @@ if($_SESSION['user']){
 					// Caso possua permissão
 					if(perm($db_link, 'permissao_e_entidade', 103, $id)){
 						// Tenta selecionar os serviços de mobilidade urbana dos quais a pessoa faz uso
-						if($db_query_2 = mysqli_query($db_link, "SELECT sm.id, sm.nome FROM pessoa_fisica_e_servico_de_mob pfsm LEFT JOIN servico_de_mob sm ON sm.id = pfsm.uso WHERE pfsm.pessoa_fisica = $id;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 5;")){
 							// Se selecionou pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Inicia as linhas
@@ -2357,7 +2357,7 @@ if($_SESSION['user']){
 						}
 
 						// Tenta selecionar os serviços de mobilidade urbana
-						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico_de_mob ORDER BY nome;")){
+						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 5 ORDER BY nome;")){
 							// Ao selecionar pelo menos um serviço
 							if(mysqli_num_rows($db_query_2)){
 								// Gera formulário para inserção

@@ -62,6 +62,7 @@ DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_educacao;
 DROP TABLE IF EXISTS servico_de_educacao;
 DROP TABLE IF EXISTS pessoa_fisica_e_servico_de_saude;
 DROP TABLE IF EXISTS servico_de_saude;
+DROP TABLE IF EXISTS pessoa_fisica_e_servico;
 DROP TABLE IF EXISTS servico;
 DROP TABLE IF EXISTS tipo_de_servico;
 DROP TABLE IF EXISTS pessoa_fisica_e_medicacao;
@@ -652,6 +653,21 @@ CREATE TABLE IF NOT EXISTS servico (
 	,UNIQUE (tipo_de_servico,nome)
 	,FOREIGN KEY (tipo_de_servico)
 		REFERENCES tipo_de_servico (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+-- Relação de uso de serviço de uma pessoa física
+CREATE TABLE IF NOT EXISTS pessoa_fisica_e_servico (
+	 pessoa_fisica BIGINT UNSIGNED
+	,uso           BIGINT UNSIGNED
+	,PRIMARY KEY (pessoa_fisica,uso)
+	,FOREIGN KEY (pessoa_fisica)
+		REFERENCES pessoa_fisica (id)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+	,FOREIGN KEY (uso)
+		REFERENCES servico (id)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
@@ -2706,101 +2722,6 @@ INSERT INTO servico (tipo_de_servico,nome) VALUES
 ,(/*69*/6,'Psiquiatra privado')
 ,(/*70*/6,'Reabilitação público (aguardando)')
 ,(/*71*/6,'Reabilitação público')
-;
-
--- Serviços de saúde iniciais
-INSERT INTO servico_de_saude (nome) VALUES
- ('CAPS - Assistente Social')
-,('CAPS - Psicólogo')
-,('CAPS - Psiquiatra')
-,('CAPSI - Arte Educador')
-,('CAPSI - Assistente Social')
-,('CAPSI - Fonoaudiólogo')
-,('CAPSI - Psicólogo')
-,('CAPSI - Psicopedagogo')
-,('CAPSI - Psiquiatra')
-,('Farmácia Municipal')
-,('Fisioterapia público')
-,('Fisioterapia público (aguardando)')
-,('Fisioterapia privado')
-,('Fonoaudiólogo público')
-,('Fonoaudiólogo privado')
-,('Medicação do SUS')
-,('Neurologista público')
-,('Neurologista privado')
-,('Odontologia público')
-,('Primeira infância melhor')
-,('Programa de alimentação e nutrição')
-,('Programa de atenção à saúde da população negra')
-,('Programa de atenção à saúde de lésbicas, gays, bissexuais, travestis, transexuais e intersexuais')
-,('Programa de atenção à saúde do homem')
-,('Programa de atenção à saúde do idoso')
-,('Programa de atenção à saúde do indígena')
-,('Programa de atenção integral à saúde da criança')
-,('Programa de atenção integral à saúde da mulher')
-,('Programa de atenção integral à saúde do adolescente')
-,('Programa de combate ao tabagismo')
-,('Programa de controle de tuberculose')
-,('Programa de fisioterapia e programa de atenção integral à saúde da pessoa com deficiência')
-,('Programa municipal IST/AIDS e hepatites virais')
-,('Programa saúde na escola')
-,('Projeto vida ativa')
-,('Psicólogo público')
-,('Psicólogo privado')
-,('Psiquiatra público')
-,('Psiquiatra privado')
-,('Reabilitação público')
-,('Reabilitação público (aguardando)')
-;
-
--- Serviços de educação iniciais
-INSERT INTO servico_de_educacao (nome) VALUES
- ('Monitor')
-,('Monitor (aguardando)')
-,('Psicopedagogia')
-,('Psicopedagogia privado')
-,('Sala de Recursos Multifuncionais')
-;
-
--- Serviços de assistência social iniciais
-INSERT INTO servico_de_as (nome) VALUES
- ('Aposentadoria para pessoas de baixa renda')
-,('Banco do Vestuário')
-,('CRAS')
-,('CREAS')
-,('Cadastro Único')
-,('Carteira do Idoso')
-,('Castração de animais')
-,('Construa a casa no seu terreno')
-,('Criança feliz')
-,('Identidade Jovem (ID Jovem)')
-,('Inclusão Produtiva')
-,('Isenção de Pagamento de Taxa de Inscrição em Concursos Públicos')
-,('Isenção de Pagamento de Taxa no ENEM')
-,('Programa de Erradicação do Trabalho Infantil')
-,('Tarifa Social da água')
-,('Tarifa social de energia Elétrica')
-,('Telefone Popular')
-;
-
--- Serviços de defesa dos direitos da pessoa com deficiência iniciais
-INSERT INTO servico_de_ddpd (nome) VALUES
- ('Conselho Tutelar')
-,('Conselho de Direitos das Pessoas com Deficiência')
-,('Defensoria Pública')
-,('Fóruns')
-,('Ministério Público')
-;
-
--- Serviços de mobilidade urbana iniciais
-INSERT INTO servico_de_mob (nome) VALUES
- ('Passe livre')
-;
-
--- Serviços de habitação iniciais
-INSERT INTO servico_de_hab (nome) VALUES
- ('Minha Casa Minha Vida')
-,('Minha Casa Minha Vida (aguardando)')
 ;
 
 -- Seções de histórico iniciais

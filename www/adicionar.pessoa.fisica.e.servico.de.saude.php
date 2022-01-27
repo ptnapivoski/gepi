@@ -21,14 +21,26 @@ if($_SESSION['user']){
 			// Valida dados vindos do formulário
 			$servico = (int) $_POST['servico'];
 
-			// Tenta inserir
-			if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_servico_de_saude (pessoa_fisica, uso) VALUES ($id, $servico);")){
-				// Se consulta inseriu uma linha
-				if(mysqli_affected_rows($db_link) === 1)
-					// Informa que houve a inserção
-					$_SESSION['msg'] = '<p class="success">Inserção efetuada.</p>';
-				// Caso contrário, informa que não houve a inserção
-				else $_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
+			// Tenta checar se serviço é de saúde
+			if($db_query = mysqli_query($db_link, "SELECT NULL FROM servico WHERE id = $servico AND tipo_de_servico = 6;")){
+				// Se selecionou serviço de saúde
+				if(mysqli_num_rows($db_query)){
+					// Tenta inserir
+					if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_servico (pessoa_fisica, uso) VALUES ($id, $servico);")){
+						// Se consulta inseriu uma linha
+						if(mysqli_affected_rows($db_link) === 1)
+							// Informa que houve a inserção
+							$_SESSION['msg'] = '<p class="success">Inserção efetuada.</p>';
+						// Caso contrário, informa que não houve a inserção
+						else $_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
+					// Caso não tenha conseguido realizar a consulta
+					} else {
+						// Seleciona-se e escapa-se o erro
+						$error = htmlspecialchars(mysqli_error($db_link));
+						// E o inclui na mensagem passada ao usuário
+						$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
+					}
+				} else $_SESSION['msg'] = '<p class="error">Serviço não é de saúde.</p>';
 			// Caso não tenha conseguido realizar a consulta
 			} else {
 				// Seleciona-se e escapa-se o erro
