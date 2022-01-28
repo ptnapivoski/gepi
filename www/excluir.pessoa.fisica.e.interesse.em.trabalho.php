@@ -17,7 +17,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 80, $id)){
+		if(perm($db_link, 'permissao_e_entidade', 74, $id)){
 			// Trata entrada
 			$interesse = (int) $_POST['interesse'];
 

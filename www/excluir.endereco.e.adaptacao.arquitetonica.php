@@ -26,7 +26,7 @@ if($_SESSION['user']){
 				require_once('perm.php');
 
 				// Caso possua permissão
-				if(perm($db_link, 'permissao_e_entidade', 106, $id) && perm($db_link, 'permissao_e_endereco', 50, $db_result_1[0])){
+				if(perm($db_link, 'permissao_e_entidade', 91, $id) && perm($db_link, 'permissao_e_endereco', 50, $db_result_1[0])){
 					// Valida dados vindos do formulário
 					$adaptacao_arquitetonica = (int) $_POST['adaptacao_arquitetonica'];
 

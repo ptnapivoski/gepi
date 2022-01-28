@@ -17,7 +17,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_adaptacao_arquitetonica', 111, $id)){
+		if(perm($db_link, 'permissao_e_adaptacao_arquitetonica', 96, $id)){
 			// Valida dado vindo do formulário
 			$nome = mysqli_real_escape_string($db_link, $_POST['nome']);
 			if($nome === '') $nome = 'NULL'; else $nome = "'$nome'";

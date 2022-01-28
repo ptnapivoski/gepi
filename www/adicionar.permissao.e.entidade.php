@@ -14,12 +14,12 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 87, NULL)){
+		if(perm($db_link, 'permissao_e_entidade', 81, NULL)){
 			// Recebe ação
 			$acao = (int) $_POST['acao'];
 
 			// Se ação válida
-			if(in_array($acao, array(56,57,58,59,60,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87), TRUE)){
+			if(in_array($acao, array(56,57,58,59,60,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81), TRUE)){
 				// Tenta selecionar flag da ação
 				if($db_query = mysqli_query($db_link, "SELECT tem_objeto FROM acao WHERE id = $acao;")){
 					// Ao selecionar uma linha

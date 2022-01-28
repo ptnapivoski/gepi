@@ -17,7 +17,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_servico', 118, $id)){
+		if(perm($db_link, 'permissao_e_servico', 100, $id)){
 			// Tenta excluir
 			if($db_query = mysqli_query($db_link, "DELETE FROM servico WHERE id = $id;")){
 				// Se consulta excluiu uma linha

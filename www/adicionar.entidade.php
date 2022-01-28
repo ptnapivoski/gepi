@@ -44,7 +44,7 @@ if($_SESSION['user']){
 							// Se consulta inseriu uma linha
 							if(mysqli_affected_rows($db_link) === 1){
 								// Ações a adicionar e depois excluir
-								$acoes = array(56,57,73,74,75,76,77,78,79,80,81,82,83,84,85,103,104,105,106);
+								$acoes = array(56,57,67,68,69,70,71,72,73,74,75,76,77,78,79,88,89,90,91);
 								// Prepara linhas a inserir
 								$acoes_q = array();
 								foreach($acoes as $val) $acoes_q[] = "($_SESSION[user], TRUE, $val, $id)";
@@ -93,7 +93,7 @@ if($_SESSION['user']){
 					// Outro
 					else {
 						// Ações a adicionar
-						$acoes = array(56,57,58,59,60,86);
+						$acoes = array(56,57,58,59,60,80);
 						// Prepara linhas a inserir
 						$acoes_q = array();
 						foreach($acoes as $val) $acoes_q[] = "($_SESSION[user], TRUE, $val, $id)";

@@ -19,7 +19,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 85, $sobre) && perm($db_link, 'permissao_e_entidade', 86, $entidade)){
+		if(perm($db_link, 'permissao_e_entidade', 79, $sobre) && perm($db_link, 'permissao_e_entidade', 80, $entidade)){
 			// Escapa data
 			$quando = mysqli_real_escape_string($db_link, $_POST['quando']);
 

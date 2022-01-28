@@ -17,7 +17,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 78, $id)){
+		if(perm($db_link, 'permissao_e_entidade', 72, $id)){
 			// Valida dado vindo do formulário
 			$beneficio = (int) $_POST['beneficio'];
 			$quantidade = (double) $_POST['quantidade'];

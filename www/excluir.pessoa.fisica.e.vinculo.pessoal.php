@@ -26,7 +26,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 82, $id) && perm($db_link, 'permissao_e_entidade', 82, $de)){
+		if(perm($db_link, 'permissao_e_entidade', 76, $id) && perm($db_link, 'permissao_e_entidade', 76, $de)){
 			// Trata entrada
 			$eh = (int) $_POST['eh'];
 

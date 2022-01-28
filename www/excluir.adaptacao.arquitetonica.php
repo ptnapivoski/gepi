@@ -17,7 +17,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_adaptacao_arquitetonica', 112, $id)){
+		if(perm($db_link, 'permissao_e_adaptacao_arquitetonica', 97, $id)){
 			// Tenta excluir
 			if($db_query = mysqli_query($db_link, "DELETE FROM adaptacao_arquitetonica WHERE id = $id;")){
 				// Se consulta excluiu uma linha

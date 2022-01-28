@@ -21,7 +21,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 84, $id)){
+		if(perm($db_link, 'permissao_e_entidade', 78, $id)){
 			// Escapa descrição
 			$descricao = mysqli_real_escape_string($db_link, $_POST['descricao']);
 			// E título

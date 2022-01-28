@@ -17,7 +17,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 76, $id)){
+		if(perm($db_link, 'permissao_e_entidade', 70, $id)){
 			// Trata entrada
 			$escola = (int) $_POST['escola'];
 			$ano = (int) $_POST['ano'];

@@ -26,7 +26,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 87, NULL)){
+		if(perm($db_link, 'permissao_e_entidade', 81, NULL)){
 			// Exibe permissões sobre entidades
 			echo
 				'<section class="cad">', $EOL,
@@ -83,7 +83,7 @@ if($_SESSION['user']){
 			}
 
 			// Tenta selecionar ações
-			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (56,57,58,59,60,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87) ORDER BY id;")){
+			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (56,57,58,59,60,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81) ORDER BY id;")){
 				// Se retornou ações
 				if(mysqli_num_rows($db_query)){
 					// Inicia formulário
@@ -1343,7 +1343,7 @@ if($_SESSION['user']){
 			}
 
 			// Tenta selecionar ações
-			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (88,89,90) ORDER BY id;")){
+			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (82,83,84) ORDER BY id;")){
 				// Tenta selecionar tecnologias
 				if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM tecnologia ORDER BY id;")){
 					// Se retornou linhas para as duas consultas
@@ -1599,7 +1599,7 @@ if($_SESSION['user']){
 			}
 
 			// Tenta selecionar ações
-			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (110,111,112) ORDER BY id;")){
+			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (95,96,97) ORDER BY id;")){
 				// Tenta selecionar adaptações arquitetônicas
 				if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM adaptacao_arquitetonica ORDER BY id;")){
 					// Se retornou linhas para as duas consultas
@@ -1855,7 +1855,7 @@ if($_SESSION['user']){
 			}
 
 			// Tenta selecionar ações
-			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (107,108,109) ORDER BY id;")){
+			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (92,93,94) ORDER BY id;")){
 				// Tenta selecionar tipos de residência
 				if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM tipo_de_residencia ORDER BY id;")){
 					// Se retornou linhas para as duas consultas
@@ -2239,7 +2239,7 @@ if($_SESSION['user']){
 			}
 
 			// Tenta selecionar ações
-			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (91,92,93) ORDER BY id;")){
+			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (85,86,87) ORDER BY id;")){
 				// Tenta selecionar medicações
 				if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM medicacao ORDER BY id;")){
 					// Se retornou linhas para as duas consultas
@@ -2367,7 +2367,7 @@ if($_SESSION['user']){
 			}
 
 			// Tenta selecionar ações
-			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (116) ORDER BY id;")){
+			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (98) ORDER BY id;")){
 				// Tenta selecionar tipos de serviços
 				if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM tipo_de_servico ORDER BY id;")){
 					// Se retornou linhas para as duas consultas
@@ -2495,7 +2495,7 @@ if($_SESSION['user']){
 			}
 
 			// Tenta selecionar ações
-			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (117,118) ORDER BY id;")){
+			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (99,100) ORDER BY id;")){
 				// Tenta selecionar serviços
 				if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico ORDER BY id;")){
 					// Se retornou linhas para as duas consultas

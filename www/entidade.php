@@ -534,7 +534,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 67, $id)){
 						// Tenta selecionar os diagnósticos da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT diag.id, diag.nome, diag.cid, pfd.permanente, sdd.nome FROM pessoa_fisica_e_diagnostico pfd LEFT JOIN diagnostico diag ON diag.id = pfd.diagnostico LEFT JOIN status_de_diagnostico sdd ON sdd.id = pfd.status_de_diagnostico WHERE pfd.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um diagnóstico
@@ -665,7 +665,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 67, $id)){
 
 						// Tenta selecionar as medicações da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT med.id, med.nome FROM pessoa_fisica_e_medicacao pfm LEFT JOIN medicacao med ON med.id = pfm.medicacao WHERE pfm.pessoa_fisica = $id;")){
@@ -752,7 +752,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 67, $id)){
 						// Tenta selecionar os serviços de saúde dos quais a pessoa faz uso
 						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 6;")){
 							// Se selecionou pelo menos um serviço
@@ -848,7 +848,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 69, $id)){
 						// Tenta selecionar o histórico escolar da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT ent.id, ent.nome, pfe.ano, se.id, se.nome, te.nome, pfe.frequencia, pfe.repetencia FROM pessoa_fisica_e_escola pfe LEFT JOIN entidade ent ON ent.id = pfe.escola LEFT JOIN serie_escolar se ON se.id = pfe.serie_escolar LEFT JOIN turno_escolar te ON te.id = pfe.turno_escolar WHERE pfe.pessoa_fisica = $id ORDER BY pfe.ano DESC;")){
 							// Se selecionou pelo menos um histórico escolar
@@ -984,7 +984,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 69, $id)){
 						// Tenta selecionar as barreiras no ensino da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT bar.id, bar.nome FROM pessoa_fisica_e_barreira_no_ensino pfbe LEFT JOIN barreira bar ON bar.id = pfbe.barreira_no_ensino WHERE pfbe.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos uma barreira
@@ -1070,7 +1070,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 69, $id)){
 						// Tenta selecionar os serviços de saúde dos quais a pessoa faz uso
 						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 3;")){
 							// Se selecionou pelo menos um serviço
@@ -1166,7 +1166,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 71, $id)){
 						// Tenta selecionar os benefícios da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT ben.id, ben.nome, pfb.quantidade FROM pessoa_fisica_e_beneficio pfb LEFT JOIN beneficio ben ON ben.id = pfb.beneficio WHERE pfb.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um benefício
@@ -1255,7 +1255,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 71, $id)){
 						// Tenta selecionar os CRASs ou CREASs dos quais a pessoa faz uso
 						if($db_query_2 = mysqli_query($db_link, "SELECT cc.id, cc.nome FROM pessoa_fisica_e_cras_ou_creas pfcc LEFT JOIN entidade cc ON cc.id = pfcc.uso WHERE pfcc.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um
@@ -1341,7 +1341,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 71, $id)){
 						// Tenta selecionar os serviços de assistência social dos quais a pessoa faz uso
 						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 1;")){
 							// Se selecionou pelo menos um serviço
@@ -1427,7 +1427,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 77, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 71, $id)){
 						// Tenta selecionar os serviços de defesa dos direitos da pessoa com deficiência dos quais a pessoa faz uso
 						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 2;")){
 							// Se selecionou pelo menos um serviço
@@ -1523,7 +1523,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 79, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
 						// Tenta selecionar para quem a pessoa trabalha ou trabalhou
 						if($db_query_2 = mysqli_query($db_link, "SELECT ent.id, ent.nome, prof.id, prof.nome, pft.passado FROM pessoa_fisica_e_trabalho pft LEFT JOIN entidade ent ON ent.id = pft.para LEFT JOIN profissao prof ON prof.id = pft.como WHERE pft.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um trabalho da pessoa
@@ -1621,7 +1621,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 79, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
 						// Tenta selecionar as qualificações da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT prof.id, prof.nome FROM pessoa_fisica_e_qualificacao pfq LEFT JOIN profissao prof ON prof.id = pfq.qualificacao WHERE pfq.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos uma qualificação
@@ -1707,7 +1707,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 79, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
 						// Tenta selecionar os interesses em qualificações da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT prof.id, prof.nome FROM pessoa_fisica_e_interesse_em_qualificacao pfiq LEFT JOIN profissao prof ON prof.id = pfiq.interesse WHERE pfiq.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um interesse em qualificação
@@ -1793,7 +1793,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 79, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
 						// Tenta selecionar os interesses em trabalho da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT prof.id, prof.nome FROM pessoa_fisica_e_interesse_em_trabalho pfit LEFT JOIN profissao prof ON prof.id = pfit.interesse WHERE pfit.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um interesse em trabalho
@@ -1879,7 +1879,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 79, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 73, $id)){
 						// Tenta selecionar as barreiras no trabalho da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT bar.id, bar.nome FROM pessoa_fisica_e_barreira_no_trabalho pfbt LEFT JOIN barreira bar ON bar.id = pfbt.barreira_no_trabalho WHERE pfbt.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos uma barreira
@@ -1975,7 +1975,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 105, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 90, $id)){
 						// Tenta selecionar o tipo de residência da pessoa
 						if($db_query_2 = mysqli_query($db_link, "SELECT tipo_de_residencia FROM pessoa_fisica WHERE id = $id;")){
 							// Tenta selecionar os tipos de residência
@@ -2045,7 +2045,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 105, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 90, $id)){
 						// Tenta selecionar as adaptações arquitetônicas das quais a pessoa tem necessidade
 						if($db_query_2 = mysqli_query($db_link, "SELECT aa.id, aa.nome FROM pessoa_fisica_e_adaptacao_arquitetonica pfaa LEFT JOIN adaptacao_arquitetonica aa ON aa.id = pfaa.adaptacao_arquitetonica WHERE pfaa.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos uma adaptação arquitetônica
@@ -2133,7 +2133,7 @@ if($_SESSION['user']){
 					// Caso tenha endereço especificado
 					if($db_result_1[1]){
 						// Caso possua permissão
-						if(perm($db_link, 'permissao_e_entidade', 105, $id)){
+						if(perm($db_link, 'permissao_e_entidade', 90, $id)){
 							// Tenta selecionar as adaptações arquitetônicas presentes na residencia
 							if($db_query_2 = mysqli_query($db_link, "SELECT aa.id, aa.nome FROM endereco_e_adaptacao_arquitetonica eaa LEFT JOIN adaptacao_arquitetonica aa ON aa.id = eaa.adaptacao_arquitetonica WHERE eaa.endereco = $db_result_1[1];")){
 								// Se selecionou pelo menos uma adaptação arquitetônica
@@ -2221,7 +2221,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 105, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 90, $id)){
 						// Tenta selecionar os serviços de habitação dos quais a pessoa faz uso
 						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 4;")){
 							// Se selecionou pelo menos um serviço
@@ -2317,7 +2317,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 103, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 88, $id)){
 						// Tenta selecionar os serviços de mobilidade urbana dos quais a pessoa faz uso
 						if($db_query_2 = mysqli_query($db_link, "SELECT ser.id, ser.nome FROM pessoa_fisica_e_servico pfs LEFT JOIN servico ser ON ser.id = pfs.uso WHERE pfs.pessoa_fisica = $id AND ser.tipo_de_servico = 5;")){
 							// Se selecionou pelo menos um serviço
@@ -2413,7 +2413,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 81, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
 						// Tenta selecionar os vínculos da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT vp.id, vp.nome, ent.id, ent.nome FROM pessoa_fisica_e_vinculo_pessoal pfvp LEFT JOIN vinculo_pessoal vp ON vp.id = pfvp.eh LEFT JOIN entidade ent ON ent.id = pfvp.de WHERE pfvp.pessoa_fisica = $id;")){
 							// Se selecionou pelo menos um vínculo
@@ -2505,7 +2505,7 @@ if($_SESSION['user']){
 					;
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 81, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 75, $id)){
 						// Tenta selecionar os vínculos da pessoa em questão
 						if($db_query_2 = mysqli_query($db_link, "SELECT ent.id, ent.nome, vp.id, vp.nome FROM pessoa_fisica_e_vinculo_pessoal pfvp LEFT JOIN entidade ent ON ent.id = pfvp.pessoa_fisica LEFT JOIN vinculo_pessoal vp ON vp.id = pfvp.eh WHERE pfvp.de = $id;")){
 							// Se selecionou pelo menos um vínculo

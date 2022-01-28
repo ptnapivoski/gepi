@@ -14,7 +14,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_tipo_de_residencia', 107, NULL)){
+		if(perm($db_link, 'permissao_e_tipo_de_residencia', 92, NULL)){
 			// Valida dado vindo do formulário
 			$nome = mysqli_real_escape_string($db_link, $_POST['nome']);
 			if($nome === '') $nome = 'NULL'; else $nome = "'$nome'";
@@ -28,7 +28,7 @@ if($_SESSION['user']){
 					// ID gerado
 					$n = mysqli_insert_id($db_link);
 					// Insere permissões de alteração e exclusão
-					mysqli_query($db_link, "INSERT INTO permissao_e_tipo_de_residencia VALUES ($_SESSION[user], TRUE, 108, $n),($_SESSION[user], TRUE, 109, $n);");
+					mysqli_query($db_link, "INSERT INTO permissao_e_tipo_de_residencia VALUES ($_SESSION[user], TRUE, 93, $n),($_SESSION[user], TRUE, 94, $n);");
 				// Caso contrário, informa que não houve a inserção
 				} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
 			// Caso não tenha conseguido realizar a consulta

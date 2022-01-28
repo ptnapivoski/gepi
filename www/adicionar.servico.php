@@ -16,7 +16,7 @@ if($_SESSION['user']){
 		$tipo_de_servico = (int) $_POST['tipo_de_servico'];
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_tipo_de_servico', 116, $tipo_de_servico)){
+		if(perm($db_link, 'permissao_e_tipo_de_servico', 98, $tipo_de_servico)){
 			// Valida dado vindo do formulário
 			$nome = mysqli_real_escape_string($db_link, $_POST['nome']);
 			if($nome === '') $nome = 'NULL'; else $nome = "'$nome'";
@@ -31,7 +31,7 @@ if($_SESSION['user']){
 					// ID gerado
 					$n = mysqli_insert_id($db_link);
 					// Insere permissões de alteração e exclusão
-					mysqli_query($db_link, "INSERT INTO permissao_e_servico VALUES ($_SESSION[user], TRUE, 117, $n),($_SESSION[user], TRUE, 118, $n);");
+					mysqli_query($db_link, "INSERT INTO permissao_e_servico VALUES ($_SESSION[user], TRUE, 99, $n),($_SESSION[user], TRUE, 100, $n);");
 				// Caso contrário, informa que não houve a inserção
 				} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
 			// Caso não tenha conseguido realizar a consulta

@@ -23,7 +23,7 @@ function historico($db_link, $sec){
 	;
 
 	// Caso possua permissão
-	if(perm($db_link, 'permissao_e_entidade', 83, $id)){
+	if(perm($db_link, 'permissao_e_entidade', 77, $id)){
 		// Filtrar seção?
 		if($sec) $secq = "AND his.secao = $sec"; else $secq = '';
 		// Tenta selecionar históricos

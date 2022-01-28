@@ -14,7 +14,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 87, NULL)){
+		if(perm($db_link, 'permissao_e_entidade', 81, NULL)){
 			// Valida dados vindos do formulário
 			$entidade = (int) $_POST['entidade'];
 			if($entidade < 1) $entidade = "IS NULL"; else $entidade = "= $entidade";

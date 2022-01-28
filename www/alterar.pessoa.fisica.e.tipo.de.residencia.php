@@ -17,7 +17,7 @@ if($_SESSION['user']){
 		require_once('perm.php');
 
 		// Caso possua permissão
-		if(perm($db_link, 'permissao_e_entidade', 106, $id)){
+		if(perm($db_link, 'permissao_e_entidade', 91, $id)){
 			// Trata entrada
 			$tipo_de_residencia = (int) $_POST['tipo-de-residencia'];
 			if($tipo_de_residencia < 1) $tipo_de_residencia = 'NULL';

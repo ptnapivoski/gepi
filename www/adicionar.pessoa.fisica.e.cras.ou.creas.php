@@ -31,7 +31,7 @@ if($_SESSION['user']){
 					require_once('perm.php');
 
 					// Caso possua permissão
-					if(perm($db_link, 'permissao_e_entidade', 78, $id)){
+					if(perm($db_link, 'permissao_e_entidade', 72, $id)){
 						// Tenta inserir
 						if($db_query = mysqli_query($db_link, "INSERT INTO pessoa_fisica_e_cras_ou_creas (pessoa_fisica, uso) VALUES ($id, $cr);")){
 							// Se consulta inseriu uma linha
