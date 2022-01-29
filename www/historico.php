@@ -89,11 +89,14 @@ function historico($db_link, $sec){
 			} else echo '<section><p>Nenhum histórico a listar</p></section>', $EOL;
 		// Caso tenha ocorrido problema com a consulta
 		} else {
-			// Seleciona-se e escapa-se o erro
-			$error = htmlspecialchars(mysqli_error($db_link));
-			// E o inclui na mensagem passada ao usuário
-			echo '<section><p class="error">Erro na consulta com a Base de Dados: ', $error, '</p></section>', $EOL;
+			echo '<section>', $EOL;
+			require_once('db.query.err.echo.p.php');
+			echo '</section>', $EOL;
 		}
 	// Caso não possua permissão
-	} else echo '<section><p class="error">Você não tem permissão para visualizar estes dados.</p></section>', $EOL;
+	} else {
+		echo '<section>', $EOL;
+		require_once('perm.err.echo.p.php');
+		echo '</section>', $EOL;
+	}
 }

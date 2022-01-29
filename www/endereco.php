@@ -184,7 +184,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query_1);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Finaliza seção
 		echo
@@ -232,7 +232,7 @@ if($_SESSION['user']){
 			} else echo '<p class="but">Nenhuma encontrada</p>', $EOL;
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Finaliza a seção
 		echo '</section>', $EOL;

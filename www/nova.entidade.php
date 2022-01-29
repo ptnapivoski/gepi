@@ -59,7 +59,7 @@ if($_SESSION['user']){
 			// Caso não tenha selecionado algum
 			} else echo '<p class="error">Base de dados inconsistente.</p>', $EOL;
 		// Caso ocorrera um problema com a consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require_once('db.query.err.echo.p.php');
 
 		echo
 					// Campo do nome

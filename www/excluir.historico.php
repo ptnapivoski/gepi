@@ -54,16 +54,11 @@ if($_SESSION['user']){
 							// Se consulta excluiu uma linha
 							if(mysqli_affected_rows($db_link) === 1)
 								// Informa que houve a exclusão
-								$_SESSION['msg'] = '<p class="success">Exclusão efetuada.</p>';
+								require_once('exc.suc.php');
 							// Caso contrário, informa que não houve a exclusão
-							else $_SESSION['msg'] = '<p class="error">Exclusão não efetuada.</p>';
+							else require_once('exc.err.php');
 						// Caso não tenha conseguido realizar a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-						}
+						} else require_once('db.query.err.php');
 					// Avisa que não conseguiu excluir
 					} else $_SESSION['msg'] = '<p class="error">Não foi possível excluir o arquivo do histórico.</p>';
 				// Caso contrário, mostra erro
@@ -72,14 +67,9 @@ if($_SESSION['user']){
 				// Limpa consulta no DB
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// E o inclui na mensagem passada ao usuário
-				$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-			}
+			} else require_once('db.query.err.php');
 		// Caso não possua permissão
-		} else $_SESSION['msg'] = '<p class="error">Você não tem permissão para executar esta ação.</p>';
+		} else require_once('perm.err.php');
 
 		// Fecha a conexão com o DB
 		mysqli_close($db_link);

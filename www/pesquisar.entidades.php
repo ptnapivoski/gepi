@@ -146,7 +146,7 @@ if($_SESSION['user']){
 				} else echo '<p class="but">Nenhuma encontrada</p>', $EOL;
 
 			// Caso ocorrera um problema na consulta
-			} else echo '<p class="error but">Erro na consulta com a Base de Dados.</p>', $EOL;
+			} else require_once('db.query.err.echo.p.php');
 
 			// Termina a seção dos resultados
 			echo '</section>', $EOL;

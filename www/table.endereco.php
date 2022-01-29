@@ -61,7 +61,7 @@ if($_SESSION['user']){
 			// Limpa os dados da consulta no servidor
 			mysqli_free_result($db_query);
 		// Se ocorreu um problema na consulta
-		} else echo '<p class="error but">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require_once('db.query.err.echo.p.php');
 
 		// Fecha conexão com o servidor da Base de Dados
 		mysqli_close($db_link);

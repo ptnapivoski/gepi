@@ -33,7 +33,7 @@ if($_SESSION['user']){
 			// Limpa a consulta
 			mysqli_free_result($db_query);
 		// Caso ocorrera um problema na consulta
-		} else echo '<section><p class="error">Erro na consulta com a Base de Dados: ', htmlspecialchars(mysqli_error($db_link)), '</p></section>', $EOL;
+		} else echo '<section>'; require_once('db.query.err.echo.p.php'); echo '</section>', $EOL;
 
 		// Finaliza conexão com o servidor da Base de Dados
 		mysqli_close($db_link);

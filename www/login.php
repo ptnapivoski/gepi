@@ -43,7 +43,7 @@ if($db_link){
 	// Caso ocorrera problema na consulta
 	} else {
 		// Configura a mensagem
-		$_SESSION['msg'] = '<p class="error">Problema na consulta à Base de Dados.</p>';
+		require_once('db.query.err.php');
 		// Direciona ao formulário de login
 		header('Location:login.form.php');
 	}

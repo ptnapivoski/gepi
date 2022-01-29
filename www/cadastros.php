@@ -71,7 +71,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -114,7 +114,7 @@ if($_SESSION['user']){
 			// Limpa consulta no servidor
 			mysqli_free_result($db_query_1);
 		// Se houve problema na consulta
-		} else echo '<option value="0">Problema na consulta com a Base de Dados</option>', $EOL;
+		} else require('db.query.err.echo.option.php');
 
 		echo
 						'</select>', $EOL,
@@ -164,7 +164,7 @@ if($_SESSION['user']){
 			// Limpa consulta no servidor
 			mysqli_free_result($db_query_1);
 		// Se houve problema na consulta
-		} else echo '<option value="0">Problema na consulta com a Base de Dados</option>', $EOL;
+		} else require('db.query.err.echo.option.php');
 
 		echo
 						'</select>', $EOL,
@@ -204,7 +204,7 @@ if($_SESSION['user']){
 			// Limpa consulta no servidor
 			mysqli_free_result($db_query_1);
 		// Se houve problema na consulta
-		} else echo '<option value="0">Problema na consulta com a Base de Dados</option>', $EOL;
+		} else require('db.query.err.echo.option.php');
 
 		echo
 						'</select>', $EOL,
@@ -260,7 +260,7 @@ if($_SESSION['user']){
 			// Limpa consulta no servidor
 			mysqli_free_result($db_query_1);
 		// Se houve problema na consulta
-		} else echo '<option value="0">Problema na consulta com a Base de Dados</option>', $EOL;
+		} else require('db.query.err.echo.option.php');
 
 		echo
 						'</select>', $EOL,
@@ -308,7 +308,7 @@ if($_SESSION['user']){
 			// Limpa consulta no servidor
 			mysqli_free_result($db_query_1);
 		// Se houve problema na consulta
-		} else echo '<option value="0">Problema na consulta com a Base de Dados</option>', $EOL;
+		} else require('db.query.err.echo.option.php');
 
 		echo
 						'</select>', $EOL,
@@ -363,7 +363,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -420,7 +420,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -477,7 +477,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -534,7 +534,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -591,7 +591,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -648,7 +648,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -705,7 +705,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -762,7 +762,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -819,7 +819,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -876,7 +876,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -933,7 +933,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -990,7 +990,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -1047,7 +1047,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -1104,7 +1104,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -1161,7 +1161,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -1218,7 +1218,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -1275,7 +1275,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -1332,7 +1332,7 @@ if($_SESSION['user']){
 			mysqli_free_result($db_query);
 
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Formulário para inserção e finaliza seção
 		echo
@@ -1391,7 +1391,7 @@ if($_SESSION['user']){
 			// Limpa a consulta no servidor
 			mysqli_free_result($db_query);
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		// Tenta selecionar os tipos de serviços
 		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM tipo_de_servico ORDER BY nome;")){
@@ -1428,7 +1428,7 @@ if($_SESSION['user']){
 			// Limpa a consulta no servidor
 			mysqli_free_result($db_query);
 		// Caso tenha problema na consulta
-		} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+		} else require('db.query.err.echo.p.php');
 
 		echo '</section>', $EOL;
 

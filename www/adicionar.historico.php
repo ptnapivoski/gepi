@@ -81,22 +81,20 @@ if($_SESSION['user']){
 							// Se consulta inseriu uma linha
 							if(mysqli_affected_rows($db_link) === 1)
 								// Informa que houve a inserção
-								$_SESSION['msg'] = '<p class="success">Inserção efetuada.</p>';
+								require_once('ins.suc.php');
 							// Caso contrário
 							else {
 								// Caso tenha conseguido subir o arquivo, exclui-o
 								if($arquivo_addr && is_file($arquivo_addr)) unlink($arquivo_addr);
 								// Informa que não houve a inserção
-								$_SESSION['msg'] = '<p class="error">Inserção não efetuada.</p>';
+								require_once('ins.err.php');
 							}
 						// Caso não tenha conseguido realizar a consulta
 						} else {
 							// Caso tenha conseguido subir o arquivo, exclui-o
 							if($arquivo_addr && is_file($arquivo_addr)) unlink($arquivo_addr);
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
+							// Mensagem
+							require_once('db.query.err.php');
 						}
 					}
 				// Avisa que houve erro ao enviar o arquivo
@@ -104,7 +102,7 @@ if($_SESSION['user']){
 			// Caso descrição vazia
 			} else $_SESSION['msg'] = '<p class="error">Incorreto preenchimento do formulário.</p>';
 		// Caso não possua permissão
-		} else $_SESSION['msg'] = '<p class="error">Você não tem permissão para executar esta ação.</p>';
+		} else require_once('perm.err.php');
 
 		// Fecha a conexão com o DB
 		mysqli_close($db_link);

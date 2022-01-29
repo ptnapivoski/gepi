@@ -75,12 +75,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (56,57,58,59,60,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81) ORDER BY id;")){
@@ -121,12 +116,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre gêneros
 			echo
@@ -177,12 +167,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (1,2,3) ORDER BY id;")){
@@ -239,22 +224,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre estados civis
 			echo
@@ -305,12 +280,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (4,5,6) ORDER BY id;")){
@@ -367,22 +337,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre diagnósticos
 			echo
@@ -437,12 +397,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (7,8,9) ORDER BY id;")){
@@ -501,22 +456,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre status de diagnósticos
 			echo
@@ -567,12 +512,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (10,11,12) ORDER BY id;")){
@@ -629,22 +569,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre escolaridades
 			echo
@@ -695,12 +625,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (13,14,15) ORDER BY id;")){
@@ -757,22 +682,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre séries escolares
 			echo
@@ -823,12 +738,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (16,17,18) ORDER BY id;")){
@@ -885,22 +795,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre turnos escolares
 			echo
@@ -951,12 +851,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (19,20,21) ORDER BY id;")){
@@ -1013,22 +908,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre raças
 			echo
@@ -1079,12 +964,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (22,23,24) ORDER BY id;")){
@@ -1141,22 +1021,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre benefícios
 			echo
@@ -1207,12 +1077,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (25,26,27) ORDER BY id;")){
@@ -1269,22 +1134,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre tecnologias
 			echo
@@ -1335,12 +1190,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (82,83,84) ORDER BY id;")){
@@ -1397,22 +1247,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre barreiras
 			echo
@@ -1463,12 +1303,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (28,29,30) ORDER BY id;")){
@@ -1525,22 +1360,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre adaptações arquitetônicas
 			echo
@@ -1591,12 +1416,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (95,96,97) ORDER BY id;")){
@@ -1653,22 +1473,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre tipos de entidades
 			echo
@@ -1719,12 +1529,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (52,53,54,55) ORDER BY id;")){
@@ -1781,22 +1586,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre tipos de residência
 			echo
@@ -1847,12 +1642,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (92,93,94) ORDER BY id;")){
@@ -1909,22 +1699,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre vínculos pessoais
 			echo
@@ -1975,12 +1755,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (61,62,63) ORDER BY id;")){
@@ -2037,22 +1812,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre profissões
 			echo
@@ -2103,12 +1868,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (64,65,66) ORDER BY id;")){
@@ -2165,22 +1925,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre medicações
 			echo
@@ -2231,12 +1981,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (85,86,87) ORDER BY id;")){
@@ -2293,22 +2038,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre tipos de serviços
 			echo
@@ -2359,12 +2094,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (98) ORDER BY id;")){
@@ -2421,22 +2151,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre serviços
 			echo
@@ -2487,12 +2207,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (99,100) ORDER BY id;")){
@@ -2549,22 +2264,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre tipos de logradouro
 			echo
@@ -2615,12 +2320,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (40,41,42) ORDER BY id;")){
@@ -2677,22 +2377,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre países
 			echo
@@ -2743,12 +2433,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query_1 = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (31,32,33,34) ORDER BY id;")){
@@ -2805,22 +2490,12 @@ if($_SESSION['user']){
 					// Limpa dados no servidor
 					mysqli_free_result($db_query_2);
 				// Caso não tenha conseguido realizar a consulta
-				} else {
-					// Seleciona-se e escapa-se o erro
-					$error = htmlspecialchars(mysqli_error($db_link));
-					// Exibe a mensagem de erro
-					echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-				}
+				} else require('db.query.err.echo.p.php');
 
 				// Limpa dados no servidor
 				mysqli_free_result($db_query_1);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre unidades federativas
 			echo
@@ -2871,12 +2546,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (35,36,37) ORDER BY id;")){
@@ -2917,12 +2587,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre cidades
 			echo
@@ -2973,12 +2638,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (38,39,43,46) ORDER BY id;")){
@@ -3019,12 +2679,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre logradouros
 			echo
@@ -3075,12 +2730,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (44,45) ORDER BY id;")){
@@ -3121,12 +2771,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre bairros
 			echo
@@ -3177,12 +2822,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (47,48) ORDER BY id;")){
@@ -3223,12 +2863,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção e exibe permissões sobre endereços
 			echo
@@ -3287,12 +2922,7 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Tenta selecionar ações
 			if($db_query = mysqli_query($db_link, "SELECT id, nome FROM acao WHERE id IN (49,50,51) ORDER BY id;")){
@@ -3333,19 +2963,18 @@ if($_SESSION['user']){
 				// Limpa dados no servidor
 				mysqli_free_result($db_query);
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// Exibe a mensagem de erro
-				echo "<p class=\"error but\">Erro na consulta com a Base de Dados: $error.</p>", $EOL;
-			}
+			} else require('db.query.err.echo.p.php');
 
 			// Fim da seção
 			echo
 				'</section>', $EOL
 			;
 		// Caso não possua permissão
-		} else echo '<section><p class="error">Você não tem permissão para exibir estes dados.</p></section>', $EOL;
+		} else {
+			echo '<section>', $EOL;
+			require_once('perm.err.echo.p.php');
+			echo '</section>', $EOL;
+		}
 
 		// Finaliza conexão com o servidor da Base de Dados
 		mysqli_close($db_link);

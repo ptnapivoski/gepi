@@ -195,7 +195,7 @@ if($_SESSION['user']){
 								// Limpa a query no servidor
 								mysqli_free_result($db_query_3);
 							// Caso ocorra problema com a consulta
-							} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+							} else require('db.query.err.echo.p.php');
 
 							// Tenta selecionar os gêneros
 							if($db_query_3 = mysqli_query($db_link, "SELECT id, nome FROM genero ORDER BY id;")){
@@ -228,7 +228,7 @@ if($_SESSION['user']){
 								// Limpa a query no servidor
 								mysqli_free_result($db_query_3);
 							// Caso ocorra problema com a consulta
-							} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+							} else require('db.query.err.echo.p.php');
 
 							// Tenta selecionar os estados civis
 							if($db_query_3 = mysqli_query($db_link, "SELECT id, nome FROM estado_civil ORDER BY id;")){
@@ -261,7 +261,7 @@ if($_SESSION['user']){
 								// Limpa a query no servidor
 								mysqli_free_result($db_query_3);
 							// Caso ocorra problema com a consulta
-							} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+							} else require('db.query.err.echo.p.php');
 
 							// Tenta selecionar as escolaridades
 							if($db_query_3 = mysqli_query($db_link, "SELECT id, nome FROM escolaridade ORDER BY id;")){
@@ -294,7 +294,7 @@ if($_SESSION['user']){
 								// Limpa a query no servidor
 								mysqli_free_result($db_query_3);
 							// Caso ocorra problema com a consulta
-							} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+							} else require('db.query.err.echo.p.php');
 
 							echo
 									// Campo da renda
@@ -326,7 +326,7 @@ if($_SESSION['user']){
 						}
 
 					// Caso ocorra problema com a consulta
-					} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+					} else require('db.query.err.echo.p.php');
 
 					echo
 						'</section>', $EOL,
@@ -366,12 +366,7 @@ if($_SESSION['user']){
 						// Caso não tenha selecionado alguma tecnologia
 						} else echo '<p class="but">Nenhuma tecnologia a listar</p>', $EOL;
 					// Caso tenha ocorrido problema com a consulta
-					} else {
-						// Seleciona-se e escapa-se o erro
-						$error = htmlspecialchars(mysqli_error($db_link));
-						// E o inclui na mensagem passada ao usuário
-						echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-					}
+					} else require('db.query.err.echo.p.php');
 
 					// Tenta selecionar as tecnologias
 					if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM tecnologia ORDER BY nome;")){
@@ -404,12 +399,7 @@ if($_SESSION['user']){
 						// Caso não tenha selecionado tecnologias
 						} else echo '<p class="but">Nenhuma tecnologia a listar</p>', $EOL;
 					// Caso tenha ocorrido problema com a consulta
-					} else {
-						// Seleciona-se e escapa-se o erro
-						$error = htmlspecialchars(mysqli_error($db_link));
-						// E o inclui na mensagem passada ao usuário
-						echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-					}
+					} else require('db.query.err.echo.p.php');
 
 					echo
 						'</section>', $EOL
@@ -452,7 +442,7 @@ if($_SESSION['user']){
 					// Limpa a query no servidor
 					mysqli_free_result($db_query_2);
 				// Caso ocorra problema com a consulta
-				} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+				} else require('db.query.err.echo.p.php');
 
 				echo
 						// Formulário de inserção de email
@@ -502,7 +492,7 @@ if($_SESSION['user']){
 					// Limpa a consulta no servidor
 					mysqli_free_result($db_query_2);
 				// Caso ocorra problema com a consulta
-				} else echo '<p class="error">Erro na consulta com a Base de Dados.</p>', $EOL;
+				} else require('db.query.err.echo.p.php');
 
 				echo
 							// Formulário de inserção de telefone
@@ -581,12 +571,7 @@ if($_SESSION['user']){
 							// Limpa consulta
 							mysqli_free_result($db_query_2);
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os diagnósticos e status de diagnóstico
 						$db_query_2 = mysqli_query($db_link, "SELECT id, cid, nome, ISNULL(cid) isnullcid FROM diagnostico ORDER BY isnullcid, cid, nome;");
@@ -647,16 +632,13 @@ if($_SESSION['user']){
 							} else echo '<p class="but">Nenhum diagnóstico a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
 						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+							require('db.query.err.echo.p.php');
 							// Limpa consultas que deram certo
 							if($db_query_2) mysqli_free_result($db_query_2);
 							if($db_query_3) mysqli_free_result($db_query_3);
 						}
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -698,12 +680,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado alguma medicação
 							} else echo '<p class="but">Nenhuma medicação a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as medicações
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM medicacao ORDER BY nome;")){
@@ -736,14 +713,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado medicação
 							} else echo '<p class="but">Nenhuma medicação a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -784,12 +756,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum serviço
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os serviços de saúde
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 6 ORDER BY nome;")){
@@ -822,14 +789,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado serviços
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL
@@ -901,12 +863,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum histórico escolar
 							} else echo '<p class="but">Nenhum histórico escolar a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as séries escolares e os turnos
 						$db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM serie_escolar ORDER BY id;");
@@ -966,16 +923,13 @@ if($_SESSION['user']){
 							} else echo '<p class="but">Séries escolares ou turnos inexistentes</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
 						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
+							require('db.query.err.echo.p.php');
 							// Limpa consultas que deram certo
 							if($db_query_2) mysqli_free_result($db_query_2);
 							if($db_query_3) mysqli_free_result($db_query_3);
 						}
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1016,12 +970,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado alguma barreira
 							} else echo '<p class="but">Nenhuma barreira a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as barreiras
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM barreira ORDER BY nome;")){
@@ -1054,14 +1003,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado barreiras
 							} else echo '<p class="but">Nenhuma barreira a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1102,12 +1046,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum serviço
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os serviços de educação
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 3 ORDER BY nome;")){
@@ -1140,14 +1079,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado serviços
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL
@@ -1200,12 +1134,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum benefício
 							} else echo '<p class="but">Nenhum benefício a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os benefícios
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM beneficio ORDER BY nome;")){
@@ -1239,14 +1168,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado benefícios
 							} else echo '<p class="but">Nenhum benefício a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1287,12 +1211,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum
 							} else echo '<p class="but">Nenhum CRAS ou CREAS vinculado a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar CRAS ou CREAS
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM entidade WHERE tipo_de_entidade IN (11,12) ORDER BY nome;")){
@@ -1325,14 +1244,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum
 							} else echo '<p class="but">Nenhum CRAS ou CREAS a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1373,12 +1287,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum serviço
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os serviços de assistência social
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 1 ORDER BY nome;")){
@@ -1411,14 +1320,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado serviços
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1459,12 +1363,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum serviço
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os serviços de defesa dos direitos da pessoa com deficiência
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 2 ORDER BY nome;")){
@@ -1497,14 +1396,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado serviços
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL
@@ -1561,12 +1455,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum trabalho
 							} else echo '<p class="but">Nenhum histórico de trabalho a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as profissões
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM profissao ORDER BY nome;")){
@@ -1605,14 +1494,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado profissões
 							} else echo '<p class="but">Nenhuma profissão a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1653,12 +1537,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado alguma qualificação
 							} else echo '<p class="but">Nenhuma qualificação a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as profissões
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM profissao ORDER BY nome;")){
@@ -1691,14 +1570,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado profissões
 							} else echo '<p class="but">Nenhuma profissão a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1739,12 +1613,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum interesse em qualificação
 							} else echo '<p class="but">Nenhum interesse em qualificação a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as profissões
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM profissao ORDER BY nome;")){
@@ -1777,14 +1646,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado profissões
 							} else echo '<p class="but">Nenhuma profissão a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1825,12 +1689,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum interesse em trabalho
 							} else echo '<p class="but">Nenhum interesse em trabalho a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as profissões
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM profissao ORDER BY nome;")){
@@ -1863,14 +1722,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado profissões
 							} else echo '<p class="but">Nenhuma profissão a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -1911,12 +1765,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado alguma barreira
 							} else echo '<p class="but">Nenhuma barreira a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as barreiras
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM barreira ORDER BY nome;")){
@@ -1949,14 +1798,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado barreiras
 							} else echo '<p class="but">Nenhuma barreira a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL
@@ -2019,24 +1863,14 @@ if($_SESSION['user']){
 								// Limpa consulta no servidor
 								mysqli_free_result($db_query_3);
 							// Caso tenha ocorrido problema com a consulta
-							} else {
-								// Seleciona-se e escapa-se o erro
-								$error = htmlspecialchars(mysqli_error($db_link));
-								// E o inclui na mensagem passada ao usuário
-								echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-							}
+							} else require('db.query.err.echo.p.php');
 
 							// Limpa consulta no servidor
 							mysqli_free_result($db_query_2);
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -2077,12 +1911,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado alguma adaptação arquitetônica
 							} else echo '<p class="but">Nenhuma adaptação arquitetônica a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar as adaptações arquitetônicas
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM adaptacao_arquitetonica ORDER BY nome;")){
@@ -2115,14 +1944,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado adaptações arquitetônicas
 							} else echo '<p class="but">Nenhuma adaptação arquitetônica a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -2165,12 +1989,7 @@ if($_SESSION['user']){
 								// Caso não tenha selecionado alguma adaptação arquitetônica
 								} else echo '<p class="but">Nenhuma adaptação arquitetônica a listar</p>', $EOL;
 							// Caso tenha ocorrido problema com a consulta
-							} else {
-								// Seleciona-se e escapa-se o erro
-								$error = htmlspecialchars(mysqli_error($db_link));
-								// E o inclui na mensagem passada ao usuário
-								echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-							}
+							} else require('db.query.err.echo.p.php');
 
 							// Tenta selecionar as adaptações arquitetônicas
 							if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM adaptacao_arquitetonica ORDER BY nome;")){
@@ -2203,14 +2022,9 @@ if($_SESSION['user']){
 								// Caso não tenha selecionado adaptações arquitetônicas
 								} else echo '<p class="but">Nenhuma adaptação arquitetônica a listar</p>', $EOL;
 							// Caso tenha ocorrido problema com a consulta
-							} else {
-								// Seleciona-se e escapa-se o erro
-								$error = htmlspecialchars(mysqli_error($db_link));
-								// E o inclui na mensagem passada ao usuário
-								echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-							}
+							} else require('db.query.err.echo.p.php');
 						// Caso não possua permissão
-						} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+						} else require('perm.err.echo.p.php');
 					// Se não houver endereço especificado
 					} else echo '<p class="but">Residência não especificada.</p>', $EOL;
 
@@ -2253,12 +2067,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum serviço
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os serviços de habitação
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 4 ORDER BY nome;")){
@@ -2291,14 +2100,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado serviços
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL
@@ -2349,12 +2153,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum serviço
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar os serviços de mobilidade urbana
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM servico WHERE tipo_de_servico = 5 ORDER BY nome;")){
@@ -2387,14 +2186,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado serviços
 							} else echo '<p class="but">Nenhum serviço a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL
@@ -2449,12 +2243,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum vínculo
 							} else echo '<p class="but">Nenhum vínculo a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar vínculos pessoais
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM vinculo_pessoal ORDER BY nome;")){
@@ -2489,14 +2278,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado vínculos
 							} else echo '<p class="but">Nenhum vínculo a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					echo
 							'</section>', $EOL,
@@ -2542,12 +2326,7 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado algum vínculo
 							} else echo '<p class="but">Nenhum vínculo a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 
 						// Tenta selecionar vínculos pessoais
 						if($db_query_2 = mysqli_query($db_link, "SELECT id, nome FROM vinculo_pessoal ORDER BY nome;")){
@@ -2584,14 +2363,9 @@ if($_SESSION['user']){
 							// Caso não tenha selecionado vínculos
 							} else echo '<p class="but">Nenhum vínculo a listar</p>', $EOL;
 						// Caso tenha ocorrido problema com a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							echo '<p class="error but">Erro na consulta com a Base de Dados: ', $error, '</p>', $EOL;
-						}
+						} else require('db.query.err.echo.p.php');
 					// Caso não possua permissão
-					} else echo '<p class="error but">Você não tem permissão para visualizar estes dados.</p>', $EOL;
+					} else require('perm.err.echo.p.php');
 
 					// Fim da aba de Vínculos e começo da aba de Históricos gerais
 					echo
@@ -2611,7 +2385,11 @@ if($_SESSION['user']){
 			// Caso não tenha conseguido selecionar a entidade
 			} else echo '<section><p class="error">Entidade não encontrada.</p></section>', $EOL;
 		// Caso tenha ocorrido algo com a consulta
-		} else echo '<section><p class="error">Erro na consulta com a Base de Dados.</p></section>', $EOL;
+		} else {
+			echo '<section>';
+			require('db.query.err.echo.p.php');
+			echo '</section>', $EOL;
+		}
 
 		// Fecha a conexão com o servidor da Base de Dados
 		mysqli_close($db_link);

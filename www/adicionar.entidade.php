@@ -64,30 +64,15 @@ if($_SESSION['user']){
 											// Ocorreu tudo bem
 											$problem = FALSE;
 										// Caso não tenha conseguido realizar a consulta
-										} else {
-											// Seleciona-se e escapa-se o erro
-											$error = htmlspecialchars(mysqli_error($db_link));
-											// E o inclui na mensagem passada ao usuário
-											$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-										}
+										} else require_once('db.query.err.php');
 									// Caso contrário, informa que não houve a inserção
 									} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linhas de permissões não inseridas.</p>';
 								// Caso não tenha conseguido realizar a consulta
-								} else {
-									// Seleciona-se e escapa-se o erro
-									$error = htmlspecialchars(mysqli_error($db_link));
-									// E o inclui na mensagem passada ao usuário
-									$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-								}
+								} else require_once('db.query.err.php');
 							// Caso contrário, informa que não houve a inserção
 							} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linha em pessoa física não inserida.</p>';
 						// Caso não tenha conseguido realizar a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-						}
+						} else require_once('db.query.err.php');
 					// Pessoa jurídica
 					} else if($tipo_de_entidade === 2) $problem = FALSE;
 					// Outro
@@ -108,12 +93,7 @@ if($_SESSION['user']){
 							// Caso contrário, informa que não houve a inserção
 							} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linhas de permissões não inseridas.</p>';
 						// Caso não tenha conseguido realizar a consulta
-						} else {
-							// Seleciona-se e escapa-se o erro
-							$error = htmlspecialchars(mysqli_error($db_link));
-							// E o inclui na mensagem passada ao usuário
-							$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-						}
+						} else require_once('db.query.err.php');
 					}
 
 					// Caso tenha ocorrido um problema ao longo da inserção
@@ -125,19 +105,14 @@ if($_SESSION['user']){
 						// Página para a qual direcionar do recém incluído
 						$page = "entidade.php?id=$id";
 						// Informa que houve inserção
-						$_SESSION['msg'] = '<p class="success">Inserção efetuada.</p>';
+						require_once('ins.suc.php');
 					}
 				// Caso contrário, informa que não houve a inserção
 				} else $_SESSION['msg'] = '<p class="error">Inserção não efetuada. Linha de entidade não inserida.</p>';
 			// Caso não tenha conseguido realizar a consulta
-			} else {
-				// Seleciona-se e escapa-se o erro
-				$error = htmlspecialchars(mysqli_error($db_link));
-				// E o inclui na mensagem passada ao usuário
-				$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $error.</p>";
-			}
+			} else require_once('db.query.err.php');
 		// Caso não possua permissão
-		} else $_SESSION['msg'] = '<p class="error">Você não tem permissão para executar esta ação.</p>';
+		} else require_once('perm.err.php');
 
 		// Fecha a conexão com o DB
 		mysqli_close($db_link);
