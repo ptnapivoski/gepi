@@ -85,68 +85,63 @@ if($_SESSION['user']){
 			$id = (int) $_POST['id'];
 			$tipo_de_entidade = (int) $_POST['tipo_de_entidade'];
 			$nome = mysqli_real_escape_string($db_link, $_POST['nome']);
+			$query = '';
 
 			// Se foi pedido por ID da entidade, seleciona apenas ela
-			if($id){
+			if($id > 0){
 				$query = "SELECT id, nome FROM entidade WHERE id = $id;";
-
 			// Para o preenchimento dos outros elementos do formulário
-			} else {
-				// Começa a array das condições de seleção
-				$cond = array();
-				// Se fora selecionado o tipo de entidade, adicionar às condições de seleção
-				if($tipo_de_entidade) $cond[] = "tipo_de_entidade = $tipo_de_entidade";
-				// Se fora preenchido o nome, adicionar às condições de seleção
-				if($nome) $cond[] = "nome LIKE '%$nome%'";
-				// Junta as condições
-				$cond = implode(' AND ', $cond);
-				// Começa a consulta
-				$query = "SELECT id, nome FROM entidade";
-				// Se há condições para seleção, as adiciona
-				if($cond) $query = "$query WHERE $cond";
-				// Ordena por nome
-				$query = "$query ORDER BY nome";
+			} else if(mb_strlen($nome, 'UTF-8') >= 2){
+				// Consulta
+				$query = "SELECT id, nome FROM entidade WHERE nome LIKE '%$nome%'";
+				// Se especificado o tipo de entidade
+				if($tipo_de_entidade > 0) $query = "$query AND tipo_de_entidade = $tipo_de_entidade";
+				// Ordenação pelo nome
+				$query = "$query ORDER BY nome;";
+			} else echo '<p class="error">Pesquisa requer pelo menos dois caracteres</p>', $EOL;
+
+			// Se há consulta a executar
+			if($query){
+				// Tenta selecionar as entidades
+				if($db_query = mysqli_query($db_link, $query)){
+					// Se conseguiu selecionar pelo menos uma
+					if(mysqli_num_rows($db_query)){
+						// Começa a tabela para exibir
+						echo '<table class="but">', $EOL;
+						// Para cada selecionado
+						while($db_result = mysqli_fetch_row($db_query)){
+							// Valida dados vindos
+							$db_result[0] = (int) $db_result[0];
+							$db_result[1] = htmlspecialchars($db_result[1]);
+
+							// Cria o formulário para exibir a entidade
+							echo
+								'<tr>', $EOL,
+									'<td>', $EOL,
+										'<form action="entidade.php" method="get" target="_blank">', $EOL,
+											'<input type="number" name="id" readonly="readonly" value="', $db_result[0], '"/> ',
+											'<input type="text" class="address" readonly="readonly" value="', $db_result[1], '"/> ',
+											'<input type="submit" value="Visualizar"/>', $EOL,
+										'</form>', $EOL,
+									'</td>', $EOL,
+									'<td>', $EOL,
+										'<form action="excluir.entidade.php" method="post">', $EOL,
+											'<input type="hidden" name="id" value="', $db_result[0], '"/>',
+											'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir a entidade \\\'', str_replace("'", '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
+										'</form>', $EOL,
+									'</td>', $EOL,
+								'</tr>', $EOL
+							;
+						}
+						// Termina a tabela
+						echo '</table>', $EOL;
+
+					// Caso não tenha conseguido encontrar alguma entidade
+					} else echo '<p class="but">Nenhuma encontrada</p>', $EOL;
+
+				// Caso ocorrera um problema na consulta
+				} else require_once('db.query.err.echo.p.php');
 			}
-
-			// Tenta selecionar as entidades
-			if($db_query = mysqli_query($db_link, $query)){
-				// Se conseguiu selecionar pelo menos uma
-				if(mysqli_num_rows($db_query)){
-					// Começa a tabela para exibir
-					echo '<table class="but">', $EOL;
-					// Para cada selecionado
-					while($db_result = mysqli_fetch_row($db_query)){
-						// Valida dados vindos
-						$db_result[0] = (int) $db_result[0];
-						$db_result[1] = htmlspecialchars($db_result[1]);
-
-						// Cria o formulário para exibir a entidade
-						echo
-							'<tr>', $EOL,
-								'<td>', $EOL,
-									'<form action="entidade.php" method="get" target="_blank">', $EOL,
-										'<input type="number" name="id" readonly="readonly" value="', $db_result[0], '"/> ',
-										'<input type="text" class="address" readonly="readonly" value="', $db_result[1], '"/> ',
-										'<input type="submit" value="Visualizar"/>', $EOL,
-									'</form>', $EOL,
-								'</td>', $EOL,
-								'<td>', $EOL,
-									'<form action="excluir.entidade.php" method="post">', $EOL,
-										'<input type="hidden" name="id" value="', $db_result[0], '"/>',
-										'<input type="submit" value="Excluir" onclick="return confirm(\'Tem certeza que deseja excluir a entidade \\\'', str_replace("'", '\\\'', $db_result[1]), '\\\'?\');"/>', $EOL,
-									'</form>', $EOL,
-								'</td>', $EOL,
-							'</tr>', $EOL
-						;
-					}
-					// Termina a tabela
-					echo '</table>', $EOL;
-
-				// Caso não tenha conseguido encontrar alguma entidade
-				} else echo '<p class="but">Nenhuma encontrada</p>', $EOL;
-
-			// Caso ocorrera um problema na consulta
-			} else require_once('db.query.err.echo.p.php');
 
 			// Termina a seção dos resultados
 			echo '</section>', $EOL;
