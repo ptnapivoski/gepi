@@ -54,6 +54,8 @@ if(!isset($_SESSION['IP']))
 else if($_SESSION['IP'] !== $_SERVER['REMOTE_ADDR']){
 	// Manda cabeçalho do tipo de arquivo
 	header($SITE_CONTENT_TYPE);
+	// Remove o cookie
+	setcookie('SID',NULL,-1,'/');
 	// Informa que a sessão é inválida
 	echo $SITE_FILE_HEADER, $EOL, '<p style="color:red">Sessão inválida</p>', $EOL;
 	// E faz nada mais
