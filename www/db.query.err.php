@@ -8,6 +8,8 @@ $errorn = mysqli_errno($db_link);
 // Mensagens para cada erro
 if($errorn === 1062)
 	$_SESSION['msg'] = '<p class="error">Entrada já presente.</p>';
+else if($errorn === 1048)
+	$_SESSION['msg'] = '<p class="error">Valor não pode ser vazio.</p>';
 else
 	// E o inclui na mensagem passada ao usuário
 	$_SESSION['msg'] = "<p class=\"error\">Erro na consulta com a Base de Dados: $errorn -> $error.</p>";
