@@ -113,6 +113,97 @@ if($_SESSION['user']){
 					'</p>', $EOL,
 					'<p><input type="submit" value="Selecionar"/></p>', $EOL,
 				'</form>', $EOL,
+			'</section>', $EOL,
+			'<section class="cad">', $EOL,
+				'<h1>Tecnologias e cidade</h1>', $EOL,
+				// Formulário
+				'<form action="relatorio.2.php" method="post">', $EOL,
+					// Select dos países
+					'<p class="select-field">', $EOL,
+						'<label>País:', $EOL,
+							'<select id="rel-2-pais-select">', $EOL
+		;
+
+		// Tenta selecionar os países
+		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM pais ORDER BY id;")){
+			// Se retornou pelo menos uma linha
+			if(mysqli_num_rows($db_query)){
+				// Linha padrão
+				echo '<option value="0">Selecione um país</option>', $EOL;
+
+				// Para cada linha
+				while($db_result = mysqli_fetch_row($db_query)){
+					// Valida dados
+					$db_result[0] = (int) $db_result[0];
+					$db_result[1] = htmlspecialchars($db_result[1]);
+
+					// Imprime a linha correspondente
+					echo '<option value="', $db_result[0], '">', $db_result[1], '</option>', $EOL;
+				}
+			// Se não retornou pelo menos uma linha
+			} else echo '<option value="0">Nenhum país encontrado</option>', $EOL;
+
+			// Limpa consulta no servidor
+			mysqli_free_result($db_query);
+		// Se houve problema na consulta
+		} else require('db.query.err.echo.option.php');
+
+		echo
+							'</select>', $EOL,
+						'</label>', $EOL,
+					'</p>', $EOL,
+					// Select das unidades federativas
+					'<p class="select-field">', $EOL,
+						'<label>Unidade federativa:', $EOL,
+							'<select id="rel-2-uf-select">', $EOL,
+								'<option value="0">Selecione um país no campo anterior</option>', $EOL,
+							'</select>', $EOL,
+						'</label>', $EOL,
+					'</p>', $EOL,
+					// Select das cidades
+					'<p class="select-field">', $EOL,
+						'<label>Cidade:', $EOL,
+							'<select id="rel-2-cidade-select" name="cidade">', $EOL,
+								'<option value="0">Selecione um país no campo anterior</option>', $EOL,
+							'</select>', $EOL,
+						'</label>', $EOL,
+					'</p>', $EOL,
+					// Select das tecnologias
+					'<p class="select-field">', $EOL,
+						'<label>Tecnologia:', $EOL,
+							'<select name="tecnologia">', $EOL
+		;
+
+		// Tenta selecionar as tecnologias
+		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM tecnologia ORDER BY id;")){
+			// Se retornou pelo menos uma linha
+			if(mysqli_num_rows($db_query)){
+				// Linha padrão
+				echo '<option value="0">Selecione uma tecnologia</option>', $EOL;
+
+				// Para cada linha
+				while($db_result = mysqli_fetch_row($db_query)){
+					// Valida dados
+					$db_result[0] = (int) $db_result[0];
+					$db_result[1] = htmlspecialchars($db_result[1]);
+
+					// Imprime a linha correspondente
+					echo '<option value="', $db_result[0], '">', $db_result[1], '</option>', $EOL;
+				}
+			// Se não retornou pelo menos uma linha
+			} else echo '<option value="0">Nenhuma tecnologia encontrada</option>', $EOL;
+
+			// Limpa consulta no servidor
+			mysqli_free_result($db_query);
+		// Se houve problema na consulta
+		} else require('db.query.err.echo.option.php');
+
+		echo
+							'</select>', $EOL,
+						'</label>', $EOL,
+					'</p>', $EOL,
+					'<p><input type="submit" value="Selecionar"/></p>', $EOL,
+				'</form>', $EOL,
 			'</section>', $EOL
 		;
 
