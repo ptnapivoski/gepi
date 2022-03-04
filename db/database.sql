@@ -481,8 +481,8 @@ CREATE TABLE IF NOT EXISTS pessoa_fisica_e_escola (
 	,escola        BIGINT UNSIGNED
 	,serie_escolar BIGINT UNSIGNED NOT NULL
 	,turno_escolar BIGINT UNSIGNED NOT NULL
-	,frequencia    DOUBLE
 	,repetencia    BIGINT UNSIGNED NOT NULL
+	,frequencia    DOUBLE
 	,PRIMARY KEY (pessoa_fisica,ano,escola,serie_escolar)
 	,FOREIGN KEY (pessoa_fisica)
 		REFERENCES pessoa_fisica (id)
