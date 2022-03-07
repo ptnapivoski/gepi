@@ -23,7 +23,7 @@ if($_SESSION['user']){
 				header('Content-Type: application/octet-stream');
 				header('Content-Disposition: attachment; filename=relatorio.csv');
 				// Linha de nome das colunas
-				echo 'Bairro', "\t", 'Quantidade', "\r\n";
+				echo "Bairro\tQuantidade\r\n";
 
 				// Para cala linha
 				while($db_result = mysqli_fetch_row($db_query)){
