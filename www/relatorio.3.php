@@ -29,7 +29,7 @@ if($_SESSION['user']){
 					// Para cala linha
 					while($db_result = mysqli_fetch_row($db_query)){
 						// A imprime
-						echo $db_result[0], "\r\n";
+						echo number_format($db_result[0], 2, ',', '.'), "\r\n";
 					}
 				// Caso contrário
 				} else {
@@ -63,7 +63,7 @@ if($_SESSION['user']){
 					// Para cala linha
 					while($db_result = mysqli_fetch_row($db_query)){
 						// A imprime
-						echo $db_result[0], "\r\n";
+						echo number_format($db_result[0], 2, ',', '.'), "\r\n";
 					}
 				// Caso contrário
 				} else {
