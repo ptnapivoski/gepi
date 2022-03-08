@@ -27,6 +27,8 @@ if($_SESSION['user']){
 
 				// Para cala linha
 				while($db_result = mysqli_fetch_row($db_query)){
+					// Caso bairro tenha caracteres que devam ser modificados
+					$db_result[0] = str_replace(array("\t", "\r", "\n"), ' ', $db_result[0]);
 					// A imprime
 					echo $db_result[0], "\t", $db_result[1], "\r\n";
 				}
