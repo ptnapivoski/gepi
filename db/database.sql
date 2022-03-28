@@ -1437,12 +1437,14 @@ INSERT INTO tecnologia (nome) VALUES
 ,('Computador pessoal')
 ,('Guia')
 ,('Internet')
+,('Tradutor e Intérprete de Libras')
 ;
 
 -- Barreiras iniciais
 INSERT INTO barreira (nome) VALUES
  ('Arquitetônica')
 ,('Transporte')
+,('Comunicacional')
 ;
 
 -- Adaptações arquitetônicas iniciais
