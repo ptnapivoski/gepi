@@ -23,6 +23,16 @@ if($_SESSION['user']){
 					// Cabeçalhos
 					header('Content-Type: application/octet-stream');
 					header('Content-Disposition: attachment; filename=relatorio.csv');
+
+					// Seleciona nome do diagnóstico
+					$query = mysqli_query($db_link, "SELECT nome FROM diagnostico WHERE id = $diagnostico;");
+					$row = mysqli_fetch_row($query);
+					mysqli_free_result($query);
+					$diagnostico_n = str_replace(array("\t", "\r", "\n"), ' ', $row[0]);
+
+					// Linha de informação do relatório
+					echo "$diagnostico_n\tAno de $ano\t", date('d/m/Y H:i:s'), "\r\n\r\n";
+
 					// Linha de nome das colunas
 					echo "Frequências\r\n";
 
@@ -31,6 +41,15 @@ if($_SESSION['user']){
 						// A imprime
 						echo number_format($db_result[0], 2, ',', '.'), "\r\n";
 					}
+
+					// Seleciona média das frequências
+					$query = mysqli_query($db_link, "SELECT AVG(pfe.frequencia) FROM pessoa_fisica_e_diagnostico pfd INNER JOIN pessoa_fisica_e_escola pfe ON pfe.pessoa_fisica = pfd.pessoa_fisica WHERE pfd.diagnostico = $diagnostico AND pfe.ano = $ano;");
+					$row = mysqli_fetch_row($query);
+					mysqli_free_result($query);
+					$num = (double) $row[0];
+
+					// Linha da média
+					echo "\r\nMédia\t$num\r\n";
 				// Caso contrário
 				} else {
 					// Configura erro

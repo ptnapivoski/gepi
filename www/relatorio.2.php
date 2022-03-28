@@ -22,6 +22,25 @@ if($_SESSION['user']){
 				// Cabeçalhos
 				header('Content-Type: application/octet-stream');
 				header('Content-Disposition: attachment; filename=relatorio.csv');
+
+				// Seleciona nome da cidade e sigla do estado
+				$query = mysqli_query($db_link, "SELECT cidade.nome, uf.sigla FROM cidade LEFT JOIN uf ON uf.id = cidade.uf WHERE cidade.id = $cidade;");
+				$row = mysqli_fetch_row($query);
+				mysqli_free_result($query);
+				$cidade_n = str_replace(array("\t", "\r", "\n"), ' ', $row[0]);
+				$uf_s = str_replace(array("\t", "\r", "\n"), ' ', $row[1]);
+
+				// Seleciona nome da tecnologia
+				$query = mysqli_query($db_link, "SELECT nome FROM tecnologia WHERE id = $tecnologia;");
+				$row = mysqli_fetch_row($query);
+				mysqli_free_result($query);
+				$tecnologia_n = str_replace(array("\t", "\r", "\n"), ' ', $row[0]);
+
+				// Linha de informação do relatório
+				echo "$cidade_n";
+				if($uf_s) echo " - $uf_s";
+				echo "\t$tecnologia_n\t", date('d/m/Y H:i:s'), "\r\n\r\n";
+
 				// Linha de nome das colunas
 				echo "Bairro\tQuantidade\r\n";
 
@@ -32,6 +51,15 @@ if($_SESSION['user']){
 					// A imprime
 					echo $db_result[0], "\t", $db_result[1], "\r\n";
 				}
+
+				// Seleciona soma da cidade
+				$query = mysqli_query($db_link, "SELECT COUNT(cid.id) FROM pessoa_fisica_e_tecnologia pft LEFT JOIN pessoa_fisica pf ON pf.id = pft.pessoa_fisica LEFT JOIN entidade ent ON ent.id = pf.id INNER JOIN endereco ON endereco.id = ent.endereco LEFT JOIN bairro bai ON bai.id = endereco.bairro LEFT JOIN cidade cid ON cid.id = bai.cidade WHERE cid.id = $cidade AND pft.tecnologia = $tecnologia GROUP BY cid.id;");
+				$row = mysqli_fetch_row($query);
+				mysqli_free_result($query);
+				$num = (int) $row[0];
+
+				// Linha da soma
+				echo "\r\nSoma\t$num\r\n";
 			// Caso contrário
 			} else {
 				// Configura erro

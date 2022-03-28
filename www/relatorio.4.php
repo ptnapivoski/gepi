@@ -23,8 +23,18 @@ if($_SESSION['user']){
 					// Cabeçalhos
 					header('Content-Type: application/octet-stream');
 					header('Content-Disposition: attachment; filename=relatorio.csv');
+
+					// Seleciona nome do diagnóstico
+					$query = mysqli_query($db_link, "SELECT nome FROM diagnostico WHERE id = $diagnostico;");
+					$row = mysqli_fetch_row($query);
+					mysqli_free_result($query);
+					$diagnostico_n = str_replace(array("\t", "\r", "\n"), ' ', $row[0]);
+
+					// Linha de informação do relatório
+					echo "$diagnostico_n\tAno de $ano\t", date('d/m/Y H:i:s'), "\r\n\r\n";
+
 					// Linha de nome das colunas
-					echo "Repetência\tQuantidade\r\n";
+					echo "Número de repetências\tQuantidade de pessoas\r\n";
 
 					// Para cala linha
 					while($db_result = mysqli_fetch_row($db_query)){
