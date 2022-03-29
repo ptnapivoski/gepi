@@ -66,6 +66,9 @@ if($_SESSION['user']){
 					'<p class="lab">', $EOL,
 						'<label>Nome: <input type="text" name="nome" value="', (isset($_POST['nome']) ? htmlspecialchars($_POST['nome']) : ''), '"/></label>', $EOL,
 					'</p>', $EOL,
+					'<p class="lab">', $EOL,
+						'<label>CPF: <input type="text" name="cpf" value="', (isset($_POST['cpf']) ? htmlspecialchars($_POST['cpf']) : ''), '"/></label>', $EOL,
+					'</p>', $EOL,
 					'<p class="lab">',
 						'<input type="submit" value="Pesquisar"/>',
 					'</p>', $EOL,
@@ -74,7 +77,7 @@ if($_SESSION['user']){
 		;
 
 		// Caso ocorrera submissão do formulário
-		if(isset($_POST['id']) && isset($_POST['tipo_de_entidade']) && isset($_POST['nome'])){
+		if(isset($_POST['id']) && isset($_POST['tipo_de_entidade']) && isset($_POST['nome']) && isset($_POST['cpf'])){
 			// Começa a seção exibindo os resultados
 			echo
 				'<section class="cad">', $EOL,
@@ -85,12 +88,23 @@ if($_SESSION['user']){
 			$id = (int) $_POST['id'];
 			$tipo_de_entidade = (int) $_POST['tipo_de_entidade'];
 			$nome = mysqli_real_escape_string($db_link, $_POST['nome']);
+			$cpf = mysqli_real_escape_string($db_link, $_POST['cpf']);
 			$query = '';
 
 			// Se foi pedido por ID da entidade, seleciona apenas ela
 			if($id > 0){
 				$query = "SELECT id, nome FROM entidade WHERE id = $id;";
-			// Para o preenchimento dos outros elementos do formulário
+			// Se preenchido o campo do CPF
+			} else if(strlen($cpf) !== 0){
+				// Insere validação de CPF
+				require_once('cpf.php');
+				// Se válido o CPF
+				if(cpf($cpf)){
+					// Prepara a consulta
+					$query = "SELECT ent.id, ent.nome FROM pessoa_fisica pf LEFT JOIN entidade ent ON ent.id = pf.id WHERE pf.cpf = '$cpf';";
+				// Caso CPF inválido
+				} else echo '<p class="error">CPF inválido</p>', $EOL;
+			// Se pesquisa por nome
 			} else if(mb_strlen($nome, 'UTF-8') >= 2){
 				// Consulta
 				$query = "SELECT id, nome FROM entidade WHERE nome LIKE '%$nome%'";
@@ -98,7 +112,7 @@ if($_SESSION['user']){
 				if($tipo_de_entidade > 0) $query = "$query AND tipo_de_entidade = $tipo_de_entidade";
 				// Ordenação pelo nome
 				$query = "$query ORDER BY nome;";
-			} else echo '<p class="error">Pesquisa requer pelo menos dois caracteres</p>', $EOL;
+			} else echo '<p class="error">Pesquisa requer pelo menos dois caracteres em nome</p>', $EOL;
 
 			// Se há consulta a executar
 			if($query){
