@@ -1,0 +1,1 @@
+<?php function cpf($cpf){$cpf = preg_replace('/[^0-9]/is', '', $cpf);if(strlen($cpf) !== 11) return FALSE;if(preg_match('/(\d)\1{10}/', $cpf)) return FALSE;for($x = 9; $x < 11; $x++){for($i = 0, $j = 0; $j < $x; $j++) $i += $cpf[$j] * (($x + 1) - $j); $i = ((10 * $i) % 11) % 10;if($cpf[$j] != $i) return FALSE;} return TRUE;}
