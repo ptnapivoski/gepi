@@ -67,8 +67,12 @@ if($_SESSION['user']){
 					// Cabeçalhos
 					header('Content-Type: application/octet-stream');
 					header('Content-Disposition: attachment; filename=relatorio.csv');
+
+					// Linha de informação do relatório
+					echo "Qualquer diagnóstico\tAno de $ano\t", date('d/m/Y H:i:s'), "\r\n\r\n";
+
 					// Linha de nome das colunas
-					echo "Repetência\tQuantidade\r\n";
+					echo "Número de repetências\tQuantidade de pessoas\r\n";
 
 					// Para cala linha
 					while($db_result = mysqli_fetch_row($db_query)){
