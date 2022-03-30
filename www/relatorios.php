@@ -24,7 +24,7 @@ if($_SESSION['user']){
 	if($db_link){
 		echo
 			'<section class="cad">', $EOL,
-				'<h1>Diagnósticos e cidade</h1>', $EOL,
+				'<h1>Bairros da cidade e número de pessoas com dado diagnóstico</h1>', $EOL,
 				// Formulário
 				'<form action="relatorio.1.php" method="post">', $EOL,
 					// Select dos países
@@ -115,7 +115,7 @@ if($_SESSION['user']){
 				'</form>', $EOL,
 			'</section>', $EOL,
 			'<section class="cad">', $EOL,
-				'<h1>Tecnologias e cidade</h1>', $EOL,
+				'<h1>Bairros da cidade e número de pessoas com dado acesso a tecnologia</h1>', $EOL,
 				// Formulário
 				'<form action="relatorio.2.php" method="post">', $EOL,
 					// Select dos países
@@ -206,7 +206,7 @@ if($_SESSION['user']){
 				'</form>', $EOL,
 			'</section>', $EOL,
 			'<section class="cad">', $EOL,
-				'<h1>Diagnósticos e frequência escolar</h1>', $EOL,
+				'<h1>Frequências em dado ano letivo de pessoas com dado diagnóstico</h1>', $EOL,
 				// Formulário
 				'<form action="relatorio.3.php" method="post">', $EOL,
 					// Select dos diagnósticos
@@ -248,7 +248,7 @@ if($_SESSION['user']){
 				'</form>', $EOL,
 			'</section>', $EOL,
 			'<section class="cad">', $EOL,
-				'<h1>Diagnósticos e repetência escolar</h1>', $EOL,
+				'<h1>Repetência escolar em dado ano letivo de pessoas com dado diagnóstico</h1>', $EOL,
 				// Formulário
 				'<form action="relatorio.4.php" method="post">', $EOL,
 					// Select dos diagnósticos
