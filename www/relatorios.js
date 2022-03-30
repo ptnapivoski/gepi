@@ -77,6 +77,25 @@ $(function(){
 		}
 	});
 
+	// Ao alterar o ID da escola
+	$('#rel-5-escola').change(function(){
+		// Se for uma entidade válida
+		if($('#rel-5-escola').val() > 0){
+			// Requisita via AJAX
+			$.ajax({
+				// De modo sincronizado
+				async: false,
+				// Os dados para inserção num input
+				url: 'input.escola.php?id='+$('#rel-5-escola').val()
+			// Com os dados requisitados
+			}).done(function(data){
+				// Insere no lugar apropriado
+				$('#rel-5-escola-nome').val(data);
+			});
+		// Caso não seja válida, colocar a escola vazia
+		} else $('#rel-5-escola-nome').val('Nenhuma');
+	});
+
 	// Em todos os selects de país, seleciona o Brasil
 	$('#rel-1-pais-select').val(1);
 	$('#rel-1-pais-select').change();

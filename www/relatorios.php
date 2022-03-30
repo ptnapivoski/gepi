@@ -288,6 +288,15 @@ if($_SESSION['user']){
 					'<p class="lab"><label>Ano: <input type="number" name="ano" value="', date('Y'), '" min="0"/></label></p>', $EOL,
 					'<p><input type="submit" value="Selecionar"/></p>', $EOL,
 				'</form>', $EOL,
+			'</section>', $EOL,
+			'<section class="cad">', $EOL,
+				'<h1>Diagnósticos em dada escola e ano letivo</h1>', $EOL,
+				// Formulário
+				'<form action="relatorio.5.php" method="post">', $EOL,
+					'<p class="lab">Escola: <input type="number" name="escola" id="rel-5-escola" value="0" min="0"/> <input type="text" id="rel-5-escola-nome" value="" class="name"/></p>', $EOL,
+					'<p class="lab"><label>Ano: <input type="number" name="ano" value="', date('Y'), '" min="0"/></label></p>', $EOL,
+					'<p><input type="submit" value="Selecionar"/></p>', $EOL,
+				'</form>', $EOL,
 			'</section>', $EOL
 		;
 
