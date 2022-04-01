@@ -1,0 +1,115 @@
+<?php
+
+// Inicializa ambiente
+require_once('init.php');
+
+// Se logado
+if($_SESSION['user']){
+	// Tenta conectar ao DB
+	require_once('db.link.php');
+
+	// Se conectado ao DB
+	if($db_link){
+		// Valida entrada
+		$tecnologia = (int) $_POST['tecnologia'];
+		$ano = (int) $_POST['ano'];
+
+		// Se tecnologia específica
+		if($tecnologia > 0){
+			// Tenta selecionar dados
+			if($db_query = mysqli_query($db_link, "SELECT pfe.repetencia, COUNT(pfe.repetencia) FROM pessoa_fisica_e_tecnologia pft INNER JOIN pessoa_fisica_e_escola pfe ON pfe.pessoa_fisica = pft.pessoa_fisica WHERE pft.tecnologia = $tecnologia AND pfe.ano = $ano GROUP BY pfe.repetencia ORDER BY pfe.repetencia ASC;")){
+				// Se consulta retornou uma linha
+				if(mysqli_num_rows($db_query) > 0){
+					// Cabeçalhos
+					header('Content-Type: application/octet-stream');
+					header('Content-Disposition: attachment; filename=relatorio.csv');
+
+					// Seleciona nome da tecnologia
+					$query = mysqli_query($db_link, "SELECT nome FROM tecnologia WHERE id = $tecnologia;");
+					$row = mysqli_fetch_row($query);
+					mysqli_free_result($query);
+					$tecnologia_n = str_replace(array("\t", "\r", "\n"), ' ', $row[0]);
+
+					// Linha de informação do relatório
+					echo "$tecnologia_n\tAno de $ano\t", date('d/m/Y H:i:s'), "\r\n\r\n";
+
+					// Linha de nome das colunas
+					echo "Número de repetências\tQuantidade de pessoas\r\n";
+
+					// Para cala linha
+					while($db_result = mysqli_fetch_row($db_query)){
+						// A imprime
+						echo $db_result[0], "\t", $db_result[1], "\r\n";
+					}
+				// Caso contrário
+				} else {
+					// Configura erro
+					require_once('no.data.err.php');
+					// Volta para a página dos relatórios
+					header('Location:relatorios.php');
+				}
+
+				// Limpa consulta no servidor
+				mysqli_free_result($db_query);
+			// Caso não tenha conseguido realizar a consulta
+			} else {
+				// Configura erro
+				require_once('db.query.err.php');
+				// Volta para a página dos relatórios
+				header('Location:relatorios.php');
+			}
+		// Todas as repetências daquele ano
+		} else {
+			// Tenta selecionar dados
+			if($db_query = mysqli_query($db_link, "SELECT pfe.repetencia, COUNT(pfe.repetencia) FROM pessoa_fisica_e_escola pfe WHERE pfe.ano = $ano GROUP BY pfe.repetencia ORDER BY pfe.repetencia ASC;")){
+				// Se consulta retornou uma linha
+				if(mysqli_num_rows($db_query) > 0){
+					// Cabeçalhos
+					header('Content-Type: application/octet-stream');
+					header('Content-Disposition: attachment; filename=relatorio.csv');
+
+					// Linha de informação do relatório
+					echo "Qualquer tecnologia\tAno de $ano\t", date('d/m/Y H:i:s'), "\r\n\r\n";
+
+					// Linha de nome das colunas
+					echo "Número de repetências\tQuantidade de pessoas\r\n";
+
+					// Para cala linha
+					while($db_result = mysqli_fetch_row($db_query)){
+						// A imprime
+						echo $db_result[0], "\t", $db_result[1], "\r\n";
+					}
+				// Caso contrário
+				} else {
+					// Configura erro
+					require_once('no.data.err.php');
+					// Volta para a página dos relatórios
+					header('Location:relatorios.php');
+				}
+
+				// Limpa consulta no servidor
+				mysqli_free_result($db_query);
+			// Caso não tenha conseguido realizar a consulta
+			} else {
+				// Configura erro
+				require_once('db.query.err.php');
+				// Volta para a página dos relatórios
+				header('Location:relatorios.php');
+			}
+		}
+
+		// Fecha a conexão com o DB
+		mysqli_close($db_link);
+	// Caso contrário
+	} else {
+		// Informa que há problema na conexão com o DB
+		require_once('db.link.err.php');
+		// Volta para a página dos relatórios
+		header('Location:relatorios.php');
+	}
+// Se não logado
+} else require_once('login.err.php');
+
+
+/*
+*/

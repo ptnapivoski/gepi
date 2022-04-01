@@ -339,6 +339,48 @@ if($_SESSION['user']){
 					'<p class="lab"><label>Ano: <input type="number" name="ano" value="', date('Y'), '" min="0"/></label></p>', $EOL,
 					'<p><input type="submit" value="Selecionar"/></p>', $EOL,
 				'</form>', $EOL,
+			'</section>', $EOL,
+			'<section class="cad">', $EOL,
+				'<h1>Repetência escolar em dado ano letivo de pessoas com dado acesso a tecnologia</h1>', $EOL,
+				// Formulário
+				'<form action="relatorio.7.php" method="post">', $EOL,
+					// Select das tecnologias
+					'<p class="select-field">', $EOL,
+						'<label>Tecnologia:', $EOL,
+							'<select name="tecnologia">', $EOL
+		;
+
+		// Tenta selecionar as tecnologias
+		if($db_query = mysqli_query($db_link, "SELECT id, nome FROM tecnologia ORDER BY id;")){
+			// Se retornou pelo menos uma linha
+			if(mysqli_num_rows($db_query)){
+				// Linha padrão
+				echo '<option value="0">Qualquer</option>', $EOL;
+
+				// Para cada linha
+				while($db_result = mysqli_fetch_row($db_query)){
+					// Valida dados
+					$db_result[0] = (int) $db_result[0];
+					$db_result[1] = htmlspecialchars($db_result[1]);
+
+					// Imprime a linha correspondente
+					echo '<option value="', $db_result[0], '">', $db_result[1], '</option>', $EOL;
+				}
+			// Se não retornou pelo menos uma linha
+			} else echo '<option value="0">Nenhuma tecnologia encontrada</option>', $EOL;
+
+			// Limpa consulta no servidor
+			mysqli_free_result($db_query);
+		// Se houve problema na consulta
+		} else require('db.query.err.echo.option.php');
+
+		echo
+							'</select>', $EOL,
+						'</label>', $EOL,
+					'</p>', $EOL,
+					'<p class="lab"><label>Ano: <input type="number" name="ano" value="', date('Y'), '" min="0"/></label></p>', $EOL,
+					'<p><input type="submit" value="Selecionar"/></p>', $EOL,
+				'</form>', $EOL,
 			'</section>', $EOL
 		;
 
