@@ -46,7 +46,7 @@ if($_SESSION['user']){
 					$query = mysqli_query($db_link, "SELECT AVG(pfe.frequencia) FROM pessoa_fisica_e_diagnostico pfd INNER JOIN pessoa_fisica_e_escola pfe ON pfe.pessoa_fisica = pfd.pessoa_fisica WHERE pfd.diagnostico = $diagnostico AND pfe.ano = $ano;");
 					$row = mysqli_fetch_row($query);
 					mysqli_free_result($query);
-					$num = (double) $row[0];
+					$num = number_format($row[0], 2, ',', '.');
 
 					// Linha da média
 					echo "\r\nMédia\t$num\r\n";
@@ -90,10 +90,10 @@ if($_SESSION['user']){
 					}
 
 					// Seleciona média das frequências
-					$query = mysqli_query($db_link, "SELECT AVG(pfe.frequencia) FROM pessoa_fisica_e_diagnostico pfd INNER JOIN pessoa_fisica_e_escola pfe ON pfe.pessoa_fisica = pfd.pessoa_fisica WHERE pfe.ano = $ano;");
+					$query = mysqli_query($db_link, "SELECT AVG(pfe.frequencia) FROM pessoa_fisica_e_escola pfe WHERE pfe.ano = $ano;");
 					$row = mysqli_fetch_row($query);
 					mysqli_free_result($query);
-					$num = (double) $row[0];
+					$num = number_format($row[0], 2, ',', '.');
 
 					// Linha da média
 					echo "\r\nMédia\t$num\r\n";

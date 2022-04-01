@@ -44,12 +44,14 @@ if($_SESSION['user']){
 
 					// Para cala linha
 					while($db_result = mysqli_fetch_row($db_query)){
+						// Nome correto
+						$db_result[0] = str_replace(array("\t", "\r", "\n"), ' ', $db_result[0]);
 						// A imprime
 						echo $db_result[0], "\t", $db_result[1], "\r\n";
 					}
 
 					// Seleciona soma da cidade
-					$query = mysqli_query($db_link, "SELECT COUNT(pfd.pessoa_fisica) FROM pessoa_fisica_e_escola pfe INNER JOIN pessoa_fisica_e_diagnostico pfd ON pfd.pessoa_fisica = pfe.pessoa_fisica WHERE pfe.ano = $ano AND pfe.escola = $escola;");
+					$query = mysqli_query($db_link, "SELECT COUNT(pfe.pessoa_fisica) FROM pessoa_fisica_e_escola pfe WHERE pfe.ano = $ano AND pfe.escola = $escola;");
 					$row = mysqli_fetch_row($query);
 					mysqli_free_result($query);
 					$num = (int) $row[0];
